@@ -1,0 +1,11 @@
+@startuml
+Systeme -> Systeme : initialisationPartie()
+Joueur -> Systeme : SaisieNom(String nom)
+loop nbBateau < 5
+loop !verif
+Joueur -> Systeme : SaisieBateau(int taille,int x,int y)
+Systeme -> Systeme : verifPosBateau(int taille,int x,int y)
+end
+end
+Systeme -> Joueur2 : genererBateau(int nb, int x, int y)
+@enduml

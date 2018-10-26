@@ -1,0 +1,18 @@
+@startuml
+loop !verif
+Joueur -> Systeme : tirer(int x, int y)
+Systeme -> Systeme : verifierPosTir(int x, int y)
+end
+Systeme -> Joueur2 : verifBateau(int x, int y)
+alt touche
+Systeme -> Joueur2 : toucheBateau(int x, int y)
+end
+Systeme -> Joueur : setGrille(int x, int y)
+Systeme -> Joueur : CompteurTirPlus()
+Systeme -> Systeme : finDuJeu()
+alt success 
+Systeme -> Systeme : fin()
+else  
+Systeme -> Systeme : changerTour()
+end
+@enduml
