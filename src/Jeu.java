@@ -1,3 +1,4 @@
+
 import com.sun.org.apache.xalan.internal.xsltc.dom.AbsoluteIterator;
 
 import model.epoch.CenturyXX;
@@ -72,4 +73,11 @@ public class Jeu {
 
 	}
 
+	public void loadGame(){
+		AbstractDAOFactory.getAbstractDAOFactory(1).getGameDAO().load(this);
+	}
+
+	public void saveGame(){
+		AbstractDAOFactory.getAbstractDAOFactory(1).getGameDAO().save(this);
+	}
 }
