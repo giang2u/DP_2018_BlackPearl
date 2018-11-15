@@ -1,6 +1,7 @@
 package model.players;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import model.ship.Ship;
 
@@ -43,19 +44,38 @@ public abstract class Player {
 	}
 	
 	public void positionShip(){
+		int num = 1;
 		for(Ship ship : listeBateaux){
 			boolean valide = false;
 			while(!valide){
-				int x = 0;//lire entrer du clavier
-				int y = 0; //lire entre du clavier
+				Scanner sc = new Scanner(System.in);
+				System.out.println("Veuillez saisir la position x du bateau :" + num );
+				int x = sc.nextInt();
+
+				System.out.println("Veuillez saisir la position y du bateau :" + num );
+				int y = sc.nextInt();
+
 				if(this.shipGrill[x][y] == 0){
 					this.shipGrill[x][y] = 1;
 					ship.setPosX(x);
 					ship.setPosY(y);
-					ship.setHorizontal(true); // lecture entre
+					System.out.println("Veuillez saisir la orientation du bateau : " + num  + " \n1 pour vertiacle \n2 pour horizontale");
+
+					int o = sc.nextInt();
+					if( o == 1){
+						ship.setHorizontal(false);
+					}
+					if(o == 2){
+						ship.setHorizontal(true);
+					}
+					valide = true;
+				}
+				else{
+					valide = false;
 				}
 				
 			}
+			num++;
 		}
 	}
 	

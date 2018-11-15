@@ -1,6 +1,9 @@
 
+import java.util.Scanner;
+
 import com.sun.org.apache.xalan.internal.xsltc.dom.AbsoluteIterator;
 
+import model.epoch.CenturyXVI;
 import model.epoch.CenturyXX;
 import model.epoch.EpochFactory;
 import model.players.AI;
@@ -22,8 +25,8 @@ public class Jeu {
 	public void initJeu(){
 		this.p1 = new Human("Nam");
 		this.ai = new AI("Cumputer");
-		//player selection epoque 
-			
+		initShip();			
+		this.p1.positionShip();
 		
 		
 	}
@@ -33,14 +36,19 @@ public class Jeu {
 	 */
 	public void initShip(){
 
-		//le joeur selectionner epoque au clavier
-		int epoque = 0;
+		//le joueur selectionner epoque au clavier
 		
-		if(epoque == 16){
-			//this.epoch = new CenturyXVI();
+
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Veuillez selectionner l'epoque \n 1: 16eme \n 2: 18eme");
+		int epoque = sc.nextInt();
+
+		
+		if(epoque == 1){
+			this.epoch = new CenturyXVI();
 		}
-		if(epoque == 18){
-			//this.epoch = new CenturyXX();
+		if(epoque == 2){
+			this.epoch = new CenturyXX();
 		}
 		
 		//creer 5 
@@ -69,7 +77,7 @@ public class Jeu {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		new Jeu();
 
 	}
 
