@@ -1,7 +1,6 @@
 
 import java.util.Scanner;
 
-import com.sun.org.apache.xalan.internal.xsltc.dom.AbsoluteIterator;
 
 import model.epoch.CenturyXVI;
 import model.epoch.CenturyXX;
