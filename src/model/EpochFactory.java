@@ -1,6 +1,6 @@
 package model;
 
-public class EpochFactory {
+public abstract class EpochFactory {
 	
 
 }
