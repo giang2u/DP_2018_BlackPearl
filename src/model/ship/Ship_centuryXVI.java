@@ -1,6 +1,6 @@
 package model.ship;
 
-public abstract class Ship {
+public class Ship_centuryXVI extends Ship {
 
 	/**
 	 * @param args
