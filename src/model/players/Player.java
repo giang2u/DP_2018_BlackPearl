@@ -8,19 +8,19 @@ import model.ship.Ship;
 
 public abstract class Player extends Observable{
 	
-	private final static int SIZE = 10;
+	public final static int SIZE = 10;
 
 	protected int[][] shipGrill = new int[SIZE][SIZE];
 	protected int[][] historyGrill = new int[SIZE][SIZE];
 	protected String playerName = "";
 	protected int nbTireToucher = 0;
 	protected int nbTireMiss = 0;
-	protected ArrayList<Ship> listeBateaux;
+	protected ArrayList<Ship> shipList;
 
 	public Player(String name) {
 		this.playerName = name;
 		initGrill();
-		listeBateaux = new ArrayList<>(5);
+		shipList = new ArrayList<>(5);
 	}
 
 	public void toucher() {
@@ -41,12 +41,12 @@ public abstract class Player extends Observable{
 	}
 
 	public void addShip(Ship ship) {
-		this.listeBateaux.add(ship);
+		this.shipList.add(ship);
 	}
 
 	public void positionShip() {
 		int num = 1;
-		for (Ship ship : listeBateaux) {
+		for (Ship ship : shipList) {
 			boolean valide = false;
 			while (!valide) {
 				Scanner sc = new Scanner(System.in);
@@ -83,22 +83,24 @@ public abstract class Player extends Observable{
 								break;
 						}
 					}
-						/*if (o == 1) {
-							ship.setHorizontal(false);
-						}
-						if (o == 2) {
-							ship.setHorizontal(true);
-						}
-						valide = true;*/
 						valide = true;
 				}
 
-				/*else{
-					valide = false;
-				}*/
 			}
 			num++;
 		}
+	}
+
+	public int[][] getShipGrill(){
+		return this.shipGrill;
+	}
+	
+	public int[][] getHistoryGrill(){
+		return this.historyGrill;
+	}
+
+	public ArrayList<Ship> getListShip(){
+		return this.shipList;
 	}
 }
 

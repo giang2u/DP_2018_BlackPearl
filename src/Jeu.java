@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import view.ShipGridView;
+import view.ShipSettingView;
 import view.ShotHistoryGridView;
 
 
@@ -28,8 +29,10 @@ public class Jeu extends JFrame {
 		initJeu();
 		JPanel jp = new ShipGridView(p1);
 		JPanel jpp = new ShotHistoryGridView(p1);
+		JPanel panelSettingShip = new ShipSettingView(p1);
 		
 		this.add(jp, BorderLayout.WEST);
+		this.add(panelSettingShip,BorderLayout.CENTER);
 		this.add(jpp, BorderLayout.EAST);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
@@ -41,7 +44,7 @@ public class Jeu extends JFrame {
 		this.p1 = new Human("Nam");
 		this.ai = new AI("Cumputer");
 		initShip();			
-		this.p1.positionShip();
+		//this.p1.positionShip();
 		
 		
 	}
@@ -51,14 +54,7 @@ public class Jeu extends JFrame {
 	 */
 	public void initShip(){
 
-		//le joueur selectionner epoque au clavier
-		
-
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Veuillez selectionner l'epoque \n 1: 16eme \n 2: 18eme");
-		int epoque = sc.nextInt();
-
-		
+		int epoque = 1;
 		if(epoque == 1){
 			this.epoch = new CenturyXVI();
 		}
