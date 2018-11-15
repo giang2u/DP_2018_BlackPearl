@@ -2,12 +2,10 @@ package model.ship;
 
 public class Ship_centuryXX extends Ship{
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	public Ship_centuryXX(int x, int y, int size, boolean horizontal) {
+		super(x, y, size, horizontal);
+		// TODO Auto-generated constructor stub
 	}
+
 
 }
