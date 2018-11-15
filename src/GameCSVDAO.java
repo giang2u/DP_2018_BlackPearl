@@ -12,7 +12,6 @@ public class GameCSVDAO implements GameDAO {
         return instance;
     }
 
-    @Override
     public void save(Jeu j) {
         try{
             ObjectOutputStream objectOutputStream = new ObjectOutputStream((new FileOutputStream("BlackPearl.csv")));
@@ -25,7 +24,6 @@ public class GameCSVDAO implements GameDAO {
         }
     }
 
-    @Override
     public Jeu load(Jeu j) {
 
         try {
