@@ -45,6 +45,10 @@ public abstract class Ship {
 		this.hp = hp;
 	}
 	
+	public void setHorizontal(boolean b){
+		this.horizontal = b;
+	}
+	
 	
 
 }
