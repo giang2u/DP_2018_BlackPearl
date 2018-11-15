@@ -39,8 +39,10 @@ public class GameCSVDAO implements GameDAO {
             }
             //j.initNewGame(jeuArrayList);  //Creation d'un nouveau jeu à partir de la sauvegarde dans jeuArrayList*/
         } catch (FileNotFoundException e) {
+            System.out.println("Fichier non trouvé");
             e.printStackTrace();
         } catch (IOException e) {
+            System.out.println("Erreur IO");
             e.printStackTrace();
         }
         return new Jeu();
