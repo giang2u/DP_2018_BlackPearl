@@ -1,5 +1,12 @@
 
+import java.awt.BorderLayout;
 import java.util.Scanner;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import view.ShipGridView;
+import view.ShotHistoryGridView;
 
 
 import model.epoch.CenturyXVI;
@@ -11,7 +18,7 @@ import model.players.Player;
 import model.ship.Ship;
 
 
-public class Jeu {
+public class Jeu extends JFrame {
 
 	private Player p1 ;
 	private Player ai ;
@@ -19,6 +26,15 @@ public class Jeu {
 	
 	public Jeu(){
 		initJeu();
+		JPanel jp = new ShipGridView(p1);
+		JPanel jpp = new ShotHistoryGridView(p1);
+		
+		this.add(jp, BorderLayout.WEST);
+		this.add(jpp, BorderLayout.EAST);
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
+		this.pack();
+		this.setVisible(true);
 	}
 	
 	public void initJeu(){

@@ -1,11 +1,12 @@
 package model.players;
 
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.Scanner;
 
 import model.ship.Ship;
 
-public abstract class Player {
+public abstract class Player extends Observable{
 	
 	private final static int SIZE = 10;
 	
