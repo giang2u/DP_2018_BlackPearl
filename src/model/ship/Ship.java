@@ -52,10 +52,7 @@ public abstract class Ship {
 	public void setHorizontal(boolean horizontal) {
 		this.horizontal = horizontal;
 	}
-	
-	public void setHorizontal(boolean b){
-		this.horizontal = b;
-	}
+
 	
 	
 
