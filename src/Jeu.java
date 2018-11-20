@@ -28,12 +28,12 @@ public class Jeu extends JFrame {
 	public Jeu(){
 		initJeu();
 		JPanel jp = new ShipGridView(p1);
-		JPanel jpp = new ShotHistoryGridView(p1);
-		JPanel panelSettingShip = new ShipSettingView(p1);
+		/*JPanel jpp = new ShotHistoryGridView(p1);
+		JPanel panelSettingShip = new ShipSettingView(p1);*/
 		
 		this.add(jp, BorderLayout.WEST);
-		this.add(panelSettingShip,BorderLayout.CENTER);
-		this.add(jpp, BorderLayout.EAST);
+		/*this.add(panelSettingShip,BorderLayout.CENTER);
+		this.add(jpp, BorderLayout.EAST);*/
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
 		this.pack();

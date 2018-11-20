@@ -2,7 +2,11 @@ package view;
 
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -20,6 +24,7 @@ import controller.ListenerPoser;
 import controller.ShipGridController;
 import controller.ShotHistoryGridController;
 
+import model.Case;
 import model.players.Player;
 
 public class ShipGridView extends JPanel implements Observer{
@@ -27,10 +32,21 @@ public class ShipGridView extends JPanel implements Observer{
 	private Player player;
     protected JButton[][] grid  = new JButton[10][10];
     protected JPanel[] panels = new JPanel[10];
+    private Graphics2D g;
+    private Case[][] lcase;
+    private int taille = 100;
     
     public ShipGridView(Player p) {
     	this.player = p;
-    	JPanel contentPane = new JPanel();
+    	lcase = new Case[11][11];
+    	
+    	 for (int i = 0; i < 11 ; i++ )  {
+         	for (int j = 0; j < 11 ; j++ ) {
+         		lcase[i][j] = new Case(i*Case.size, j*Case.size);
+         	}
+         }
+    	 
+    	/*JPanel contentPane = new JPanel();
     	for (int i = 0; i < panels.length; i++) {
             panels[i] = new JPanel();
         }
@@ -49,11 +65,38 @@ public class ShipGridView extends JPanel implements Observer{
             contentPane.add(jPanel);
         }
         
-        this.add(contentPane);
-
-
+        this.add(contentPane);*/
+    	
     	
 		this.player.addObserver(this);
+    }
+    
+ 
+    public void paintComponent(Graphics g)
+    {
+        // dessin du fond
+       /* g.setColor(...);
+        g.fillRect(0,0,backbufferSizeX, backbufferSizeY);*/
+    	
+        // dessin des lignes de la grille
+    	Graphics2D g2 = (Graphics2D) g;
+    	super.paintComponent(g2);
+    	
+
+    	g2.setColor(Color.pink);
+    	g2.fillRect(0,0,11 * Case.size, 11 * Case.size);
+     
+    	
+        for (int i = 0; i < 11 ; i++ )  {
+        	for (int j = 0; j < 11 ; j++ ) {
+        		int x = lcase[i][j].getX();
+        		int y = lcase[i][j].getY();
+        		Color c = lcase[i][j].getColor();
+        		g2.fillRect(x, y, Case.size, Case.size);
+        		g2.setColor(c);
+        		g2.drawRect(x, y, Case.size, Case.size);
+        	}
+        }
     }
 
 	@Override
