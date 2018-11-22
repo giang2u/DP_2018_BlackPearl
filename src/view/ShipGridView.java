@@ -8,6 +8,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -24,13 +25,16 @@ public class ShipGridView extends JPanel implements Observer{
     private Graphics2D g2;
     private Case[][] lcase;
     
+
     public ShipGridView(Player p) {
+    	
     	this.player = p;
     	lcase = new Case[11][11];
     	
     	 for (int i = 0; i < 11 ; i++ )  {
          	for (int j = 0; j < 11 ; j++ ) {
-         		lcase[i][j] = new Case(i*Case.size, j*Case.size);
+         		lcase[i][j] = new Case(i*Case.size, j*Case.size, player);
+         		
          	}
          }
     	

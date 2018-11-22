@@ -1,10 +1,15 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import model.players.Player;
+
+import controller.ListenerShot;
 
 public class Case extends JButton {
 	
@@ -12,9 +17,13 @@ public class Case extends JButton {
 	public static int size = 50;
 	public Color color = Color.white;
 	
-	public Case(int x,int y){
+	public Case(int x,int y, Player p){
+		super("");
+		addMouseListener(new ListenerShot(p));
 		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		this.x=x;this.y=y;
+		this.x=x;
+		this.y=y;
+		setPreferredSize(new Dimension(size, size));
 	}
 
 	public int getX() {
