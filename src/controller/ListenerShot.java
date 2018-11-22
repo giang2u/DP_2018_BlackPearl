@@ -19,9 +19,7 @@ public class ListenerShot implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		p.setxClick(e.getX());
-		p.setyClick(e.getY());
-		//System.out.println(p.getxClick());
+		p.setCoorDonne(e.getX()/50, e.getY()/50);
 		
 		
 	}

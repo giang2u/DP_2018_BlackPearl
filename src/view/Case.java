@@ -48,6 +48,7 @@ public class Case extends JButton {
 
 	public void setColor(Color color) {
 		this.color = color;
+
 	}
 
 }
