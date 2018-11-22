@@ -11,7 +11,6 @@ import model.players.Player;
 
 public class ListenerShot implements MouseListener {
 	private Player p;
-	
 	public ListenerShot(Player p){
 		this.p = p; 
 	}
@@ -20,7 +19,10 @@ public class ListenerShot implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("toucher");
+		p.setxClick(e.getX());
+		p.setyClick(e.getY());
+		//System.out.println(p.getxClick());
+		
 		
 	}
 

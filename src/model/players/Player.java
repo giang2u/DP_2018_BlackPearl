@@ -103,6 +103,26 @@ public abstract class Player extends Observable{
 	public ArrayList<Ship> getListShip(){
 		return this.shipList;
 	}
+
+	public int getxClick() {
+		return xClick;
+	}
+
+	public void setxClick(int xClick) {
+		this.xClick = xClick;
+		setChanged();
+		notifyObservers();
+	}
+
+	public int getyClick() {
+		return yClick;
+	}
+
+	public void setyClick(int yClick) {
+		this.yClick = yClick;
+		setChanged();
+		notifyObservers();
+	}
 	
 	
 }
