@@ -104,14 +104,19 @@ public abstract class Player extends Observable{
 		return this.shipList;
 	}
 
+	public void setCoorDonne(int x , int y ){
+		setxClick(x);
+		setyClick(y);
+		setChanged();
+		notifyObservers();
+	}
+	
 	public int getxClick() {
 		return xClick;
 	}
 
 	public void setxClick(int xClick) {
 		this.xClick = xClick;
-		setChanged();
-		notifyObservers();
 	}
 
 	public int getyClick() {
@@ -120,8 +125,6 @@ public abstract class Player extends Observable{
 
 	public void setyClick(int yClick) {
 		this.yClick = yClick;
-		setChanged();
-		notifyObservers();
 	}
 	
 	

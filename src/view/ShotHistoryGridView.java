@@ -53,11 +53,8 @@ public class ShotHistoryGridView extends JPanel implements Observer{
     	
         // dessin des lignes de la grille
     	g2 = (Graphics2D) g;
-    	super.paintComponent(g2);
 
     	g2.fillRect(0,0,11 * Case.size, 11 * Case.size);
-     
-    	
         for (int i = 0; i < 11 ; i++ )  {
         	for (int j = 0; j < 11 ; j++ ) {
         		int x = lcase[i][j].getX();
@@ -66,10 +63,22 @@ public class ShotHistoryGridView extends JPanel implements Observer{
         		g2.drawRect(x, y, Case.size, Case.size);
         	}
         }
+
     }
 
 	@Override
 	public void update(Observable o, Object arg) {
+		
+		System.out.println(lcase[player.getxClick()][player.getyClick()].getColor());
+		
+		lcase[player.getxClick()][player.getyClick()].setColor(Color.RED);
+		
+		System.out.println(lcase[player.getxClick()][player.getyClick()].getColor());
+		
+		g2.fillRect(player.getxClick(),player.getyClick(), Case.size, Case.size);
+		g2.setColor(Color.red);
+		g2.drawRect(player.getxClick(), player.getyClick(), Case.size, Case.size);
+		
 		
 	}
 	
