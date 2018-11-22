@@ -16,6 +16,7 @@ public abstract class Player extends Observable{
 	protected int nbTireToucher = 0;
 	protected int nbTireMiss = 0;
 	protected ArrayList<Ship> shipList;
+	protected int xClick, yClick;
 
 	public Player(String name) {
 		this.playerName = name;
@@ -102,5 +103,7 @@ public abstract class Player extends Observable{
 	public ArrayList<Ship> getListShip(){
 		return this.shipList;
 	}
+	
+	
 }
 

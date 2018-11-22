@@ -20,6 +20,7 @@ public class ListenerShot implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+		System.out.println("toucher");
 		
 	}
 

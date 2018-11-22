@@ -37,9 +37,9 @@ public class Jeu extends JFrame {
 		
 		//JPanel panelSettingShip = new ShipSettingView(p1);
 		
-		this.add(jp, BorderLayout.EAST);
+		this.add(jp, BorderLayout.WEST);
 		//this.add(panelSettingShip,BorderLayout.CENTER);
-		this.add(jpHistory, BorderLayout.WEST);
+		this.add(jpHistory, BorderLayout.EAST);
 		
 		this.pack();
 		this.setVisible(true);

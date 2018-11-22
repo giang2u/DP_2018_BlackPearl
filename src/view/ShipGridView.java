@@ -34,7 +34,6 @@ public class ShipGridView extends JPanel implements Observer{
     	 for (int i = 0; i < 11 ; i++ )  {
          	for (int j = 0; j < 11 ; j++ ) {
          		lcase[i][j] = new Case(i*Case.size, j*Case.size, player);
-         		
          	}
          }
     	
