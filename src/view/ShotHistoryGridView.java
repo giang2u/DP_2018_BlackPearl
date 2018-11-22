@@ -1,6 +1,10 @@
 package view;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -21,41 +25,56 @@ import controller.ShotHistoryGridController;
 public class ShotHistoryGridView extends JPanel implements Observer{
 	
 	protected Player player;
-    protected JButton[][] grid  = new JButton[10][10];
-    protected JPanel[] panels = new JPanel[10];
+    protected JButton[][] grid  = new JButton[11][11];
+    protected JPanel[] panels = new JPanel[11];
+    private Graphics2D g2;
+    private Case[][] lcase;
     
     public ShotHistoryGridView(Player p) {
     	
     	this.player = p;
-    	JPanel contentPane = new JPanel();
-    	for (int i = 0; i < panels.length; i++) {
-            panels[i] = new JPanel();
-        }
+    	lcase = new Case[11][11];
     	
-    	// initialize button 100 casse 
-        for(int i = 0; i < Player.SIZE; i++) {
-        	for(int j = 0; j < Player.SIZE; j++){
-                grid[i][j] = new JButton("~");
-                grid[i][j].addActionListener(new ListenerShot(this.player));
-                panels[i].setLayout(new FlowLayout(FlowLayout.LEFT));
-                panels[i].add(grid[i][j]);
+
+    	
+    	 for (int i = 0; i < 11 ; i++ )  {
+         	for (int j = 0; j < 11 ; j++ ) {
+
+         		lcase[i][j] = new Case(i*Case.size, j*Case.size);
+         	}
+         }
+
+     	this.setPreferredSize(new Dimension(500, 500));
+		this.player.addObserver(this);
+    }
+    
+ 
+    public void paintComponent(Graphics g)
+    {
+    	
+        // dessin des lignes de la grille
+    	g2 = (Graphics2D) g;
+    	super.paintComponent(g2);
+
+    	g2.fillRect(0,0,11 * Case.size, 11 * Case.size);
+     
+    	
+        for (int i = 0; i < 11 ; i++ )  {
+        	for (int j = 0; j < 11 ; j++ ) {
+        		int x = lcase[i][j].getX();
+        		int y = lcase[i][j].getY();
+        		g2.setColor(Color.blue);
+        		g2.drawRect(x, y, Case.size, Case.size);
         	}
         }
-        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
-        for (JPanel jPanel : panels) {
-            contentPane.add(jPanel);
-        }
-        
-        this.add(contentPane);
-
-
-    	
-		this.player.addObserver(this);
     }
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
+	
 		
 	}
+	
+
+
 }
