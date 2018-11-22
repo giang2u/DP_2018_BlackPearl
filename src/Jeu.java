@@ -35,10 +35,10 @@ public class Jeu extends JFrame {
 		JPanel jp = new ShipGridView(p1);
 		JPanel jpHistory = new ShotHistoryGridView(p1);
 		
-		//JPanel panelSettingShip = new ShipSettingView(p1);
+		JPanel panelSettingShip = new ShipSettingView(p1);
 		
 		this.add(jp, BorderLayout.WEST);
-		//this.add(panelSettingShip,BorderLayout.CENTER);
+		this.add(panelSettingShip,BorderLayout.CENTER);
 		this.add(jpHistory, BorderLayout.EAST);
 		
 		this.pack();
