@@ -25,6 +25,7 @@ import controller.ShipGridController;
 import controller.ShotHistoryGridController;
 
 import model.Case;
+import model.players.Human;
 import model.players.Player;
 
 public class ShipGridView extends JPanel implements Observer{
@@ -81,9 +82,12 @@ public class ShipGridView extends JPanel implements Observer{
         // dessin des lignes de la grille
     	Graphics2D g2 = (Graphics2D) g;
     	super.paintComponent(g2);
+       /* g2.drawLine(0,0, 200, 200);
+	    g2.drawLine(0, 200,200, 0);*/
     	
-
-    	g2.setColor(Color.pink);
+    	
+    	
+    	
     	g2.fillRect(0,0,11 * Case.size, 11 * Case.size);
      
     	
@@ -92,9 +96,8 @@ public class ShipGridView extends JPanel implements Observer{
         		int x = lcase[i][j].getX();
         		int y = lcase[i][j].getY();
         		Color c = lcase[i][j].getColor();
-        		g2.fillRect(x, y, Case.size, Case.size);
-        		g2.setColor(c);
-        		g2.drawRect(x, y, Case.size, Case.size);
+        		g2.setColor(Color.blue);
+        		g2.drawRect(x, y, Case.size*1000000, Case.size*1000000);
         	}
         }
     }
@@ -114,5 +117,7 @@ public class ShipGridView extends JPanel implements Observer{
 	        }
 		
 	}
+	
+
 
 }

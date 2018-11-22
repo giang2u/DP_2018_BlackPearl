@@ -1,5 +1,6 @@
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
@@ -31,10 +32,11 @@ public class Jeu extends JFrame {
 		/*JPanel jpp = new ShotHistoryGridView(p1);
 		JPanel panelSettingShip = new ShipSettingView(p1);*/
 		
-		this.add(jp, BorderLayout.WEST);
+		this.add(jp/*, BorderLayout.WEST*/);
 		/*this.add(panelSettingShip,BorderLayout.CENTER);
 		this.add(jpp, BorderLayout.EAST);*/
 		
+		setPreferredSize(new Dimension(1400, 1000));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
 		this.pack();
 		this.setVisible(true);
