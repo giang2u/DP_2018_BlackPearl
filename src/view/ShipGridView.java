@@ -13,6 +13,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JPanel;
+import javax.swing.TransferHandler;
 
 import model.players.Human;
 import model.players.Player;
@@ -36,8 +37,6 @@ public class ShipGridView extends JPanel implements Observer{
          		lcase[i][j] = new Case(i*Case.size, j*Case.size, player);
          	}
          }
-    	
-    	 
     	 
     	this.setPreferredSize(new Dimension(500, 500));
 		this.player.addObserver(this);
@@ -65,6 +64,7 @@ public class ShipGridView extends JPanel implements Observer{
         		g2.drawRect(x, y, Case.size, Case.size);
         	}
         }
+        setTransferHandler(new TransferHandler("test"));
     }
 
 	@Override

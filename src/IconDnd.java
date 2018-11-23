@@ -1,4 +1,4 @@
-/*
+
 
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -13,14 +13,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-/*
-Java Swing tutorial
+
+/*Java Swing tutorial
 Drag and drop icons
 
 Author: Jan Bodnar
-Website: http://zetcode.com
- */
-/*
+Website: http://zetcode.com*/
+ 
+
 public class IconDnd extends JFrame {
 
 
@@ -31,9 +31,9 @@ public class IconDnd extends JFrame {
 
     private void initUI() {
 
-        ImageIcon icon1 = new ImageIcon("src/main/resources/sad.png");
-        ImageIcon icon2 = new ImageIcon("src/main/resources/plain.png");
-        ImageIcon icon3 = new ImageIcon("src/main/resources/smile.png");
+        ImageIcon icon1 = new ImageIcon("img/ship_list.png");
+        ImageIcon icon2 = new ImageIcon("img/grille_bataille_navale.png");
+        ImageIcon icon3 = new ImageIcon("img/bataille-navale.jpg");
 
         JLabel label1 = new JLabel(icon1, JLabel.CENTER);
         JLabel label2 = new JLabel(icon2, JLabel.CENTER);
@@ -104,10 +104,8 @@ public class IconDnd extends JFrame {
 
     public static void main(String[] args) {
 
-        EventQueue.invokeLater(() -> {
 
             IconDnd ex = new IconDnd();
             ex.setVisible(true);
-        });
     }
-}*/
+}
