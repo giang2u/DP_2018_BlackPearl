@@ -53,6 +53,24 @@ public abstract class Ship {
 		this.horizontal = horizontal;
 	}
 
+	public boolean estToucher(int a, int b){
+		if(!horizontal){
+			if(posX <= a  && a < posX + 1 && posY <=b  && b < posY + size){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		else{ 
+			if(posX <= a  && a < posX + size && posY <=b  && b < posY + 1){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+	}
 	
 	
 

@@ -28,9 +28,16 @@ public class ListenerShot implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		p.setCoorDonne(e.getX()/50, e.getY()/50);
-		lcase[e.getX()/50][ e.getY()/50].setColor(Color.red);
-		System.out.println("oui");
+		//System.out.println(e.getX()/50 +"**" + e.getY()/50);
+		if(p.cibleToucher(e.getX()/50, e.getY()/50)){
+			lcase[e.getX()/50][ e.getY()/50].setColor(Color.red);
+			p.toucher();
+			System.out.println("tire toucher" + p.getNbTireToucher());
+		}
+		else{
+			p.rater();
+			System.out.println("tire louper" + p.getNbTireMiss());
+		}
 	}
 
 	@Override
