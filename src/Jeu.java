@@ -68,11 +68,11 @@ public class Jeu extends JFrame {
 		}
 		
 		//creer 5 
-		Ship playerShip2 =  this.epoch.buildShip(0,0,2, true);
-		Ship playerShip3=  this.epoch.buildShip(0,0,3, true);
-		Ship playerShip3B =  this.epoch.buildShip(0,0,3, true);
-		Ship playerShip4 =  this.epoch.buildShip(0,0,4, true);
-		Ship playerShip5=  this.epoch.buildShip(0,0,5, true);
+		Ship playerShip2 =  this.epoch.buildShip(0,0,2, false);//
+		Ship playerShip3=  this.epoch.buildShip(1,1,3, false);
+		Ship playerShip3B =  this.epoch.buildShip(2,2,3, true);//
+		Ship playerShip4 =  this.epoch.buildShip(2,4,4, true);
+		Ship playerShip5=  this.epoch.buildShip(1,5,5, false);//
 		
 		//donne 5 bateaux au joueur
 		this.p1.addShip(playerShip2);

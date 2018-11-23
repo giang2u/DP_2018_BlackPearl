@@ -23,6 +23,17 @@ public abstract class Player extends Observable{
 		initGrill();
 		shipList = new ArrayList<>(5);
 	}
+	
+	public boolean cibleToucher(int xTirer, int yTirer){
+		boolean toucher = false;
+		setCoorDonne(xTirer, yTirer);
+		for(Ship ship : shipList){
+			if(ship.estToucher(xClick, yClick)){
+				toucher = true;;
+			}
+		}
+		return toucher;
+	}
 
 	public void toucher() {
 		this.nbTireToucher++;
