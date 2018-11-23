@@ -20,7 +20,6 @@ public class Case extends JButton {
 	public Case(int x,int y, Player p){
 		super("");
 		addMouseListener(new ListenerShot(p));
-		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		this.x=x;
 		this.y=y;
 		setPreferredSize(new Dimension(size, size));

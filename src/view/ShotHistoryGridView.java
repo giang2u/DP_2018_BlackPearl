@@ -35,13 +35,13 @@ public class ShotHistoryGridView extends JPanel implements Observer{
     	this.player = p;
     	lcase = new Case[11][11];
 
-     	addMouseListener(new ListenerShot(p));
+     	
     	 for (int i = 0; i < 11 ; i++ )  {
          	for (int j = 0; j < 11 ; j++ ) {
          		lcase[i][j] = new Case(i*Case.size, j*Case.size,player);
          	}
          }
-    	 
+    	 addMouseListener(new ListenerShot(p,lcase));
 
      	this.setPreferredSize(new Dimension(500, 500));
 		this.player.addObserver(this);
@@ -54,13 +54,16 @@ public class ShotHistoryGridView extends JPanel implements Observer{
         // dessin des lignes de la grille
     	g2 = (Graphics2D) g;
 
-    	g2.fillRect(0,0,11 * Case.size, 11 * Case.size);
         for (int i = 0; i < 11 ; i++ )  {
         	for (int j = 0; j < 11 ; j++ ) {
         		int x = lcase[i][j].getX();
         		int y = lcase[i][j].getY();
-        		g2.setColor(Color.blue);
+
+        		g2.setColor(lcase[i][j].getColor());
+            	g2.fillRect(x,y, Case.size, Case.size);
+        		g2.setColor(Color.black);
         		g2.drawRect(x, y, Case.size, Case.size);
+        		
         	}
         }
 
@@ -68,18 +71,7 @@ public class ShotHistoryGridView extends JPanel implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		
-		System.out.println(lcase[player.getxClick()][player.getyClick()].getColor());
-		
-		lcase[player.getxClick()][player.getyClick()].setColor(Color.RED);
-		
-		System.out.println(lcase[player.getxClick()][player.getyClick()].getColor());
-		
-		g2.fillRect(player.getxClick(),player.getyClick(), Case.size, Case.size);
-		g2.setColor(Color.red);
-		g2.drawRect(player.getxClick(), player.getyClick(), Case.size, Case.size);
-		
-		
+		repaint();
 	}
 	
 
