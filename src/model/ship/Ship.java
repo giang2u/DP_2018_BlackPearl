@@ -56,7 +56,6 @@ public abstract class Ship {
 	public boolean estToucher(int a, int b){
 		if(!horizontal){
 			if(posX <= a  && a < posX + 1 && posY <=b  && b < posY + size){
-				System.out.println("a" + a + " b" + b + "**** posx" + posX +"posY" + posY + "** size"+  size );
 				return true;
 			}
 			else{

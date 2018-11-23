@@ -29,10 +29,26 @@ public abstract class Player extends Observable{
 		setCoorDonne(xTirer, yTirer);
 		for(Ship ship : shipList){
 			if(ship.estToucher(xClick, yClick)){
-				toucher = true;;
+				toucher = true;
 			}
 		}
 		return toucher;
+	}
+
+	public int getNbTireToucher() {
+		return nbTireToucher;
+	}
+
+	public void setNbTireToucher(int nbTireToucher) {
+		this.nbTireToucher = nbTireToucher;
+	}
+
+	public int getNbTireMiss() {
+		return nbTireMiss;
+	}
+
+	public void setNbTireMiss(int nbTireMiss) {
+		this.nbTireMiss = nbTireMiss;
 	}
 
 	public void toucher() {
