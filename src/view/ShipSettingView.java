@@ -33,6 +33,7 @@ import javax.swing.TransferHandler;
 import controller.ListenerPoser;
 import controller.MouseGlassListener;
 import controller.MouseGlassMotionListener;
+import controller.MyMouseAdapter;
 
 import model.players.Player;
 import model.ship.Ship;
@@ -86,7 +87,7 @@ public class ShipSettingView extends JPanel implements Observer {
 
 		lcase = new ArrayList<>();
 		lcase.add(new Case(50,400,p));
-		addMouseMotionListener(new MyMouseAdapter(lcase));
+		//addMouseMotionListener(new MyMouseAdapter(lcase));
 
 		this.add(contentPane);
 		this.player.addObserver(this);
