@@ -1,7 +1,11 @@
-package dragdrop;
+package controller;
 
 
 import javax.swing.*;
+
+import view.Case;
+import view.CaseLabel;
+
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
@@ -41,7 +45,7 @@ public class MyTransferHandler extends TransferHandler {
 
         try {
             str = (String)data.getTransferData(DataFlavor.stringFlavor);
-            Case c = (Case)support.getComponent();
+            CaseLabel c = (CaseLabel)support.getComponent();
             c.setType(str);
             c.ajouterElement();
         } catch (UnsupportedFlavorException e){
@@ -61,7 +65,7 @@ public class MyTransferHandler extends TransferHandler {
     protected Transferable createTransferable(JComponent c) {
         //On retourne un nouvel objet implémentant l'interface Transferable
         //StringSelection implémente cette interface,  nous l'utilisons donc
-        return new StringSelection(((Case)c).getType());
+        return new StringSelection(((CaseLabel)c).getType());
     }
 
 

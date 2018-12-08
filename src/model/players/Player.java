@@ -17,11 +17,16 @@ public abstract class Player extends Observable{
 	protected int nbTireMiss = 0;
 	protected ArrayList<Ship> shipList;
 	protected int xClick, yClick;
+	
+    protected Ship[][] checkShip;
+	protected int[] shipCount;
 
 	public Player(String name) {
 		this.playerName = name;
 		initGrill();
 		shipList = new ArrayList<>(5);
+		shipCount = new int[5];
+		checkShip = new Ship[Player.SIZE][Player.SIZE];
 	}
 	
 	public boolean cibleToucher(int xTirer, int yTirer){
@@ -154,6 +159,9 @@ public abstract class Player extends Observable{
 		this.yClick = yClick;
 	}
 	
+    public Ship getShip(int i,int j){
+        return checkShip[i][j];
+    }
 	
 }
 

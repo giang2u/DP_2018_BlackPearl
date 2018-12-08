@@ -1,8 +1,13 @@
-package dragdrop;
+package view;
 
 
 import javax.swing.*;
 import javax.swing.border.Border;
+
+import controller.MyMouseAdapter;
+import controller.MyTransferHandler;
+import model.players.Human;
+import model.players.Niveau;
 
 import java.awt.*;
 
@@ -13,40 +18,22 @@ public class VueObjets extends JPanel{
 	private ImageIcon ship3;
 	private ImageIcon ship4;
 	private ImageIcon ship5;
-    private ImageIcon mur;
-    private ImageIcon dragon;
-    private ImageIcon soldat;
-    private ImageIcon heros;
-    private ImageIcon herbe;
-    private ImageIcon tresor;
-    private ImageIcon epee;
-    private ImageIcon piege;
 
     private static int NBOBJET = 2;
 
-    private Case labelShip;
-    private Case labelShip2;
-    private Case labelShip3;
-    private Case labelShip4;
-    private Case labelShip5;
-    private Case labelMur;
-    private Case labelSoldat;
-    private Case labelDragon;
-    private Case labelHeros;
-    private Case labelHerbe;
-    private Case labelTresor;
-    private Case labelEpee;
-    private Case labelPiege;
-
-    private JTextField lon;
-    private JTextField haut;
-
-    private Niveau niv;
+    private CaseLabel labelShip;
+    private CaseLabel labelShip2;
+    private CaseLabel labelShip3;
+    private CaseLabel labelShip4;
+    private CaseLabel labelShip5;
 
 
-    public VueObjets(final Niveau niv) {
+    private Human player;
 
-        this.niv = niv;
+
+    public VueObjets(Human player) {
+
+        this.player = player;
 
         this.setLayout(new BorderLayout());
 
@@ -65,11 +52,11 @@ public class VueObjets extends JPanel{
 
         objet.setLayout(new GridLayout(5,1));
 
-        labelShip = new Case(niv, -1, -1, ship);
-        labelShip2 = new Case(niv, -1, -1, ship2);
-        labelShip3 = new Case(niv, -1, -1, ship3);
-        labelShip4 = new Case(niv, -1, -1, ship4);
-        labelShip5 = new Case(niv, -1, -1, ship5);
+        labelShip = new CaseLabel(player, -1, -1, ship);
+        labelShip2 = new CaseLabel(player, -1, -1, ship2);
+        labelShip3 = new CaseLabel(player, -1, -1, ship3);
+        labelShip4 = new CaseLabel(player, -1, -1, ship4);
+        labelShip5 = new CaseLabel(player, -1, -1, ship5);
 
         labelShip.setType("ship");
         labelShip2.setType("ship2");

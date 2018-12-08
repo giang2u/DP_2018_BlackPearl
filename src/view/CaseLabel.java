@@ -1,22 +1,26 @@
-package dragdrop;
-
+package view;
 
 import javax.swing.*;
+
+import model.players.Human;
+import model.players.Niveau;
+
 import java.awt.*;
 
-public class Case extends JLabel {
+public class CaseLabel extends JLabel {
 
     private int ligne,colonne, taille;
-    private Niveau niveau;
+    private Human player;
     public String type;
+    public static int size = 50;
 
 
-    public Case(Niveau niveau, int ligne, int colonne, ImageIcon i){
+    public CaseLabel(Human niveau, int ligne, int colonne, ImageIcon i){
         super();
         super.setIcon(i);
         this.ligne = ligne;
         this.colonne = colonne;
-        this.niveau = niveau;
+        this.player = niveau;
     }
 
     public int getTaille() {
@@ -41,11 +45,11 @@ public class Case extends JLabel {
 
     
     public void ajouterHerbe() {
-    	niveau.ajouterShip(ligne,colonne, taille);
+    	player.ajouterShip(ligne,colonne, taille);
     }
 
     public void ajouterShip(int i){
-        niveau.ajouterShip(ligne,colonne, i);
+    	player.ajouterShip(ligne,colonne, i);
     }
     
     public void verticalShip() {

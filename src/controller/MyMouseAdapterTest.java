@@ -4,11 +4,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import view.Case;
+import view.CaseLabel;
 
 public class MyMouseAdapterTest extends MouseAdapter {
 	
-	private ArrayList<Case> lcase;
+	private ArrayList<CaseLabel> lcase;
 /*
     @Override
     public void mousePressed(MouseEvent e) {

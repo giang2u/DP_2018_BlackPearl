@@ -34,7 +34,7 @@ public class ShipGridView extends JPanel implements Observer{
     	
     	 for (int i = 0; i < 11 ; i++ )  {
          	for (int j = 0; j < 11 ; j++ ) {
-         		lcase[i][j] = new Case(i*Case.size, j*Case.size, player);
+         		lcase[i][j] = new Case(i*CaseLabel.size, j*CaseLabel.size, player);
          	}
          }
     	 
@@ -53,7 +53,7 @@ public class ShipGridView extends JPanel implements Observer{
     	
     	
     	
-    	g2.fillRect(0,0,11 * Case.size, 11 * Case.size);
+    	g2.fillRect(0,0,11 * CaseLabel.size, 11 * CaseLabel.size);
      
     	
         for (int i = 0; i < 11 ; i++ )  {
@@ -61,7 +61,7 @@ public class ShipGridView extends JPanel implements Observer{
         		int x = lcase[i][j].getX();
         		int y = lcase[i][j].getY();
         		g2.setColor(Color.blue);
-        		g2.drawRect(x, y, Case.size, Case.size);
+        		g2.drawRect(x, y, CaseLabel.size, CaseLabel.size);
         	}
         }
         setTransferHandler(new TransferHandler("test"));

@@ -1,4 +1,4 @@
-package view;
+ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -60,3 +60,4 @@ public class Case extends JButton {
 	}
 
 }
+

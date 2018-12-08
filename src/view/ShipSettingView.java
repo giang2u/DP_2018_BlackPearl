@@ -109,9 +109,9 @@ public class ShipSettingView extends JPanel implements Observer {
 		Graphics2D g2d = (Graphics2D)g;
 		for (Case c : lcase) {
 			g2d.setColor(c.getColor());
-			g2d.fillRect(c.getX(), c.getY(), Case.size*5, Case.size);
+			g2d.fillRect(c.getX(), c.getY(), CaseLabel.size*5, CaseLabel.size);
 			g2d.setColor(Color.black);
-			g2d.drawRect(c.getX(), c.getY(), Case.size*5, Case.size);
+			g2d.drawRect(c.getX(), c.getY(), CaseLabel.size*5, CaseLabel.size);
 			System.out.println(c.getX());
 		}
 		//Si on n'a pas d'image à dessiner, on ne fait rien…

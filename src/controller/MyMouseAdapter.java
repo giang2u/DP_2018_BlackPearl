@@ -1,7 +1,8 @@
-package dragdrop;
+package controller;
 
 import javax.swing.*;
 
+import view.VueObjets;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;

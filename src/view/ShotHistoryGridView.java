@@ -38,7 +38,7 @@ public class ShotHistoryGridView extends JPanel implements Observer{
      	
     	 for (int i = 0; i < 11 ; i++ )  {
          	for (int j = 0; j < 11 ; j++ ) {
-         		lcase[i][j] = new Case(i*Case.size, j*Case.size,player);
+         		lcase[i][j] = new Case(i*CaseLabel.size, j*CaseLabel.size,player);
          	}
          }
     	 addMouseListener(new ListenerShot(p,lcase));
@@ -59,9 +59,9 @@ public class ShotHistoryGridView extends JPanel implements Observer{
         		int y = lcase[i][j].getY();
 
         		g2.setColor(lcase[i][j].getColor());
-            	g2.fillRect(x,y, Case.size, Case.size);
+            	g2.fillRect(x,y, CaseLabel.size, CaseLabel.size);
         		g2.setColor(Color.black);
-        		g2.drawRect(x, y, Case.size, Case.size);
+        		g2.drawRect(x, y, CaseLabel.size, CaseLabel.size);
         		
         	}
         }

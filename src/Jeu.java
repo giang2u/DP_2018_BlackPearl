@@ -10,15 +10,17 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.TransferHandler;
 
-import dragdrop.Niveau;
 import view.ShipGridView;
 import view.ShipSettingView;
 import view.ShotHistoryGridView;
+import view.VueCreaLaby;
+import view.VueObjets;
 import model.epoch.CenturyXVI;
 import model.epoch.CenturyXX;
 import model.epoch.EpochFactory;
 import model.players.AI;
 import model.players.Human;
+import model.players.Niveau;
 import model.players.Player;
 import model.ship.Ship;
 
@@ -38,10 +40,12 @@ public class Jeu extends JFrame {
 		JPanel jp = new ShipGridView(p1);
 		JPanel jpHistory = new ShotHistoryGridView(p1);
 		
-		JPanel panelSettingShip = new ShipSettingView(p1);
+		//JPanel panelSettingShip = new ShipSettingView(p1);
+		JPanel jpGridShip = new VueCreaLaby((Human) p1,10, 10);
+		JPanel jpShip = new VueObjets((Human) p1);
 		
-		this.add(jp, BorderLayout.WEST);
-		this.add(panelSettingShip,BorderLayout.CENTER);
+		this.add(jpGridShip, BorderLayout.WEST);
+		this.add(jpShip,BorderLayout.CENTER);
 		this.add(jpHistory, BorderLayout.EAST);
 		
 		this.pack();

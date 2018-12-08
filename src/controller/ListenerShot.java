@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
 
-import dragdrop.Cases;
 import view.Case;
 
 import model.players.Player;
@@ -17,7 +16,6 @@ import model.players.Player;
 public class ListenerShot implements MouseListener {
 	private Player p;
 	private Case[][] lcase;
-	private Cases[][] lcases;
 	public ListenerShot(Player p){
 		this.p = p; 
 	}
@@ -28,10 +26,7 @@ public class ListenerShot implements MouseListener {
 	}
 	
 	
-	public ListenerShot(Player p,Cases[][] lcase){
-		this.p = p; 
-		this.lcases = lcase;
-	}
+
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -48,19 +43,6 @@ public class ListenerShot implements MouseListener {
 				System.out.println("tire louper" + p.getNbTireMiss());
 			}
 		}
-		/*
-		if (lcases != null) {
-			//lcases[e.getX()/50][ e.getY()/50].setColor(Color.red);
-			if(p.cibleToucher(e.getX()/50, e.getY()/50)){
-				lcases[e.getX()/50][ e.getY()/50].setColor(Color.red);
-				p.toucher();
-				System.out.println("tir toucher" + p.getNbTireToucher());
-			}
-			else{
-				p.rater();
-				System.out.println("tir louper" + p.getNbTireMiss());
-			}
-		}*/
 	}
 
 	@Override

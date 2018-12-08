@@ -1,29 +1,34 @@
-package dragdrop;
+package view;
 
 import javax.swing.*;
+
+import model.players.Human;
+import model.players.Niveau;
+import model.players.Player;
+
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
 public class VueGenerateur extends JFrame {
 
-    private Niveau niv;
+    private Human player;
     private VueObjets vo;
     private VueCreaLaby vc;
     private final static int HAUTEUR = 1000;
     private final static int LARGEUR = HAUTEUR+130;
     Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 
-    public VueGenerateur(Niveau niv) {
+    public VueGenerateur(Human p) {
 
-        this.niv = niv;
+        this.player = p;
 
         setTitle("Generateur de Monde");
         setSize(LARGEUR, HAUTEUR);
         setLocation((screen.width-this.getSize().width)/2,(screen.height-this.getSize().height)/2);
 
-        vo = new VueObjets(niv);
-        vc = new VueCreaLaby(niv,10, 10);
+        vo = new VueObjets(player);
+        vc = new VueCreaLaby(player,10, 10);
 
         //this.setLayout(new BoxLayout());
         //this.add(vo,BorderLayout.LINE_START);
@@ -46,6 +51,6 @@ public class VueGenerateur extends JFrame {
     }
     
     public static void main(String[] args) {
-    	new VueGenerateur(new Niveau("oui",10,10));
+    	new VueGenerateur(new Human("oui"));
     }
 }
