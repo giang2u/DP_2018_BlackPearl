@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import view.Case;
 
-public class MyMouseAdapter extends MouseAdapter {
+public class MyMouseAdapterTest extends MouseAdapter {
 	
 	private ArrayList<Case> lcase;
 /*

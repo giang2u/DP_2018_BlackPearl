@@ -17,6 +17,15 @@ public class Case extends JButton {
 	public static int size = 50;
 	public Color color = Color.white;
 	
+	
+	public Case(int x,int y){
+		super("");
+		this.x=x;
+		this.y=y;
+		setPreferredSize(new Dimension(size, size));
+	}
+
+	
 	public Case(int x,int y, Player p){
 		super("");
 		addMouseListener(new ListenerShot(p));

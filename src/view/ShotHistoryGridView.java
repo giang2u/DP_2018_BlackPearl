@@ -50,7 +50,6 @@ public class ShotHistoryGridView extends JPanel implements Observer{
  
     public void paintComponent(Graphics g)
     {
-    	
         // dessin des lignes de la grille
     	g2 = (Graphics2D) g;
 

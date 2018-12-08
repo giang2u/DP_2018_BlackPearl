@@ -10,11 +10,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.TransferHandler;
 
+import dragdrop.Niveau;
 import view.ShipGridView;
 import view.ShipSettingView;
 import view.ShotHistoryGridView;
-
-
 import model.epoch.CenturyXVI;
 import model.epoch.CenturyXX;
 import model.epoch.EpochFactory;
