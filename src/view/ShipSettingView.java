@@ -54,7 +54,7 @@ public class ShipSettingView extends JPanel implements Observer {
 	public ShipSettingView(Player p){
 		this.player = p;
 
-		this.poser.addActionListener(new ListenerPoser(player));
+		//this.poser.addMouseListener(new ListenerPoser(player));
 		JPanel contentPane = new JPanel();
 		int j = 0;
 

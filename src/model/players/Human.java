@@ -16,8 +16,6 @@ public class Human extends Player {
 
     // try to placed ship where we dropped 
     public void ajouterShip(int x,int y,int taille){
-    	
-    	
 		// if there we can place it
 		if (checkCount(taille) && checkPlacedShip(x,y,taille, true) ) {
 			// place the ship
@@ -35,7 +33,6 @@ public class Human extends Player {
     // search if there is already a ship placed 
     // true if no ship
     public boolean checkPlacedShip(int x,int y,int taille, boolean horizontal) {
-    	
 		// if the ship does not exceed the map size
 		boolean noShip = horizontal==true ? (x+taille < Player.SIZE +1) : (y-taille >= 0);
 		if (noShip) {

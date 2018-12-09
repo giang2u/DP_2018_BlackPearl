@@ -13,6 +13,7 @@ public class CaseLabel extends JLabel {
     private Human player;
     public String type;
     public static int size = 50;
+    public boolean touche = false;
 
 
     public CaseLabel(Human niveau, int ligne, int colonne, ImageIcon i){
@@ -86,8 +87,25 @@ public class CaseLabel extends JLabel {
         }
 
     }
+    
+    public void EnemyShot() {
+    	if (touche) this.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1_shot.png")));
+    	else this.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case_shot.png")));
+    }
+    
+    public Icon getIconLabel() {
+    	return this.getIcon();
+    }
+    
+    public boolean isTouche() {
+		return touche;
+	}
 
-    public void setType(String type){
+	public void setTouche(boolean touche) {
+		this.touche = touche;
+	}
+
+	public void setType(String type){
         this.type = type;
     }
 

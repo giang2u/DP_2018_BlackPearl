@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
+import controller.ListenerPoser;
 import controller.MyTransferHandler;
 import model.players.Human;
 import model.players.Niveau;
@@ -45,11 +46,12 @@ public class VueCreaLaby extends JPanel implements Observer {
         js.createHorizontalScrollBar();
         js.createVerticalScrollBar();
         this.add(js);
+        jp.addMouseListener(new ListenerPoser(player));
         init();
     }
     
     public void init() {
-    	tabLab = new CaseLabel[nbLigne][nbColonne];
+    	tabLab = new JLabel[nbLigne][nbColonne];
     	jp.setPreferredSize(new Dimension(nbLigne*50,nbColonne*50));
     	 for(int i =0;i<nbLigne;i++){
              for(int j =0;j<nbColonne;j++){
@@ -86,10 +88,15 @@ public class VueCreaLaby extends JPanel implements Observer {
         for(int i =0;i<nbLigne;i++){
             for(int j =0;j<nbColonne;j++){
 	            	if (player.getShip(i, j) != null) {
-	                    tabLab[i][j] = new CaseLabel(player, i, j, new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1.png")));
+	            		int x = player.getShip(i, j).getPosX();
+	            		//System.out.println(x + "     " + player.getShip(i, j).getShipPart() );
+	            		if (player.getShip(i, j).getShipPart()[i-x] == 1)
+	            			tabLab[i][j] = new CaseLabel(player, i, j, new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1_shot.png")));
+	            		else tabLab[i][j] = new CaseLabel(player, i, j, new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1.png")));
+	                    
 	                }
                     else {
-                        tabLab[i][j] = new CaseLabel(player, i, j, new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case.png")));
+                    	 tabLab[i][j] = new CaseLabel(player, i, j, new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case.png")));
                     }
                 tabLab[i][j].setTransferHandler(new MyTransferHandler());
                 //tabLab[i][j].setBorder(BorderFactory.createLineBorder(Color.black));

@@ -28,7 +28,8 @@ public abstract class Player extends Observable{
 		shipCount = new int[5];
 		checkShip = new Ship[Player.SIZE][Player.SIZE];
 	}
-	
+
+
 	public boolean cibleToucher(int xTirer, int yTirer){
 		boolean toucher = false;
 		setCoorDonne(xTirer, yTirer);
@@ -161,6 +162,14 @@ public abstract class Player extends Observable{
 	
     public Ship getShip(int i,int j){
         return checkShip[i][j];
+    }
+    
+    public void setShipPart(int i, int j) {
+    	System.out.println("connard");
+    	checkShip[i][j].setShipPart(i, j);
+    	System.out.println("connard");
+    	setChanged();
+		notifyObservers();
     }
 	
 }

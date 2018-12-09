@@ -37,7 +37,7 @@ public class Jeu extends JFrame {
 		setPreferredSize(new Dimension(1500, 600));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
 		
-		JPanel jp = new ShipGridView(p1);
+		//JPanel jp = new ShipGridView(p1);
 		JPanel jpHistory = new ShotHistoryGridView(p1);
 		
 		//JPanel panelSettingShip = new ShipSettingView(p1);
@@ -48,6 +48,7 @@ public class Jeu extends JFrame {
 		this.add(jpShip,BorderLayout.CENTER);
 		this.add(jpHistory, BorderLayout.EAST);
 		
+		this.setTitle("WORLD OF WARSHIP IN SQUARE BECAUSE NOT GRAPHIC ASSET");
 		this.pack();
 		this.setVisible(true);
 	}

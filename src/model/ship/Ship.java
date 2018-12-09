@@ -4,6 +4,7 @@ public abstract class Ship {
 	
 	protected int posX, posY, size, hp;
 	protected boolean  horizontal;
+	protected int[] shipPart;
 	
 	public Ship(int x, int y, int size, boolean horizontal) {
 		this.posX = x;
@@ -11,7 +12,10 @@ public abstract class Ship {
 		this.size = size;
 		this.hp = size;
 		this.horizontal = horizontal;
+		shipPart = new int[size];
 	}
+
+
 
 	public void setPosX(int posX) {
 		this.posX = posX;
@@ -56,6 +60,7 @@ public abstract class Ship {
 	public boolean estToucher(int a, int b){
 		if(!horizontal){
 			if(posX <= a  && a < posX + 1 && posY <=b  && b < posY + size){
+				shipPart[a - posX] = 1;
 				return true;
 			}
 			else{
@@ -69,6 +74,18 @@ public abstract class Ship {
 			else{
 				return false;
 			}
+		}
+	}
+
+	public int[] getShipPart() {
+		return shipPart;
+	}
+
+
+
+	public void setShipPart(int x, int y) {
+		if (horizontal && x >= posX && x < posX + size) {
+			this.shipPart[x - posX] = 1;
 		}
 	}
 	
