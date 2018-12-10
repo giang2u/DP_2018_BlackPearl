@@ -3,7 +3,7 @@ package model.ship;
 public abstract class Ship {
 	
 	protected int posX, posY, size, hp;
-	protected boolean  horizontal;
+	protected boolean horizontal, dead;
 	protected int[] shipPart;
 	
 	public Ship(int x, int y, int size, boolean horizontal) {
@@ -12,6 +12,7 @@ public abstract class Ship {
 		this.size = size;
 		this.hp = size;
 		this.horizontal = horizontal;
+		dead = false;
 		shipPart = new int[size];
 	}
 
@@ -56,6 +57,14 @@ public abstract class Ship {
 	public void setHorizontal(boolean horizontal) {
 		this.horizontal = horizontal;
 	}
+	
+	public boolean isDead() {
+		dead = true;
+		for (int i = 0; i < shipPart.length; i++) {
+			if (shipPart[i] == 0) dead = false;
+		}
+		return dead;
+	}
 
 	public boolean estToucher(int a, int b){
 		if(!horizontal){
@@ -69,7 +78,7 @@ public abstract class Ship {
 		}
 		else{ 
 			if(posX <= a  && a < posX + size && posY <=b  && b < posY + 1){
-				return true;
+				return lostHp(a,b);
 			}
 			else{
 				return false;
@@ -90,5 +99,22 @@ public abstract class Ship {
 	}
 	
 	
+	public boolean lostHp(int x, int y) {
+		boolean touche = false;
+		
+		if (horizontal) {
+			if (shipPart[x - posX] == 0) {
+				diminuer();
+				shipPart[x - posX] = 1;
+				touche = true;
+			}
+		}
+		
+		return touche;
+	}
+	
+	public void diminuer() {
+		if (this.hp > 0) this.hp--;
+	}
 
 }

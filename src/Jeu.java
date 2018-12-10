@@ -31,11 +31,12 @@ public class Jeu extends JFrame {
 	private Player ai ;
 	private EpochFactory epoch;
 	private Player joueurCourant;
+	private JPanel jpShip;
 	
 	public Jeu(){
 		initJeu();
 		joueurCourant = p1;
-		setPreferredSize(new Dimension(1500, 600));
+		setPreferredSize(new Dimension(1400, 600));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
 		
 		//JPanel jp = new ShipGridView(p1);
@@ -43,7 +44,7 @@ public class Jeu extends JFrame {
 		
 		//JPanel panelSettingShip = new ShipSettingView(p1);
 		JPanel jpGridShip = new VueCreaLaby((Human) p1,10, 10);
-		JPanel jpShip = new VueObjets((Human) p1);
+		jpShip = new VueObjets((Human) p1);
 		
 		this.add(jpGridShip, BorderLayout.WEST);
 		this.add(jpShip,BorderLayout.CENTER);
@@ -80,6 +81,9 @@ public class Jeu extends JFrame {
 		p1.setEnemy(ai);
 		ai.setEnemy(p1);
 		
+		
+		
+		
 		for (Ship s : ai.getListShip()) System.out.println(s.getPosX() + "     " + s.getPosY() + "  "+ s.getSize());
 		/*
 		//creer 5 
@@ -107,19 +111,34 @@ public class Jeu extends JFrame {
 	
 	/**
 	 * @param args
+	 * @throws InterruptedException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		Jeu j = new Jeu();
+		
+		
 		while(true) {
 			
 			
-			
-			
+			System.out.println(j.getP1().getListShip().size());
+			if (j.getP1().getListShip().size() == 5) {
+				((AI) j.getAi()).randomShot();
+				//if (j.getP1().isLose()) System.out.println(" OUA T TRO FORT"); System.exit(0);
+			}
+		
 			
 			// changement de tour
 			Player p = (j.getJoueurCourant() == j.getP1()) ? j.getAi() : j.getP1();
 			j.setJoueurCourant(p);
 		}
+	}
+
+	public JPanel getJpShip() {
+		return jpShip;
+	}
+
+	public void setJpShip(JPanel jpShip) {
+		this.jpShip = jpShip;
 	}
 
 	public Player getP1() {

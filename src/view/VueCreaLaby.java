@@ -71,15 +71,12 @@ public class VueCreaLaby extends JPanel implements Observer {
     }
 
     private void modifLab(int h, int l){
-
-        for (int i = 0; i < nbLigne; i++) {
-
+       /* for (int i = 0; i < nbLigne; i++) {
             for (int j = 0; j < nbColonne; j++) {
                 jp.remove(tabLab[i][j]);
             }
-        }
+        }*/
  
-
         nbLigne=h;
         nbColonne=l;
         tabLab = new CaseLabel[nbLigne][nbColonne];
@@ -91,17 +88,21 @@ public class VueCreaLaby extends JPanel implements Observer {
 	            		int x = player.getShip(i, j).getPosX();
 	            		//System.out.println(x + "     " + player.getShip(i, j).getShipPart() );
 	            		if (player.getShip(i, j).getShipPart()[i-x] == 1)
-	            			tabLab[i][j] = new CaseLabel(player, i, j, new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1_shot.png")));
-	            		else tabLab[i][j] = new CaseLabel(player, i, j, new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1.png")));
+	            			((JLabel) jp.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1_shot.png")));
+	            			//tabLab[i][j] = new CaseLabel(player, i, j, new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1_shot.png")));	
+	            		else ((JLabel) jp.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1.png")));
 	                    
 	                }
                     else {
-                    	 tabLab[i][j] = new CaseLabel(player, i, j, new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case.png")));
+                    	if (player.getShipGrill(i,j) == 1)
+                    		((JLabel) jp.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case_shot.png")));	
+                    		//tabLab[i][j] = new CaseLabel(player, i, j, new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case_shot.png")));
+                      	//else tabLab[i][j] = new CaseLabel(player, i, j, new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case.png")));
                     }
-                tabLab[i][j].setTransferHandler(new MyTransferHandler());
+                //tabLab[i][j].setTransferHandler(new MyTransferHandler());
                 //tabLab[i][j].setBorder(BorderFactory.createLineBorder(Color.black));
-                tabLab[i][j].setBounds(i*50,j*50,50,50);
-                jp.add(tabLab[i][j]);
+               // tabLab[i][j].setBounds(i*50,j*50,50,50);
+                //jp.add(tabLab[i][j]);
             }
         }
         js.setViewportView(jp);

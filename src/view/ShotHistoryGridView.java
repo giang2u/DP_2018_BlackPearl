@@ -25,19 +25,17 @@ import controller.ShotHistoryGridController;
 public class ShotHistoryGridView extends JPanel implements Observer{
 	
 	protected Player player;
-    protected JButton[][] grid  = new JButton[11][11];
-    protected JPanel[] panels = new JPanel[11];
     private Graphics2D g2;
     private Case[][] lcase;
     
     public ShotHistoryGridView(Player p) {
     	
     	this.player = p;
-    	lcase = new Case[11][11];
+    	lcase = new Case[10][10];
 
      	
-    	 for (int i = 0; i < 11 ; i++ )  {
-         	for (int j = 0; j < 11 ; j++ ) {
+    	 for (int i = 0; i < 10 ; i++ )  {
+         	for (int j = 0; j < 10 ; j++ ) {
          		lcase[i][j] = new Case(i*CaseLabel.size, j*CaseLabel.size,player);
          	}
          }
@@ -53,8 +51,8 @@ public class ShotHistoryGridView extends JPanel implements Observer{
         // dessin des lignes de la grille
     	g2 = (Graphics2D) g;
 
-        for (int i = 0; i < 11 ; i++ )  {
-        	for (int j = 0; j < 11 ; j++ ) {
+        for (int i = 0; i < 10 ; i++ )  {
+        	for (int j = 0; j < 10 ; j++ ) {
         		int x = lcase[i][j].getX();
         		int y = lcase[i][j].getY();
 

@@ -177,6 +177,16 @@ public abstract class Player extends Observable{
 		notifyObservers();
     }
     
+    public int getShipGrill(int i,int j){
+        return shipGrill[i][j];
+    }
+    
+    public void setShipGrill(int i, int j) {
+    	shipGrill[i][j] = 1;
+    	setChanged();
+		notifyObservers();
+    }
+    
 	//  ------------------ PLACEMENT DRAG AND DROP DES BATEAUX -------------------------- //
 
     // try to placed ship where we dropped 
@@ -237,6 +247,18 @@ public abstract class Player extends Observable{
     
     //  ------------------ FIN PLACEMENT DRAG AND DROP DES BATEAUX -------------------------- //
     
+    public boolean isLose() {
+    	boolean lose = true;
+    	
+    	for (Ship s : shipList) {
+    		// si un bateau nest pas coule alors le joueur na pas perdu
+    		if (!s.isDead()) {
+    			lose = false;
+    		}
+    	}
+    	
+    	return lose;
+    }
 	
 }
 
