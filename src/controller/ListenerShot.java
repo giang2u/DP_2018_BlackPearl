@@ -32,6 +32,7 @@ public class ListenerShot implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		//System.out.println(e.getX()/50 +"**" + e.getY()/50);
+
 		if (lcase != null) {
 			if(p.cibleToucher(e.getX()/50, e.getY()/50)){
 				lcase[e.getX()/50][ e.getY()/50].setColor(Color.red);

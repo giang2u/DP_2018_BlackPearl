@@ -30,10 +30,11 @@ public class Jeu extends JFrame {
 	private Player p1 ;
 	private Player ai ;
 	private EpochFactory epoch;
+	private Player joueurCourant;
 	
 	public Jeu(){
 		initJeu();
-
+		joueurCourant = p1;
 		setPreferredSize(new Dimension(1500, 600));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
 		
@@ -74,7 +75,13 @@ public class Jeu extends JFrame {
 		if(epoque == 2){
 			this.epoch = new CenturyXX();
 		}
+		((AI) this.ai).putShip();
 		
+		p1.setEnemy(ai);
+		ai.setEnemy(p1);
+		
+		for (Ship s : ai.getListShip()) System.out.println(s.getPosX() + "     " + s.getPosY() + "  "+ s.getSize());
+		/*
 		//creer 5 
 		Ship playerShip2 =  this.epoch.buildShip(0,0,2, false);//
 		Ship playerShip3=  this.epoch.buildShip(1,1,3, false);
@@ -95,14 +102,56 @@ public class Jeu extends JFrame {
 		this.ai.addShip(playerShip3B);
 		this.ai.addShip(playerShip4);
 		this.ai.addShip(playerShip5);
+		*/
 	}
 	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		new Jeu();
+		Jeu j = new Jeu();
+		while(true) {
+			
+			
+			
+			
+			
+			// changement de tour
+			Player p = (j.getJoueurCourant() == j.getP1()) ? j.getAi() : j.getP1();
+			j.setJoueurCourant(p);
+		}
+	}
 
+	public Player getP1() {
+		return p1;
+	}
+
+	public void setP1(Player p1) {
+		this.p1 = p1;
+	}
+
+	public Player getAi() {
+		return ai;
+	}
+
+	public void setAi(Player ai) {
+		this.ai = ai;
+	}
+
+	public EpochFactory getEpoch() {
+		return epoch;
+	}
+
+	public void setEpoch(EpochFactory epoch) {
+		this.epoch = epoch;
+	}
+
+	public Player getJoueurCourant() {
+		return joueurCourant;
+	}
+
+	public void setJoueurCourant(Player joueurCourant) {
+		this.joueurCourant = joueurCourant;
 	}
 
 	public void loadGame(){

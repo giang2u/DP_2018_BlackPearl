@@ -5,6 +5,7 @@ import java.util.Observable;
 import java.util.Scanner;
 
 import model.ship.Ship;
+import model.ship.Ship_centuryXVI;
 
 public abstract class Player extends Observable{
 	
@@ -20,6 +21,7 @@ public abstract class Player extends Observable{
 	
     protected Ship[][] checkShip;
 	protected int[] shipCount;
+	protected Player enemy;
 
 	public Player(String name) {
 		this.playerName = name;
@@ -31,9 +33,14 @@ public abstract class Player extends Observable{
 
 
 	public boolean cibleToucher(int xTirer, int yTirer){
+		
 		boolean toucher = false;
 		setCoorDonne(xTirer, yTirer);
-		for(Ship ship : shipList){
+
+		for(Ship ship : enemy.getListShip()){
+			//System.out.println(ship.getPosX() + "   " + ship.getPosY());
+
+			System.out.println("tir " + xTirer + "  " +  yTirer);
 			if(ship.estToucher(xClick, yClick)){
 				toucher = true;
 			}
@@ -165,12 +172,71 @@ public abstract class Player extends Observable{
     }
     
     public void setShipPart(int i, int j) {
-    	System.out.println("connard");
     	checkShip[i][j].setShipPart(i, j);
-    	System.out.println("connard");
     	setChanged();
 		notifyObservers();
     }
+    
+	//  ------------------ PLACEMENT DRAG AND DROP DES BATEAUX -------------------------- //
+
+    // try to placed ship where we dropped 
+    public boolean ajouterShip(int x,int y,int taille){
+    	
+    	boolean put = false;
+		// if there we can place it
+		if (checkCount(taille) && checkPlacedShip(x,y,taille, true) ) {
+			// place the ship
+	    	for (int i = 0; i < taille; i++) {
+	    		Ship s = new Ship_centuryXVI(x,y,taille,true);
+	    		checkShip[x + i][y] = s;
+	    		if (i == 0) addShip(s);
+	    		put = true;
+	    	}
+			// increment ship register
+			shipCount[taille-1]++;
+            setChanged();
+            notifyObservers();
+		}
+		return put;
+    }
+    
+    
+    // search if there is already a ship placed 
+    // true if no ship
+    public boolean checkPlacedShip(int x,int y,int taille, boolean horizontal) {
+		// if the ship does not exceed the map size
+		boolean noShip = horizontal==true ? (x+taille < Player.SIZE +1) : (y-taille >= 0);
+		if (noShip) {
+    		int i = 0;
+    		while(i < taille && noShip) {
+    			noShip = horizontal==true ? (checkShip[x + i][y] == null) : (checkShip[x][y + i] == null);
+    			i++;
+    		}
+		}
+    	return noShip;
+    }
+    
+    // rule allow one ship 2,4,5 and two ship 3
+    public boolean checkCount(int size) {
+    	boolean check = false;
+    	if (size == 2 || size == 4 || size == 5) check = shipCount[size-1] < 1;
+    	if (size == 3) check = shipCount[size-1] < 2;
+    	return check;
+    }
+    
+    
+    public void verticalShip(int x,int y, int taille) {
+    	if (checkShip[x][y] != null) {
+    		
+    	}
+    }
+    
+    public void setEnemy(Player p) {
+    	enemy = p;
+    }
+    
+    //  ------------------ FIN PLACEMENT DRAG AND DROP DES BATEAUX -------------------------- //
+    
 	
 }
 
