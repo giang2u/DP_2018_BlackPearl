@@ -9,11 +9,12 @@ public class ShotCross implements StrategyShot{
     private int yDebut = (int) (Math.random()* AI.SIZE);
 
     @Override
-    public void shot(Player enemy, int nbTireMiss, int nbTireToucher, int SIZE) {
-        if (nbTireMiss+nbTireToucher < SIZE*SIZE){
-            if (enemy.getShip(xDebut, yDebut) != null) {
-                enemy.setShipPart(xDebut, yDebut);
-            }else enemy.setShipGrill(xDebut, yDebut);
+    public void shot(Player p) {
+    	Player enemy = p.getEnemy();
+        if (p.shotNumber() < Player.SIZE*Player.SIZE){
+            if (enemy.getShip(xDebut, yDebut) != null){
+                enemy.setShipPart(xDebut,yDebut);
+            }
         }
         xDebut = xDebut-1;
         yDebut = yDebut-1;

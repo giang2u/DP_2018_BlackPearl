@@ -59,8 +59,8 @@ public class Jeu extends JFrame {
 
 	public void initJeu(){
 		this.p1 = new Human("Nam");
-		//this.ai = new AI("Cumputer", new ShotRandom());
-		this.ai = new AI("shotcross", new ShotCross());
+		this.ai = new AI("Cumputer", new ShotRandom());
+		//this.ai = new AI("shotcross", new ShotCross());
 		setJoueurCourant(p1);
 		initShip();			
 		//this.p1.positionShip();
@@ -136,8 +136,8 @@ public class Jeu extends JFrame {
 
 				else   {
 					if (j.getP1().getListShip().size() == 5) {
-					System.out.println("AI TURN   " + nbTour);
-					((AI) j.getAi()).tirer();
+						System.out.println("AI TURN   " + nbTour);
+						((AI) j.getAi()).tirer();
 					}
 				}
 

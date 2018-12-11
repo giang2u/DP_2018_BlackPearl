@@ -6,17 +6,19 @@ import java.util.Random;
 
 public class ShotRandom implements StrategyShot{
 
-    @Override
-    public void shot(Player enemy, int nbTireMiss, int nbTireToucher, int SIZE) {
-        if (nbTireMiss+nbTireToucher < SIZE*SIZE){
+    public void shot(Player p) {
+    		Player enemy = p.getEnemy();
             Random random = new Random();
-            int xDebut = random.nextInt(SIZE);
-            int yDebut = random.nextInt(SIZE);
+            int xDebut = random.nextInt(Player.SIZE);
+            int yDebut = random.nextInt(Player.SIZE);
             System.out.println(xDebut +"  "+ yDebut);
-            if (enemy.getShip(xDebut, yDebut) != null) enemy.setShipPart(xDebut,yDebut);
-            else enemy.setShipGrill(xDebut, yDebut);
-            nbTireMiss++;
-        }
-        System.out.println("SAHUT");
+            if (enemy.getShip(xDebut, yDebut) != null) {
+            	enemy.setShipPart(xDebut,yDebut); 
+            	p.toucher();
+            }
+            else {
+            	enemy.setShipGrill(xDebut, yDebut); 
+            	p.rater();
+            }
     }
 }
