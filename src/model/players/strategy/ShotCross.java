@@ -11,10 +11,11 @@ public class ShotCross implements StrategyShot{
     @Override
     public void shot(Player enemy, int nbTireMiss, int nbTireToucher, int SIZE) {
         if (nbTireMiss+nbTireToucher < SIZE*SIZE){
-            if (enemy.getShip(xDebut, yDebut) != null){
-                enemy.setShipPart(xDebut,yDebut);
-            }
-            System.out.println( xDebut+"x" + yDebut+"y");
+            if (enemy.getShip(xDebut, yDebut) != null) {
+                enemy.setShipPart(xDebut, yDebut);
+            }else enemy.setShipGrill(xDebut, yDebut);
         }
+        xDebut = xDebut-1;
+        yDebut = yDebut-1;
     }
 }
