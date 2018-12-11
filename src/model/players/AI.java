@@ -40,7 +40,7 @@ public class AI extends Player {
 
 	public void tirer(){
 		if (strategyShot != null){
-			strategyShot.shot(enemy, nbTireMiss, nbTireToucher, SIZE);
+			strategyShot.shot(this);
 		}else{
 			System.out.println("oups il y a un problème");
 		}

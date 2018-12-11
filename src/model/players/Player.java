@@ -213,7 +213,12 @@ public abstract class Player extends Observable{
     }
     
     
-    // search if there is already a ship placed 
+    public Player getEnemy() {
+		return enemy;
+	}
+
+
+	// search if there is already a ship placed 
     // true if no ship
     public boolean checkPlacedShip(int x,int y,int taille, boolean horizontal) {
 		// if the ship does not exceed the map size
