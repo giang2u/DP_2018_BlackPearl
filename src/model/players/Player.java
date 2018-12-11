@@ -17,6 +17,8 @@ public abstract class Player extends Observable{
 	protected int nbTireToucher = 0;
 	protected int nbTireMiss = 0;
 	protected ArrayList<Ship> shipList;
+	
+	// last click of user
 	protected int xClick, yClick;
 	
     protected Ship[][] checkShip;
@@ -258,6 +260,10 @@ public abstract class Player extends Observable{
     	}
     	
     	return lose;
+    }
+    
+    public int shotNumber() {
+    	return nbTireMiss + nbTireToucher;
     }
 	
 }
