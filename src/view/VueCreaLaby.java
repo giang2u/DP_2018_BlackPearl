@@ -86,7 +86,6 @@ public class VueCreaLaby extends JPanel implements Observer {
             for(int j =0;j<nbColonne;j++){
 	            	if (player.getShip(i, j) != null) {
 	            		int x = player.getShip(i, j).getPosX();
-	            		//System.out.println(x + "     " + player.getShip(i, j).getShipPart() );
 	            		if (player.getShip(i, j).getShipPart()[i-x] == 1)
 	            			((JLabel) jp.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1_shot.png")));
 	            			//tabLab[i][j] = new CaseLabel(player, i, j, new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1_shot.png")));	
@@ -94,10 +93,9 @@ public class VueCreaLaby extends JPanel implements Observer {
 	                    
 	                }
                     else {
-                    	if (player.getShipGrill(i,j) == 1)
-                    		((JLabel) jp.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case_shot.png")));	
+                    	if (player.getShipGrill(i,j) == 1) ((JLabel) jp.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case_shot.png")));	
                     		//tabLab[i][j] = new CaseLabel(player, i, j, new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case_shot.png")));
-                      	//else tabLab[i][j] = new CaseLabel(player, i, j, new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case.png")));
+                      	else ((JLabel) jp.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case.png")));	
                     }
                 //tabLab[i][j].setTransferHandler(new MyTransferHandler());
                 //tabLab[i][j].setBorder(BorderFactory.createLineBorder(Color.black));

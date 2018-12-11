@@ -204,9 +204,9 @@ public abstract class Player extends Observable{
 	    	}
 			// increment ship register
 			shipCount[taille-1]++;
-            setChanged();
-            notifyObservers();
 		}
+        setChanged();
+        notifyObservers();
 		return put;
     }
     
