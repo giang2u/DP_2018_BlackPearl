@@ -32,38 +32,39 @@ public class Jeu extends JFrame {
 	private EpochFactory epoch;
 	private Player joueurCourant;
 	private JPanel jpShip;
-	
+
 	public Jeu(){
 		initJeu();
 		joueurCourant = p1;
 		setPreferredSize(new Dimension(1400, 600));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
-		
+
 		//JPanel jp = new ShipGridView(p1);
 		JPanel jpHistory = new ShotHistoryGridView(p1);
-		
+
 		//JPanel panelSettingShip = new ShipSettingView(p1);
 		JPanel jpGridShip = new VueCreaLaby((Human) p1,10, 10);
 		jpShip = new VueObjets((Human) p1);
-		
+
 		this.add(jpGridShip, BorderLayout.WEST);
 		this.add(jpShip,BorderLayout.CENTER);
 		this.add(jpHistory, BorderLayout.EAST);
-		
+
 		this.setTitle("WORLD OF WARSHIP IN SQUARE BECAUSE NOT GRAPHIC ASSET");
 		this.pack();
 		this.setVisible(true);
 	}
-	
+
 	public void initJeu(){
 		this.p1 = new Human("Nam");
 		this.ai = new AI("Cumputer");
+		setJoueurCourant(p1);
 		initShip();			
 		//this.p1.positionShip();
-		
-		
+
+
 	}
-	
+
 	/**
 	 * init create 5 bateau et donne au joueur
 	 */
@@ -77,13 +78,12 @@ public class Jeu extends JFrame {
 			this.epoch = new CenturyXX();
 		}
 		((AI) this.ai).putShip();
-		
 		p1.setEnemy(ai);
 		ai.setEnemy(p1);
-		
-		
-		
-		
+
+
+
+
 		for (Ship s : ai.getListShip()) System.out.println(s.getPosX() + "     " + s.getPosY() + "  "+ s.getSize());
 		/*
 		//creer 5 
@@ -92,44 +92,68 @@ public class Jeu extends JFrame {
 		Ship playerShip3B =  this.epoch.buildShip(2,2,3, true);//
 		Ship playerShip4 =  this.epoch.buildShip(2,4,4, true);
 		Ship playerShip5=  this.epoch.buildShip(1,5,5, false);//
-		
+
 		//donne 5 bateaux au joueur
 		this.p1.addShip(playerShip2);
 		this.p1.addShip(playerShip3);
 		this.p1.addShip(playerShip3B);
 		this.p1.addShip(playerShip4);
 		this.p1.addShip(playerShip5);
-		
+
 		//donne 5 bateau au IA
 		this.ai.addShip(playerShip2);
 		this.ai.addShip(playerShip3);
 		this.ai.addShip(playerShip3B);
 		this.ai.addShip(playerShip4);
 		this.ai.addShip(playerShip5);
-		*/
+		 */
 	}
-	
+
 	/**
 	 * @param args
 	 * @throws InterruptedException 
 	 */
 	public static void main(String[] args) throws InterruptedException {
 		Jeu j = new Jeu();
+
+		int nbTour = 0;
 		
 		
-		while(true) {
+		boolean fini = false;
+		while(!fini) {
+
+				int currentNbShot = j.getJoueurCourant() == j.getP1() ? j.getP1().shotNumber() :  j.getAi().shotNumber();
+
+
+				if (j.getJoueurCourant() == j.getP1()) {
+					System.out.println("PLAYER TURN   " + nbTour);
+					// while player have not shot we stay here
+				}
+
+				else   {
+					if (j.getP1().getListShip().size() == 5) {
+					System.out.println("AI TURN   " + nbTour);
+					((AI) j.getAi()).randomShot();
+					}
+				}
+
+
+				if (currentNbShot != j.getJoueurCourant().shotNumber()) {
+
+					Player p = (j.getJoueurCourant() == j.getP1()) ? j.getAi() : j.getP1();
+
+					// check if p has lost
+					if (p.isLose()) { 
+						System.out.println(" OUA T TRO FORT LE JOUEUR " + p.toString() + " A PERDU"); 
+						fini = true;
+					}
+
+					// Switch turn
+					j.setJoueurCourant(p);
+					nbTour++;
+				}
 			
-			
-			System.out.println(j.getP1().getListShip().size());
-			if (j.getP1().getListShip().size() == 5) {
-				((AI) j.getAi()).randomShot();
-				//if (j.getP1().isLose()) System.out.println(" OUA T TRO FORT"); System.exit(0);
-			}
-		
-			
-			// changement de tour
-			Player p = (j.getJoueurCourant() == j.getP1()) ? j.getAi() : j.getP1();
-			j.setJoueurCourant(p);
+
 		}
 	}
 
@@ -180,10 +204,10 @@ public class Jeu extends JFrame {
 	public void saveGame(){
 		AbstractDAOFactory.getAbstractDAOFactory(1).getGameDAO().save(this);
 	}
-	
+
 	/*
 	private void createLayout(JComponent... arg) {
-		
+
 		ShipSettingView jp = (ShipSettingView) arg[0];
 
         Container pane = getContentPane();
@@ -216,6 +240,6 @@ public class Jeu extends JFrame {
 
         pack();
     }*/
-	
-	
+
+
 }
