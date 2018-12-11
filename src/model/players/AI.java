@@ -1,14 +1,20 @@
 package model.players;
 
+import model.players.strategy.StrategyShot;
+
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.util.Random;
 
+
 public class AI extends Player {
 
-	public AI(String name) {
+	private StrategyShot strategyShot;
+
+	public AI(String name, StrategyShot strategyShot) {
 		super(name);
+		this.strategyShot = strategyShot;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -31,9 +37,16 @@ public class AI extends Player {
 		}
 		
 	}
+
+	public void tirer(){
+		if (strategyShot != null){
+			strategyShot.shot(enemy, nbTireMiss, nbTireToucher, SIZE);
+		}else{
+			System.out.println("oups il y a un problème");
+		}
+	}
 	
-	
-	public void randomShot(){
+	/*public void randomShot(){
 		
 		if (nbTireMiss+nbTireToucher < SIZE*SIZE){
 			Random random = new Random();
@@ -45,7 +58,7 @@ public class AI extends Player {
 			nbTireMiss++;
 		}
 		//cibleToucher(xDebut, yDebut);
-		
-	}
+
+	}*/
 
 }
