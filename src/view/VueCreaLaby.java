@@ -22,8 +22,8 @@ public class VueCreaLaby extends JPanel implements Observer {
 
     private int nbLigne,nbColonne;
     private JLabel[][] tabLab;
-    protected JButton start;
     private Human player;
+    protected JButton start;
     private  JPanel jp;
     private JScrollPane js;
 
@@ -41,7 +41,7 @@ public class VueCreaLaby extends JPanel implements Observer {
         jp.setLayout(null);
 
 
-        tabLab = new JLabel[nbLigne][nbColonne ];
+        tabLab = new JLabel[nbLigne][nbColonne];
         jp.setPreferredSize(new Dimension(nbLigne*50,nbColonne*50));
 
         js = new JScrollPane(jp);
@@ -50,15 +50,15 @@ public class VueCreaLaby extends JPanel implements Observer {
         this.add(js);
         jp.addMouseListener(new ListenerPoser(player));
         init();
-     	this.start = new JButton("Start");
+        this.start = new JButton("Start");
      	this.start.setEnabled(false);
      	this.start.addActionListener(new ControllerStartGame(player));
      	this.add(start, BorderLayout.SOUTH);
-
     }
     
     public void init() {
     	tabLab = new JLabel[nbLigne][nbColonne];
+    	jp.setPreferredSize(new Dimension(nbLigne*50,nbColonne*50));
     	 for(int i =0;i<nbLigne;i++){
              for(int j =0;j<nbColonne;j++){
 
@@ -70,7 +70,6 @@ public class VueCreaLaby extends JPanel implements Observer {
                  jp.add(tabLab[i][j]);
              }
     	 }
-
     }
 
     public Dimension getTailleLaby(){

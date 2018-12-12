@@ -1,5 +1,6 @@
 package model.players;
 
+import main.Jeu;
 import model.players.strategy.StrategyShot;
 
 import java.awt.AWTException;
@@ -11,10 +12,12 @@ import java.util.Random;
 public class AI extends Player {
 
 	private StrategyShot strategyShot;
+	private int difficulte;
 
 	public AI(String name, StrategyShot strategyShot) {
 		super(name);
 		this.strategyShot = strategyShot;
+		difficulte = 0;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -43,6 +46,12 @@ public class AI extends Player {
 			strategyShot.shot(this);
 		}else{
 			System.out.println("oups il y a un problème");
+		}
+	}
+	
+	public void setDifficulte(int i) {
+		if (i >= 0 && i < Jeu.difficulte.length) {
+			difficulte = i;
 		}
 	}
 	

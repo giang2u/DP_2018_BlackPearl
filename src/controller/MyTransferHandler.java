@@ -39,7 +39,7 @@ public class MyTransferHandler extends TransferHandler {
     public boolean importData(TransferHandler.TransferSupport support){
         /*if(!canImport(support))
             return false;*/
-
+    	
         Transferable data = support.getTransferable();
         String str = "";
 
@@ -77,7 +77,7 @@ public class MyTransferHandler extends TransferHandler {
      * @param action
      */
     protected void exportDone(JComponent c, Transferable t, int action){
-
+    	c.setEnabled(false);
     }
 
     /**

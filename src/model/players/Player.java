@@ -148,25 +148,25 @@ public abstract class Player extends Observable{
     // try to placed ship where we dropped 
     public boolean ajouterShip(int x,int y,int taille){
 
-		Ship s = new Ship_centuryXVI(x,y,taille,true);
     	boolean put = false;
 		// if there we can place it
 		if (checkCount(taille) ) {
 			// place the ship
-			if(checkPlacedShip(x,y,taille, s.isHorizontal()) ){
+			if(checkPlacedShip(x,y,taille, true) ){
 		    	for (int i = 0; i < taille; i++) {
+					Ship s = new Ship_centuryXVI(x,y,taille,true);
 		    		checkShip[x + i][y] = s;
 		    		if (i == 0) addShip(s);
 		    		put = true;
 		    	}
 			}
-			else{
+			/*else{
 		    	for (int i = 0; i < taille; i++) {
 		    		checkShip[x][y+i] = s;
 		    		if (i == 0) addShip(s);
 		    		put = true;
 		    	}
-			}
+			}*/
 			// increment ship register
 			shipCount[taille-1]++;
 		}
