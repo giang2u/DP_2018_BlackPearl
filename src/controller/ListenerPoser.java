@@ -22,10 +22,16 @@ public class ListenerPoser implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 
-		System.out.println(" JE TIRE ICI");
-		// TODO Auto-generated method stub
+		
 		int x = arg0.getX()/Case.size;
 		int y = arg0.getY()/Case.size;
+
+		if(p.getCheckShip()[x][y] != null){
+			p.getCheckShip()[x][y].setHorizontal(false);
+			System.out.println(x + " " + y + " " + p.getCheckShip()[x][y].isHorizontal());
+			p.setxClick(x);
+			p.setyClick(y);
+		}
 		
 	}
 
@@ -44,7 +50,6 @@ public class ListenerPoser implements MouseListener {
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		System.out.println(" JE TIRE ICI");
 	}
 
 	@Override

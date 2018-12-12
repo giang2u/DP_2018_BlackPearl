@@ -17,6 +17,7 @@ public abstract class Player extends Observable{
 	protected int nbTireToucher = 0;
 	protected int nbTireMiss = 0;
 	protected ArrayList<Ship> shipList;
+	protected boolean isReady = false;
 	
 	// last click of user
 	protected int xClick, yClick;
@@ -86,54 +87,7 @@ public abstract class Player extends Observable{
 	public void addShip(Ship ship) {
 		this.shipList.add(ship);
 	}
-
-	public void positionShip() {
-		int num = 1;
-		for (Ship ship : shipList) {
-			boolean valide = false;
-			while (!valide) {
-				Scanner sc = new Scanner(System.in);
-				System.out.println("Veuillez saisir la position x du bateau :" + num);
-				int x = sc.nextInt();
-
-				System.out.println("Veuillez saisir la position y du bateau :" + num);
-				int y = sc.nextInt();
-
-				if (this.shipGrill[x][y] == 0) {
-					this.shipGrill[x][y] = 1;
-					ship.setPosX(x);
-					ship.setPosY(y);
-					System.out.println("Veuillez saisir la orientation du bateau : " + num + " \n1 pour vertiacle \n2 pour horizontale");
-
-					int o = sc.nextInt();
-					boolean orienation = false;
-					while (!orienation) {
-						switch (o) {
-							case 1:
-								ship.setHorizontal(false);
-								orienation = true;
-								break;
-
-							case 2:
-								ship.setHorizontal(true);
-								orienation = true;
-								break;
-
-							default:
-								System.out.println("Erreur tapez 1 ou 2");
-								orienation = false;
-								o = sc.nextInt();
-								break;
-						}
-					}
-						valide = true;
-				}
-
-			}
-			num++;
-		}
-	}
-
+	
 	public int[][] getShipGrill(){
 		return this.shipGrill;
 	}
@@ -193,20 +147,30 @@ public abstract class Player extends Observable{
 
     // try to placed ship where we dropped 
     public boolean ajouterShip(int x,int y,int taille){
-    	
+
+		Ship s = new Ship_centuryXVI(x,y,taille,true);
     	boolean put = false;
 		// if there we can place it
-		if (checkCount(taille) && checkPlacedShip(x,y,taille, true) ) {
+		if (checkCount(taille) ) {
 			// place the ship
-	    	for (int i = 0; i < taille; i++) {
-	    		Ship s = new Ship_centuryXVI(x,y,taille,true);
-	    		checkShip[x + i][y] = s;
-	    		if (i == 0) addShip(s);
-	    		put = true;
-	    	}
+			if(checkPlacedShip(x,y,taille, s.isHorizontal()) ){
+		    	for (int i = 0; i < taille; i++) {
+		    		checkShip[x + i][y] = s;
+		    		if (i == 0) addShip(s);
+		    		put = true;
+		    	}
+			}
+			else{
+		    	for (int i = 0; i < taille; i++) {
+		    		checkShip[x][y+i] = s;
+		    		if (i == 0) addShip(s);
+		    		put = true;
+		    	}
+			}
 			// increment ship register
 			shipCount[taille-1]++;
 		}
+		
         setChanged();
         notifyObservers();
 		return put;
@@ -270,6 +234,30 @@ public abstract class Player extends Observable{
     public int shotNumber() {
     	return nbTireMiss + nbTireToucher;
     }
+
+
+	public boolean isReady() {
+		return isReady;
+	}
+
+
+	public void setReady(boolean isReady) {
+		this.isReady = isReady;
+
+        setChanged();
+        notifyObservers();
+	}
+
+
+	public Ship[][] getCheckShip() {
+		return checkShip;
+	}
+
+
+	public void setCheckShip(Ship[][] checkShip) {
+		this.checkShip = checkShip;
+	}
+    
 	
 }
 

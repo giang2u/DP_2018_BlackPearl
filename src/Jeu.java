@@ -122,15 +122,13 @@ public class Jeu extends JFrame {
 		int nbTour = 0;
 		
 		
-
 		boolean fini = false;
 		while(!fini) {
-
+			if(true){//j.getP1().isReady()){
 				int currentNbShot = j.getJoueurCourant() == j.getP1() ? j.getP1().shotNumber() :  j.getAi().shotNumber();
 
-
 				if (j.getJoueurCourant() == j.getP1()) {
-					System.out.println("PLAYER TURN   " + nbTour);
+					//System.out.println("PLAYER TURN   " + nbTour);
 					// while player have not shot we stay here
 				}
 
@@ -156,8 +154,10 @@ public class Jeu extends JFrame {
 					j.setJoueurCourant(p);
 					nbTour++;
 				}
-			
-
+			}
+			else{
+				System.out.println("Le joueur n'est pas pret");
+			}
 		}
 	}
 
