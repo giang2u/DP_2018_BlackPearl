@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
+import controller.ControllerStartGame;
 import controller.ListenerPoser;
 import controller.MyTransferHandler;
 import model.players.Human;
@@ -22,6 +23,7 @@ public class VueCreaLaby extends JPanel implements Observer {
     private int nbLigne,nbColonne;
     private JLabel[][] tabLab;
     private Human player;
+    protected JButton start;
     private  JPanel jp;
     private JScrollPane js;
 
@@ -48,6 +50,10 @@ public class VueCreaLaby extends JPanel implements Observer {
         this.add(js);
         jp.addMouseListener(new ListenerPoser(player));
         init();
+        this.start = new JButton("Start");
+     	this.start.setEnabled(false);
+     	this.start.addActionListener(new ControllerStartGame(player));
+     	this.add(start, BorderLayout.SOUTH);
     }
     
     public void init() {
@@ -110,7 +116,17 @@ public class VueCreaLaby extends JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        this.modifLab(Player.SIZE,Player.SIZE);
         this.repaint();
+        if(this.player.isReady()){
+        	this.start.setEnabled(false);
+        }
+        if(this.player.getListShip().size() >= 5 && !this.player.isReady()){
+        	this.start.setEnabled(true);
+        }
+        if(player.getCheckShip()[player.getxClick()][player.getyClick()] != null){
+            System.out.println(player.getxClick() + " " + player.getyClick());
+        	System.out.println("hello");
+        }
+        this.modifLab(Player.SIZE,Player.SIZE);
     }
 }

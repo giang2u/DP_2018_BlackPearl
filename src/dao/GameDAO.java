@@ -1,3 +1,5 @@
+package dao;
+
 import main.Jeu;
 
 public interface GameDAO {

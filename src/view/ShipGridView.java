@@ -12,6 +12,7 @@ import java.awt.GridLayout;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.TransferHandler;
 
@@ -21,7 +22,6 @@ import model.players.Player;
 public class ShipGridView extends JPanel implements Observer{
 	
 	private Player player;
-    //protected JButton[][] grid  = new JButton[10][10];
     protected JPanel[] panels = new JPanel[10];
     private Graphics2D g2;
     private Case[][] lcase;
@@ -31,13 +31,14 @@ public class ShipGridView extends JPanel implements Observer{
     	
     	this.player = p;
     	lcase = new Case[11][11];
-    	
     	 for (int i = 0; i < 11 ; i++ )  {
          	for (int j = 0; j < 11 ; j++ ) {
          		lcase[i][j] = new Case(i*CaseLabel.size, j*CaseLabel.size, player);
          	}
          }
+    	
     	 
+
     	this.setPreferredSize(new Dimension(500, 500));
 		this.player.addObserver(this);
     }
@@ -49,8 +50,6 @@ public class ShipGridView extends JPanel implements Observer{
         // dessin des lignes de la grille
     	this.g2 = (Graphics2D) g;
     	super.paintComponent(g2);
-    	
-    	
     	
     	
     	g2.fillRect(0,0,11 * CaseLabel.size, 11 * CaseLabel.size);

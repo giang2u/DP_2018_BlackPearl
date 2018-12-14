@@ -1,3 +1,5 @@
+package main;
+
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -5,17 +7,27 @@ import java.awt.Dimension;
 import java.util.Scanner;
 
 import javax.swing.GroupLayout;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.TransferHandler;
 
 import model.players.strategy.ShotCheckerBoard;
+import controller.ControllerAiDifficulty;
+import controller.ControllerRestart;
+
+import dao.AbstractDAOFactory;
+
 import model.players.strategy.ShotRandom;
 import view.ShipGridView;
 import view.ShipSettingView;
 import view.ShotHistoryGridView;
 import view.VueCreaLaby;
+import view.VueMenu;
 import view.VueObjets;
 import model.epoch.CenturyXVI;
 import model.epoch.CenturyXX;
@@ -33,7 +45,14 @@ public class Jeu extends JFrame {
 	private Player ai ;
 	private EpochFactory epoch;
 	private Player joueurCourant;
+	private JPanel jpHistory,jpGridShip;
+	private JMenuBar jpMenu;
+	
 	private JPanel jpShip;
+	
+	public static int[] difficulte = {0,1};
+	
+	public static Jeu instance;
 
 	public Jeu(){
 		initJeu();
@@ -41,13 +60,12 @@ public class Jeu extends JFrame {
 		setPreferredSize(new Dimension(1400, 600));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
 
-		//JPanel jp = new ShipGridView(p1);
-		JPanel jpHistory = new ShotHistoryGridView(p1);
+		jpHistory = new ShotHistoryGridView(p1);
 
-		//JPanel panelSettingShip = new ShipSettingView(p1);
-		JPanel jpGridShip = new VueCreaLaby((Human) p1,10, 10);
-		jpShip = new VueObjets((Human) p1);
-
+		jpGridShip = new VueCreaLaby((Human) p1,10, 10);
+		jpShip = new VueObjets((Human) p1, this);
+		jpMenu = new VueMenu(this);
+		this.setJMenuBar(jpMenu);
 		this.add(jpGridShip, BorderLayout.WEST);
 		this.add(jpShip,BorderLayout.CENTER);
 		this.add(jpHistory, BorderLayout.EAST);
@@ -55,6 +73,12 @@ public class Jeu extends JFrame {
 		this.setTitle("WORLD OF WARSHIP IN SQUARE BECAUSE NOT GRAPHIC ASSET");
 		this.pack();
 		this.setVisible(true);
+		
+	}
+	
+	public void restart() {
+		initJeu();
+		initShip();
 	}
 
 	public void initJeu(){
@@ -64,9 +88,8 @@ public class Jeu extends JFrame {
 		setJoueurCourant(p1);
 		initShip();			
 		//this.p1.positionShip();
-
-
 	}
+
 
 	/**
 	 * init create 5 bateau et donne au joueur
@@ -84,10 +107,6 @@ public class Jeu extends JFrame {
 		p1.setEnemy(ai);
 		ai.setEnemy(p1);
 
-
-
-
-		for (Ship s : ai.getListShip()) System.out.println(s.getPosX() + "     " + s.getPosY() + "  "+ s.getSize());
 		/*
 		//creer 5 
 		Ship playerShip2 =  this.epoch.buildShip(0,0,2, false);//
@@ -118,19 +137,18 @@ public class Jeu extends JFrame {
 	 */
 	public static void main(String[] args) throws InterruptedException {
 		Jeu j = new Jeu();
-
 		int nbTour = 0;
-		
-		
 
 		boolean fini = false;
 		while(!fini) {
-
+			if(j.getP1().isReady()){
 				int currentNbShot = j.getJoueurCourant() == j.getP1() ? j.getP1().shotNumber() :  j.getAi().shotNumber();
 
-
 				if (j.getJoueurCourant() == j.getP1()) {
+<<<<<<< HEAD:src/Jeu.java
 					//System.out.println("PLAYER TURN   " + nbTour);
+=======
+>>>>>>> 401b70ad0a3b6f7ef8f9d76ed13ff2c0236d61b7:src/main/Jeu.java
 					// while player have not shot we stay here
 				}
 
@@ -156,7 +174,11 @@ public class Jeu extends JFrame {
 					j.setJoueurCourant(p);
 					nbTour++;
 				}
-			
+			}
+			else{
+				System.out.println("Le joueur n'est pas pret");
+			}
+
 
 		}
 	}
@@ -208,6 +230,7 @@ public class Jeu extends JFrame {
 	public void saveGame(){
 		AbstractDAOFactory.getAbstractDAOFactory(1).getGameDAO().save(this);
 	}
+	
 
 	/*
 	private void createLayout(JComponent... arg) {

@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.*;
 
+import main.Jeu;
 import model.players.Human;
 import model.players.Niveau;
 import model.players.Player;
@@ -19,7 +20,7 @@ public class VueGenerateur extends JFrame {
     private final static int LARGEUR = HAUTEUR+130;
     Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 
-    public VueGenerateur(Human p) {
+    public VueGenerateur(Human p,Jeu j) {
 
         this.player = p;
 
@@ -27,7 +28,7 @@ public class VueGenerateur extends JFrame {
         setSize(LARGEUR, HAUTEUR);
         setLocation((screen.width-this.getSize().width)/2,(screen.height-this.getSize().height)/2);
 
-        vo = new VueObjets(player);
+        vo = new VueObjets(player, j);
         vc = new VueCreaLaby(player,10, 10);
 
         //this.setLayout(new BoxLayout());
@@ -51,6 +52,7 @@ public class VueGenerateur extends JFrame {
     }
     
     public static void main(String[] args) {
-    	new VueGenerateur(new Human("oui"));
+    	new VueGenerateur(new Human("oui"), new Jeu());
     }
+    
 }
