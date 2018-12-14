@@ -1,6 +1,7 @@
 package main;
 
 
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
@@ -19,12 +20,12 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.TransferHandler;
 
+import model.players.strategy.ShotCheckerBoard;
 import controller.ControllerAiDifficulty;
 import controller.ControllerRestart;
 
 import dao.AbstractDAOFactory;
 
-import model.players.strategy.ShotCross;
 import model.players.strategy.ShotRandom;
 import view.ShipGridView;
 import view.ShipSettingView;
@@ -63,6 +64,7 @@ public class Jeu extends JFrame implements Observer{
 	}
 
 	public Jeu(){
+		
 		initJeu();
 		joueurCourant = p1;
 		setPreferredSize(new Dimension(1400, 650));
@@ -72,7 +74,10 @@ public class Jeu extends JFrame implements Observer{
 
 		jpGridShip = new VueCreaLaby((Human) p1,10, 10);
 		jpShip = new VueObjets((Human) p1, this);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 27a6b3e50127d1b63db064fd08163e6ce72e39a5
 		jpMenu = new VueMenu(this);
 		this.setJMenuBar(jpMenu);
 		this.add(jpGridShip, BorderLayout.WEST);
@@ -87,14 +92,19 @@ public class Jeu extends JFrame implements Observer{
 	
 	
 	public void restart() {
+<<<<<<< HEAD
 		this.dispose();
 		getInstance();
+=======
+		initShip();
+		initJeu();
+>>>>>>> 27a6b3e50127d1b63db064fd08163e6ce72e39a5
 	}
 
 	public void initJeu(){
 		this.p1 = new Human("Nam");
-		this.ai = new AI("Cumputer", new ShotRandom());
-		//this.ai = new AI("shotcross", new ShotCross());
+		//this.ai = new AI("Cumputer", new ShotRandom());
+		this.ai = new AI("shotcheckerboard", new ShotCheckerBoard());
 		setJoueurCourant(p1);
 		//initShip();			
 		//this.p1.positionShip();
@@ -116,29 +126,6 @@ public class Jeu extends JFrame implements Observer{
 		((AI) this.ai).putShip();
 		p1.setEnemy(ai);
 		ai.setEnemy(p1);
-
-		/*
-		//creer 5 
-		Ship playerShip2 =  this.epoch.buildShip(0,0,2, false);//
-		Ship playerShip3=  this.epoch.buildShip(1,1,3, false);
-		Ship playerShip3B =  this.epoch.buildShip(2,2,3, true);//
-		Ship playerShip4 =  this.epoch.buildShip(2,4,4, true);
-		Ship playerShip5=  this.epoch.buildShip(1,5,5, false);//
-
-		//donne 5 bateaux au joueur
-		this.p1.addShip(playerShip2);
-		this.p1.addShip(playerShip3);
-		this.p1.addShip(playerShip3B);
-		this.p1.addShip(playerShip4);
-		this.p1.addShip(playerShip5);
-
-		//donne 5 bateau au IA
-		this.ai.addShip(playerShip2);
-		this.ai.addShip(playerShip3);
-		this.ai.addShip(playerShip3B);
-		this.ai.addShip(playerShip4);
-		this.ai.addShip(playerShip5);
-		 */
 	}
 
 	/**
@@ -156,12 +143,16 @@ public class Jeu extends JFrame implements Observer{
 				int currentNbShot = j.getJoueurCourant() == j.getP1() ? j.getP1().shotNumber() :  j.getAi().shotNumber();
 
 				if (j.getJoueurCourant() == j.getP1()) {
+<<<<<<< HEAD:src/Jeu.java
+					//System.out.println("PLAYER TURN   " + nbTour);
+=======
+>>>>>>> 401b70ad0a3b6f7ef8f9d76ed13ff2c0236d61b7:src/main/Jeu.java
 					// while player have not shot we stay here
 				}
 
 				else   {
 					if (j.getP1().getListShip().size() == 5) {
-						System.out.println("AI TURN   " + nbTour);
+						//System.out.println("AI TURN   " + nbTour);
 						((AI) j.getAi()).tirer();
 					}
 				}
@@ -182,9 +173,12 @@ public class Jeu extends JFrame implements Observer{
 					nbTour++;
 				}
 			}
+<<<<<<< HEAD
 			else{
 				//System.out.println("Le joueur n'est pas pret");
 			}
+=======
+>>>>>>> 27a6b3e50127d1b63db064fd08163e6ce72e39a5
 
 
 		}

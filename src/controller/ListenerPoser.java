@@ -10,13 +10,15 @@ import javax.swing.JLabel;
 import model.players.Player;
 import view.Case;
 import view.CaseLabel;
+import view.VueCreaLaby;
 
 public class ListenerPoser implements MouseListener {
 
 	private Player p;
-	
-	public ListenerPoser(Player p){
+	private VueCreaLaby vue;
+	public ListenerPoser(Player p, VueCreaLaby vue){
 		this.p = p;
+		this.vue = vue;
 	}
 
 	@Override
@@ -28,11 +30,11 @@ public class ListenerPoser implements MouseListener {
 
 		if(p.getCheckShip()[x][y] != null){
 			p.getCheckShip()[x][y].setHorizontal(false);
-			System.out.println(x + " " + y + " " + p.getCheckShip()[x][y].isHorizontal());
 			p.setxClick(x);
 			p.setyClick(y);
 		}
-		
+
+        p.setVerticalShip();
 	}
 
 	@Override

@@ -11,6 +11,7 @@ import controller.MyTransferHandler;
 import model.players.Human;
 import model.players.Niveau;
 import model.players.Player;
+import model.ship.Ship;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -46,8 +47,6 @@ public class VueCreaLaby extends JPanel implements Observer {
 
 
         jp.addMouseListener(new ListenerPoser(player));
-     	
- 
      	this.add(jp,BorderLayout.CENTER);
      	init();
         
@@ -126,7 +125,6 @@ public class VueCreaLaby extends JPanel implements Observer {
     }
 
     private void modifLab(int h, int l){
- 
         nbLigne=h;
         nbColonne=l;
         tabLab = new CaseLabel[nbLigne][nbColonne];
@@ -138,12 +136,15 @@ public class VueCreaLaby extends JPanel implements Observer {
 	            		int x = player.getShip(i, j).getPosX();
 	            		if (player.getShip(i, j).getShipPart()[i-x] == 1)
 	            			((JLabel) jp.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1_shot.png")));
+
 	            		else ((JLabel) jp.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1.png")));   
 	                }
                     else {
                     	if (player.getShipGrill(i,j) == 1) ((JLabel) jp.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case_shot.png")));	
                       	else ((JLabel) jp.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case.png")));	
                     }
+
+
             }
         }
     }
@@ -157,13 +158,11 @@ public class VueCreaLaby extends JPanel implements Observer {
         if(this.player.isReady()){
         	this.start.setEnabled(false);
         }
-        if(this.player.getListShip().size() >= 5){
-        this.start.setEnabled(true);
+        if(this.player.getListShip().size() >= 5 && !this.player.isReady()){
+        	this.start.setEnabled(true);
         }
-        if(player.getCheckShip()[player.getxClick()][player.getyClick()] != null){
-            System.out.println(player.getxClick() + " " + player.getyClick());
-        	System.out.println("hello");
-        }
+
         this.modifLab(Player.SIZE,Player.SIZE);
+        
     }
 }
