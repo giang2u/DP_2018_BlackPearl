@@ -120,8 +120,8 @@ public class VueCreaLaby extends JPanel implements Observer {
         if(this.player.isReady()){
         	this.start.setEnabled(false);
         }
-        if(this.player.getListShip().size() >= 5){
-        this.start.setEnabled(true);
+        if(this.player.getListShip().size() >= 5 && !this.player.isReady()){
+        	this.start.setEnabled(true);
         }
         if(player.getCheckShip()[player.getxClick()][player.getyClick()] != null){
             System.out.println(player.getxClick() + " " + player.getyClick());

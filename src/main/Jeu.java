@@ -58,7 +58,7 @@ public class Jeu extends JFrame {
 		jpGridShip = new VueCreaLaby((Human) p1,10, 10);
 		jpShip = new VueObjets((Human) p1, this);
 
-		this.add(new VueMenu(this), BorderLayout.NORTH);
+		//this.add(new VueMenu(this), BorderLayout.NORTH);
 		this.add(jpGridShip, BorderLayout.WEST);
 		this.add(jpShip,BorderLayout.CENTER);
 		this.add(jpHistory, BorderLayout.EAST);
@@ -130,7 +130,6 @@ public class Jeu extends JFrame {
 	 */
 	public static void main(String[] args) throws InterruptedException {
 		Jeu j = new Jeu();
-
 		int nbTour = 0;
 
 		boolean fini = false;

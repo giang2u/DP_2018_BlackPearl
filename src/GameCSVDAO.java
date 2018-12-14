@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.ArrayList;
 
+import main.Jeu;
+
 public class GameCSVDAO implements GameDAO {
 
     private static GameDAO instance = null;
