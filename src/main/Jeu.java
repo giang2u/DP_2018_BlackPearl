@@ -10,8 +10,14 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.TransferHandler;
+
+import controller.ControllerAiDifficulty;
+import controller.ControllerRestart;
 
 import dao.AbstractDAOFactory;
 
@@ -40,6 +46,7 @@ public class Jeu extends JFrame {
 	private EpochFactory epoch;
 	private Player joueurCourant;
 	private JPanel jpHistory,jpGridShip;
+	private JMenuBar jpMenu;
 	
 	private JPanel jpShip;
 	
@@ -57,8 +64,8 @@ public class Jeu extends JFrame {
 
 		jpGridShip = new VueCreaLaby((Human) p1,10, 10);
 		jpShip = new VueObjets((Human) p1, this);
-
-		//this.add(new VueMenu(this), BorderLayout.NORTH);
+		jpMenu = new VueMenu(this);
+		this.setJMenuBar(jpMenu);
 		this.add(jpGridShip, BorderLayout.WEST);
 		this.add(jpShip,BorderLayout.CENTER);
 		this.add(jpHistory, BorderLayout.EAST);
