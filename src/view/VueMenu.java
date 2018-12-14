@@ -1,5 +1,6 @@
 package view;
 
+
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
@@ -12,10 +13,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
+import main.Jeu;
+
 import controller.ControllerAiDifficulty;
 import controller.ControllerRestart;
 
-import main.Jeu;
 
 public class VueMenu extends JMenuBar implements Observer{
 

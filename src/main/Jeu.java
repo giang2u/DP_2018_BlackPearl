@@ -1,6 +1,7 @@
 package main;
 
 
+
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -55,6 +56,7 @@ public class Jeu extends JFrame {
 	public static Jeu instance;
 
 	public Jeu(){
+		
 		initJeu();
 		joueurCourant = p1;
 		setPreferredSize(new Dimension(1400, 600));
@@ -77,8 +79,8 @@ public class Jeu extends JFrame {
 	}
 	
 	public void restart() {
-		initJeu();
 		initShip();
+		initJeu();
 	}
 
 	public void initJeu(){
@@ -106,29 +108,6 @@ public class Jeu extends JFrame {
 		((AI) this.ai).putShip();
 		p1.setEnemy(ai);
 		ai.setEnemy(p1);
-
-		/*
-		//creer 5 
-		Ship playerShip2 =  this.epoch.buildShip(0,0,2, false);//
-		Ship playerShip3=  this.epoch.buildShip(1,1,3, false);
-		Ship playerShip3B =  this.epoch.buildShip(2,2,3, true);//
-		Ship playerShip4 =  this.epoch.buildShip(2,4,4, true);
-		Ship playerShip5=  this.epoch.buildShip(1,5,5, false);//
-
-		//donne 5 bateaux au joueur
-		this.p1.addShip(playerShip2);
-		this.p1.addShip(playerShip3);
-		this.p1.addShip(playerShip3B);
-		this.p1.addShip(playerShip4);
-		this.p1.addShip(playerShip5);
-
-		//donne 5 bateau au IA
-		this.ai.addShip(playerShip2);
-		this.ai.addShip(playerShip3);
-		this.ai.addShip(playerShip3B);
-		this.ai.addShip(playerShip4);
-		this.ai.addShip(playerShip5);
-		 */
 	}
 
 	/**
@@ -170,9 +149,6 @@ public class Jeu extends JFrame {
 					j.setJoueurCourant(p);
 					nbTour++;
 				}
-			}
-			else{
-				System.out.println("Le joueur n'est pas pret");
 			}
 
 

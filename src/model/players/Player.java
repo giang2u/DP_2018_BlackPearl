@@ -8,7 +8,7 @@ import model.ship.Ship;
 import model.ship.Ship_centuryXVI;
 
 public abstract class Player extends Observable{
-	
+
 	public final static int SIZE = 10;
 
 	protected int[][] shipGrill = new int[SIZE][SIZE];
@@ -18,11 +18,11 @@ public abstract class Player extends Observable{
 	protected int nbTireMiss = 0;
 	protected ArrayList<Ship> shipList;
 	protected boolean isReady = false;
-	
+
 	// last click of user
 	protected int xClick, yClick;
-	
-    protected Ship[][] checkShip;
+
+	protected Ship[][] checkShip;
 	protected int[] shipCount;
 	protected Player enemy;
 
@@ -36,7 +36,7 @@ public abstract class Player extends Observable{
 
 
 	public boolean cibleToucher(int xTirer, int yTirer){
-		
+
 		boolean toucher = false;
 		setCoorDonne(xTirer, yTirer);
 
@@ -87,11 +87,11 @@ public abstract class Player extends Observable{
 	public void addShip(Ship ship) {
 		this.shipList.add(ship);
 	}
-	
+
 	public int[][] getShipGrill(){
 		return this.shipGrill;
 	}
-	
+
 	public int[][] getHistoryGrill(){
 		return this.historyGrill;
 	}
@@ -106,7 +106,7 @@ public abstract class Player extends Observable{
 		setChanged();
 		notifyObservers();
 	}
-	
+
 	public int getxClick() {
 		return xClick;
 	}
@@ -122,118 +122,130 @@ public abstract class Player extends Observable{
 	public void setyClick(int yClick) {
 		this.yClick = yClick;
 	}
-	
-    public Ship getShip(int i,int j){
-        return checkShip[i][j];
-    }
-    
-    public void setShipPart(int i, int j) {
-    	checkShip[i][j].setShipPart(i, j);
-    	setChanged();
+
+	public Ship getShip(int i,int j){
+		return checkShip[i][j];
+	}
+
+	public void setShipPart(int i, int j) {
+		checkShip[i][j].setShipPart(i, j);
+		setChanged();
 		notifyObservers();
-    }
-    
-    public int getShipGrill(int i,int j){
-        return shipGrill[i][j];
-    }
-    
-    public void setShipGrill(int i, int j) {
-    	shipGrill[i][j] = 1;
-    	setChanged();
+	}
+
+	public int getShipGrill(int i,int j){
+		return shipGrill[i][j];
+	}
+
+	public void setShipGrill(int i, int j) {
+		shipGrill[i][j] = 1;
+		setChanged();
 		notifyObservers();
-    }
-    
+	}
+
+	public void setVerticalShip(){
+		for(Ship s : this.shipList){
+			if(!s.isHorizontal() && s.getPosY() - s.getSize() +1  >= 0){
+				boolean notturner = false;
+				int j = 1;
+				while(!notturner && j < s.getSize()){
+					if(checkShip[s.getPosX()][s.getPosY()-j] != null){
+						notturner = true;
+
+					}
+					j++;
+				}
+				if(!notturner){
+					//Ship s2 = new Ship_centuryXVI(s.getPosX(),s.getPosY(),s.getSize(),false);
+					s.setHorizontal(false);
+					for (int i = 0; i < s.getSize(); i++) {
+						checkShip[s.getPosX()][s.getPosY()-i] = s;
+						if(i >= 1){
+							checkShip[s.getPosX()+i][s.getPosY()] = null;
+						}
+					}
+				}
+			}
+
+			setChanged();
+			notifyObservers();
+		}
+	}
+
 	//  ------------------ PLACEMENT DRAG AND DROP DES BATEAUX -------------------------- //
 
-    // try to placed ship where we dropped 
-    public boolean ajouterShip(int x,int y,int taille){
-
-    	boolean put = false;
+	// try to placed ship where we dropped 
+	public boolean ajouterShip(int x,int y,int taille){
+		boolean put = false;
+		Ship s;
 		// if there we can place it
-		if (checkCount(taille) ) {
-			// place the ship
-			if(checkPlacedShip(x,y,taille, true) ){
-		    	for (int i = 0; i < taille; i++) {
-					Ship s = new Ship_centuryXVI(x,y,taille,true);
-		    		checkShip[x + i][y] = s;
-		    		if (i == 0) addShip(s);
-		    		put = true;
-		    	}
+		if (checkCount(taille) && checkPlacedShip(x,y,taille, true)) {
+			for (int i = 0; i < taille; i++) {
+				s = new Ship_centuryXVI(x,y,taille,true);
+				checkShip[x+i][y] = s;
+				if (i == 0) addShip(s);
+				put = true;
 			}
-			/*else{
-		    	for (int i = 0; i < taille; i++) {
-		    		checkShip[x][y+i] = s;
-		    		if (i == 0) addShip(s);
-		    		put = true;
-		    	}
-			}*/
-			// increment ship register
 			shipCount[taille-1]++;
 		}
-		
-        setChanged();
-        notifyObservers();
+		setChanged();
+		notifyObservers();
 		return put;
-    }
-    
-    
-    public Player getEnemy() {
+	}
+
+
+	public Player getEnemy() {
 		return enemy;
 	}
 
 
 	// search if there is already a ship placed 
-    // true if no ship
-    public boolean checkPlacedShip(int x,int y,int taille, boolean horizontal) {
+	// true if no ship
+	public boolean checkPlacedShip(int x,int y,int taille, boolean horizontal) {
 		// if the ship does not exceed the map size
 		boolean noShip = horizontal==true ? (x+taille < Player.SIZE +1) : (y-taille >= 0);
 		if (noShip) {
-    		int i = 0;
-    		while(i < taille && noShip) {
-    			noShip = horizontal==true ? (checkShip[x + i][y] == null) : (checkShip[x][y + i] == null);
-    			i++;
-    		}
+			int i = 0;
+			while(i < taille && noShip) {
+				noShip = horizontal==true ? (checkShip[x + i][y] == null) : (checkShip[x][y + i] == null);
+				i++;
+			}
 		}
-    	return noShip;
-    }
-    
-    // rule allow one ship 2,4,5 and two ship 3
-    public boolean checkCount(int size) {
-    	boolean check = false;
-    	if (size == 2 || size == 4 || size == 5) check = shipCount[size-1] < 1;
-    	if (size == 3) check = shipCount[size-1] < 2;
-    	return check;
-    }
-    
-    
-    public void verticalShip(int x,int y, int taille) {
-    	if (checkShip[x][y] != null) {
-    		
-    	}
-    }
-    
-    public void setEnemy(Player p) {
-    	enemy = p;
-    }
-    
-    //  ------------------ FIN PLACEMENT DRAG AND DROP DES BATEAUX -------------------------- //
-    
-    public boolean isLose() {
-    	boolean lose = true;
-    	
-    	for (Ship s : shipList) {
-    		// si un bateau nest pas coule alors le joueur na pas perdu
-    		if (!s.isDead()) {
-    			lose = false;
-    		}
-    	}
-    	
-    	return lose;
-    }
-    
-    public int shotNumber() {
-    	return nbTireMiss + nbTireToucher;
-    }
+		return noShip;
+	}
+
+	// rule allow one ship 2,4,5 and two ship 3
+	public boolean checkCount(int size) {
+		boolean check = false;
+		if (size == 2 || size == 4 || size == 5) check = shipCount[size-1] < 1;
+		if (size == 3) check = shipCount[size-1] < 2;
+		return check;
+	}
+
+
+
+	public void setEnemy(Player p) {
+		enemy = p;
+	}
+
+	//  ------------------ FIN PLACEMENT DRAG AND DROP DES BATEAUX -------------------------- //
+
+	public boolean isLose() {
+		boolean lose = true;
+
+		for (Ship s : shipList) {
+			// si un bateau nest pas coule alors le joueur na pas perdu
+			if (!s.isDead()) {
+				lose = false;
+			}
+		}
+
+		return lose;
+	}
+
+	public int shotNumber() {
+		return nbTireMiss + nbTireToucher;
+	}
 
 
 	public boolean isReady() {
@@ -244,8 +256,8 @@ public abstract class Player extends Observable{
 	public void setReady(boolean isReady) {
 		this.isReady = isReady;
 
-        setChanged();
-        notifyObservers();
+		setChanged();
+		notifyObservers();
 	}
 
 
@@ -257,7 +269,7 @@ public abstract class Player extends Observable{
 	public void setCheckShip(Ship[][] checkShip) {
 		this.checkShip = checkShip;
 	}
-    
-	
+
+
 }
 

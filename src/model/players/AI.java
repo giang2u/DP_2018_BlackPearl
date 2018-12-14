@@ -16,7 +16,7 @@ public class AI extends Player {
 
 	public AI(String name, StrategyShot strategyShot) {
 		super(name);
-		this.strategyShot = strategyShot;
+		//this.strategyShot = strategyShot;
 		difficulte = 0;
 		// TODO Auto-generated constructor stub
 	}

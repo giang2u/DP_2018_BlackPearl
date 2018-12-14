@@ -11,6 +11,7 @@ import controller.MyTransferHandler;
 import model.players.Human;
 import model.players.Niveau;
 import model.players.Player;
+import model.ship.Ship;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -48,7 +49,7 @@ public class VueCreaLaby extends JPanel implements Observer {
         js.createHorizontalScrollBar();
         js.createVerticalScrollBar();
         this.add(js);
-        jp.addMouseListener(new ListenerPoser(player));
+        jp.addMouseListener(new ListenerPoser(player, this));
         init();
         this.start = new JButton("Start");
      	this.start.setEnabled(false);
@@ -76,13 +77,7 @@ public class VueCreaLaby extends JPanel implements Observer {
         return new Dimension(50*nbLigne,50*nbColonne);
     }
 
-    private void modifLab(int h, int l){
-       /* for (int i = 0; i < nbLigne; i++) {
-            for (int j = 0; j < nbColonne; j++) {
-                jp.remove(tabLab[i][j]);
-            }
-        }*/
- 
+    public void modifLab(int h, int l){
         nbLigne=h;
         nbColonne=l;
         tabLab = new CaseLabel[nbLigne][nbColonne];
@@ -94,19 +89,14 @@ public class VueCreaLaby extends JPanel implements Observer {
 	            		int x = player.getShip(i, j).getPosX();
 	            		if (player.getShip(i, j).getShipPart()[i-x] == 1)
 	            			((JLabel) jp.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1_shot.png")));
-	            			//tabLab[i][j] = new CaseLabel(player, i, j, new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1_shot.png")));	
 	            		else ((JLabel) jp.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1.png")));
 	                    
 	                }
                     else {
                     	if (player.getShipGrill(i,j) == 1) ((JLabel) jp.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case_shot.png")));	
-                    		//tabLab[i][j] = new CaseLabel(player, i, j, new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case_shot.png")));
-                      	else ((JLabel) jp.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case.png")));	
+                    	else ((JLabel) jp.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case.png")));	
                     }
-                //tabLab[i][j].setTransferHandler(new MyTransferHandler());
-                //tabLab[i][j].setBorder(BorderFactory.createLineBorder(Color.black));
-               // tabLab[i][j].setBounds(i*50,j*50,50,50);
-                //jp.add(tabLab[i][j]);
+
             }
         }
         js.setViewportView(jp);
@@ -123,10 +113,8 @@ public class VueCreaLaby extends JPanel implements Observer {
         if(this.player.getListShip().size() >= 5 && !this.player.isReady()){
         	this.start.setEnabled(true);
         }
-        if(player.getCheckShip()[player.getxClick()][player.getyClick()] != null){
-            System.out.println(player.getxClick() + " " + player.getyClick());
-        	System.out.println("hello");
-        }
+
         this.modifLab(Player.SIZE,Player.SIZE);
+        
     }
 }
