@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Scanner;
 
+import view.Vue;
+
 import model.ship.Ship;
 import model.ship.Ship_centuryXVI;
 
@@ -17,6 +19,7 @@ public abstract class Player extends Observable{
 	protected int nbTireToucher = 0;
 	protected int nbTireMiss = 0;
 	protected ArrayList<Ship> shipList;
+	protected ArrayList<Vue> listView;
 	protected boolean isReady = false;
 	
 	// last click of user
@@ -32,6 +35,7 @@ public abstract class Player extends Observable{
 		shipList = new ArrayList<>(5);
 		shipCount = new int[5];
 		checkShip = new Ship[Player.SIZE][Player.SIZE];
+		listView = new ArrayList<>();
 	}
 
 
@@ -142,6 +146,7 @@ public abstract class Player extends Observable{
     	setChanged();
 		notifyObservers();
     }
+    
     
 	//  ------------------ PLACEMENT DRAG AND DROP DES BATEAUX -------------------------- //
 

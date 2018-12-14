@@ -38,7 +38,7 @@ import controller.MyMouseAdapterTest;
 import model.players.Player;
 import model.ship.Ship;
 
-public class ShipSettingView extends JPanel implements Observer {
+public class ShipSettingView extends JPanel implements Observer,Vue {
 
 	private BufferedImage bateau;
 	private Point location;

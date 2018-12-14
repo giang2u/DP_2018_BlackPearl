@@ -5,6 +5,7 @@ import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.players.Player;
@@ -23,6 +24,7 @@ public class Case extends JButton {
 		this.x=x;
 		this.y=y;
 		setPreferredSize(new Dimension(size, size));
+		add(new JLabel(String.valueOf(x/50)));
 	}
 
 	

@@ -31,7 +31,15 @@ public class ControllerAiDifficulty implements ActionListener{
 	      null,
 	      sexe,
 	      sexe[2]);
-	    jop2.showMessageDialog(null, "Votre difficulté est " + nom, "Apple pen", JOptionPane.INFORMATION_MESSAGE);
+	    
+	    String camembert = "very hard mode";
+	    String affiche = nom==null?camembert:nom;
+	    
+	    jop2.showMessageDialog(null, "Votre difficulté est " +  affiche, "Apple pen", JOptionPane.INFORMATION_MESSAGE);
+	    
+	    if (nom == null)  {
+	    	nom = "difficile ";
+	    }
 	    
 	    switch(nom) {
 	    case "facile":
@@ -41,7 +49,7 @@ public class ControllerAiDifficulty implements ActionListener{
 	    	((AI) jeu.getAi()).setDifficulte(1);
 	    	break;
 	    case "random":
-	    	int i = (int)(Math.random() * 1) + 0 ;
+	    	int i = (int)(Math.random() * 2) + 0 ;
 	    	((AI) jeu.getAi()).setDifficulte(i);
 	    	break;
 	    }
