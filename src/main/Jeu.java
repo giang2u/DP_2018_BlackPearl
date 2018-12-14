@@ -78,7 +78,7 @@ public class Jeu extends JFrame {
 	
 	public void restart() {
 		initJeu();
-		initShip();
+		//initShip();
 	}
 
 	public void initJeu(){
@@ -86,7 +86,7 @@ public class Jeu extends JFrame {
 		//this.ai = new AI("Cumputer", new ShotRandom());
 		this.ai = new AI("shotcheckerboard", new ShotCheckerBoard());
 		setJoueurCourant(p1);
-		initShip();			
+		//initShip();
 		//this.p1.positionShip();
 	}
 
@@ -145,10 +145,7 @@ public class Jeu extends JFrame {
 				int currentNbShot = j.getJoueurCourant() == j.getP1() ? j.getP1().shotNumber() :  j.getAi().shotNumber();
 
 				if (j.getJoueurCourant() == j.getP1()) {
-<<<<<<< HEAD:src/Jeu.java
 					//System.out.println("PLAYER TURN   " + nbTour);
-=======
->>>>>>> 401b70ad0a3b6f7ef8f9d76ed13ff2c0236d61b7:src/main/Jeu.java
 					// while player have not shot we stay here
 				}
 

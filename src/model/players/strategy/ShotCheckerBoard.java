@@ -29,6 +29,7 @@ public class ShotCheckerBoard implements StrategyShot{
 
         int xAttack = (int) (Math.random()* Player.SIZE);
         int yAttack = (int) (Math.random()* Player.SIZE);
+
         System.out.println("Positions d'attaques: "+ xAttack + " : "+yAttack);
         System.out.println("Valeur de la position: "+ positions[xAttack][yAttack]);
 
