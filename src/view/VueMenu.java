@@ -22,12 +22,9 @@ public class VueMenu extends JMenuBar implements Observer{
 	private Jeu jeu;
 
 	public VueMenu(Jeu j) {
-		
 		jeu = j;
 
 		JMenu menu = new JMenu("pineapple");
-		
-		
 		JMenuItem restart = new JMenuItem("Restart");
 		restart.addActionListener(new ControllerRestart(jeu));
 		menu.add(restart);
@@ -35,10 +32,7 @@ public class VueMenu extends JMenuBar implements Observer{
 		JMenuItem difficulty = new JMenuItem("Difficulty");
 		difficulty.addActionListener(new ControllerAiDifficulty(jeu));
 		menu.add(difficulty);
-		
-		
 		this.add(menu);
-
 	}
 
 	@Override
