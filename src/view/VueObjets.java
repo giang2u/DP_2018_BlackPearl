@@ -1,6 +1,7 @@
 package view;
 
 
+
 import javax.swing.*;
 import javax.swing.border.Border;
 
@@ -13,7 +14,7 @@ import model.players.Niveau;
 
 import java.awt.*;
 
-public class VueObjets extends JPanel{
+public class VueObjets extends JPanel implements Vue{
 	
 	private ImageIcon ship2;
 	private ImageIcon ship3;

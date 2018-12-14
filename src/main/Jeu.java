@@ -1,9 +1,13 @@
 package main;
 
 
+
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Scanner;
 
 import javax.swing.GroupLayout;
@@ -39,7 +43,7 @@ import model.players.Player;
 import model.ship.Ship;
 
 
-public class Jeu extends JFrame {
+public class Jeu extends JFrame implements Observer{
 
 	private Player p1 ;
 	private Player ai ;
@@ -53,11 +57,17 @@ public class Jeu extends JFrame {
 	public static int[] difficulte = {0,1};
 	
 	public static Jeu instance;
+	
+	public static Jeu getInstance() {
+		instance = new Jeu();
+		return instance;
+	}
 
 	public Jeu(){
+		
 		initJeu();
 		joueurCourant = p1;
-		setPreferredSize(new Dimension(1400, 600));
+		setPreferredSize(new Dimension(1400, 650));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
 
 		jpHistory = new ShotHistoryGridView(p1);
@@ -76,9 +86,12 @@ public class Jeu extends JFrame {
 		
 	}
 	
+	
 	public void restart() {
+		this.dispose();
+		getInstance();
+		initShip();
 		initJeu();
-		//initShip();
 	}
 
 	public void initJeu(){
@@ -106,29 +119,6 @@ public class Jeu extends JFrame {
 		((AI) this.ai).putShip();
 		p1.setEnemy(ai);
 		ai.setEnemy(p1);
-
-		/*
-		//creer 5 
-		Ship playerShip2 =  this.epoch.buildShip(0,0,2, false);//
-		Ship playerShip3=  this.epoch.buildShip(1,1,3, false);
-		Ship playerShip3B =  this.epoch.buildShip(2,2,3, true);//
-		Ship playerShip4 =  this.epoch.buildShip(2,4,4, true);
-		Ship playerShip5=  this.epoch.buildShip(1,5,5, false);//
-
-		//donne 5 bateaux au joueur
-		this.p1.addShip(playerShip2);
-		this.p1.addShip(playerShip3);
-		this.p1.addShip(playerShip3B);
-		this.p1.addShip(playerShip4);
-		this.p1.addShip(playerShip5);
-
-		//donne 5 bateau au IA
-		this.ai.addShip(playerShip2);
-		this.ai.addShip(playerShip3);
-		this.ai.addShip(playerShip3B);
-		this.ai.addShip(playerShip4);
-		this.ai.addShip(playerShip5);
-		 */
 	}
 
 	/**
@@ -141,6 +131,7 @@ public class Jeu extends JFrame {
 
 		boolean fini = false;
 		while(!fini) {
+
 			if(j.getP1().isReady()){
 				int currentNbShot = j.getJoueurCourant() == j.getP1() ? j.getP1().shotNumber() :  j.getAi().shotNumber();
 
@@ -172,11 +163,6 @@ public class Jeu extends JFrame {
 					nbTour++;
 				}
 			}
-			else{
-				System.out.println("Le joueur n'est pas pret");
-			}
-
-
 		}
 	}
 
@@ -226,6 +212,13 @@ public class Jeu extends JFrame {
 
 	public void saveGame(){
 		AbstractDAOFactory.getAbstractDAOFactory(1).getGameDAO().save(this);
+	}
+
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

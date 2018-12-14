@@ -1,6 +1,8 @@
 package model.ship;
 
-public abstract class Ship {
+import java.util.Observable;
+
+public abstract class Ship extends Observable{
 	
 	protected int posX, posY, size, hp;
 	protected boolean horizontal, dead;
@@ -56,6 +58,8 @@ public abstract class Ship {
 
 	public void setHorizontal(boolean horizontal) {
 		this.horizontal = horizontal;
+		setChanged();
+		notifyObservers();
 	}
 	
 	public boolean isDead() {
