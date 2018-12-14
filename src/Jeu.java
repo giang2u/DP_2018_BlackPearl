@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.TransferHandler;
 
-import model.players.strategy.ShotCross;
+import model.players.strategy.ShotCheckerBoard;
 import model.players.strategy.ShotRandom;
 import view.ShipGridView;
 import view.ShipSettingView;
@@ -59,8 +59,8 @@ public class Jeu extends JFrame {
 
 	public void initJeu(){
 		this.p1 = new Human("Nam");
-		this.ai = new AI("Cumputer", new ShotRandom());
-		//this.ai = new AI("shotcross", new ShotCross());
+		//this.ai = new AI("Cumputer", new ShotRandom());
+		this.ai = new AI("shotcheckerboard", new ShotCheckerBoard());
 		setJoueurCourant(p1);
 		initShip();			
 		//this.p1.positionShip();
@@ -130,13 +130,13 @@ public class Jeu extends JFrame {
 
 
 				if (j.getJoueurCourant() == j.getP1()) {
-					System.out.println("PLAYER TURN   " + nbTour);
+					//System.out.println("PLAYER TURN   " + nbTour);
 					// while player have not shot we stay here
 				}
 
 				else   {
 					if (j.getP1().getListShip().size() == 5) {
-						System.out.println("AI TURN   " + nbTour);
+						//System.out.println("AI TURN   " + nbTour);
 						((AI) j.getAi()).tirer();
 					}
 				}
