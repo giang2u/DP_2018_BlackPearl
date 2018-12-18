@@ -74,10 +74,6 @@ public class Jeu extends JFrame implements Observer{
 
 		jpGridShip = new VueCreaLaby((Human) p1,10, 10);
 		jpShip = new VueObjets((Human) p1, this);
-<<<<<<< HEAD
-
-=======
->>>>>>> 27a6b3e50127d1b63db064fd08163e6ce72e39a5
 		jpMenu = new VueMenu(this);
 		this.setJMenuBar(jpMenu);
 		this.add(jpGridShip, BorderLayout.WEST);
@@ -92,13 +88,8 @@ public class Jeu extends JFrame implements Observer{
 	
 	
 	public void restart() {
-<<<<<<< HEAD
 		this.dispose();
 		getInstance();
-=======
-		initShip();
-		initJeu();
->>>>>>> 27a6b3e50127d1b63db064fd08163e6ce72e39a5
 	}
 
 	public void initJeu(){
@@ -143,10 +134,7 @@ public class Jeu extends JFrame implements Observer{
 				int currentNbShot = j.getJoueurCourant() == j.getP1() ? j.getP1().shotNumber() :  j.getAi().shotNumber();
 
 				if (j.getJoueurCourant() == j.getP1()) {
-<<<<<<< HEAD:src/Jeu.java
 					//System.out.println("PLAYER TURN   " + nbTour);
-=======
->>>>>>> 401b70ad0a3b6f7ef8f9d76ed13ff2c0236d61b7:src/main/Jeu.java
 					// while player have not shot we stay here
 				}
 
@@ -173,13 +161,9 @@ public class Jeu extends JFrame implements Observer{
 					nbTour++;
 				}
 			}
-<<<<<<< HEAD
 			else{
 				//System.out.println("Le joueur n'est pas pret");
 			}
-=======
->>>>>>> 27a6b3e50127d1b63db064fd08163e6ce72e39a5
-
 
 		}
 	}

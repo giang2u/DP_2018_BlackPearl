@@ -21,7 +21,7 @@ public class ShotCheckerBoard implements StrategyShot{
                 }
             }
         }
-        System.out.println("Valeurs des positions "+Arrays.deepToString(positions));
+       // System.out.println("Valeurs des positions "+Arrays.deepToString(positions));
     }
 
     public void shot(Player p) {

@@ -145,13 +145,10 @@ public abstract class Player extends Observable{
 		shipGrill[i][j] = 1;
 		setChanged();
 		notifyObservers();
-<<<<<<< HEAD
     }
     
     
 	//  ------------------ PLACEMENT DRAG AND DROP DES BATEAUX -------------------------- //
-=======
-	}
 
 	public void setVerticalShip(){
 		for(Ship s : this.shipList){
@@ -181,7 +178,6 @@ public abstract class Player extends Observable{
 			notifyObservers();
 		}
 	}
->>>>>>> 27a6b3e50127d1b63db064fd08163e6ce72e39a5
 
 	//  ------------------ PLACEMENT DRAG AND DROP DES BATEAUX -------------------------- //
 

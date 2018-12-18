@@ -16,7 +16,9 @@ import javax.swing.JToolBar;
 import main.Jeu;
 
 import controller.ControllerAiDifficulty;
+import controller.ControllerLoad;
 import controller.ControllerRestart;
+import controller.ControllerSave;
 
 
 public class VueMenu extends JMenuBar implements Observer{
@@ -27,6 +29,8 @@ public class VueMenu extends JMenuBar implements Observer{
 		jeu = j;
 
 		JMenu menu = new JMenu("pineapple");
+		
+		
 		JMenuItem restart = new JMenuItem("Restart");
 		restart.addActionListener(new ControllerRestart(jeu));
 		menu.add(restart);
@@ -34,6 +38,15 @@ public class VueMenu extends JMenuBar implements Observer{
 		JMenuItem difficulty = new JMenuItem("Difficulty");
 		difficulty.addActionListener(new ControllerAiDifficulty(jeu));
 		menu.add(difficulty);
+		
+		JMenuItem save = new JMenuItem("Sauvegarder");
+		save.addActionListener(new ControllerSave(jeu));
+		menu.add(save);
+		
+		JMenuItem load = new JMenuItem("Charger");
+		load.addActionListener(new ControllerLoad(jeu));
+		menu.add(load);
+		
 		this.add(menu);
 	}
 
