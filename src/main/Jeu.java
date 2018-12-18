@@ -97,7 +97,7 @@ public class Jeu extends JFrame implements Observer{
 		//this.ai = new AI("Cumputer", new ShotRandom());
 		this.ai = new AI("shotcheckerboard", new ShotCheckerBoard());
 		setJoueurCourant(p1);
-		//initShip();			
+		//initShip();
 		//this.p1.positionShip();
 	}
 
@@ -161,10 +161,6 @@ public class Jeu extends JFrame implements Observer{
 					nbTour++;
 				}
 			}
-			else{
-				//System.out.println("Le joueur n'est pas pret");
-			}
-
 		}
 	}
 
