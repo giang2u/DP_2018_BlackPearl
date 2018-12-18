@@ -22,10 +22,8 @@ import java.util.Observer;
 public class VueCreaLaby extends JPanel implements Observer {
 
     private int nbLigne,nbColonne;
-    private JLabel[][] tabLab;
     private Human player;
     protected JButton start;
-    private  JPanel jp, jp2, jp3;
     private Graphics2D g2;
 
     public VueCreaLaby(Human niv, int nbLigne, int nbColonne){
@@ -38,21 +36,6 @@ public class VueCreaLaby extends JPanel implements Observer {
 
         this.setLayout(new BorderLayout());
         
-        jp = new JPanel();
-        jp.setLayout(null);
-        
-        jp2 = new JPanel();
-        jp3 = new JPanel();
-
-
-        tabLab = new JLabel[nbLigne][nbColonne];
-        //jp.setPreferredSize(new Dimension((nbLigne)*Player.SIZE,(nbColonne)*Player.SIZE));
-
-
-        //jp.addMouseListener(new ListenerPoser(player,this));
-     	/*this.add(jp,BorderLayout.CENTER);
-     	this.add(jp2,BorderLayout.NORTH);
-     	this.add(jp3,BorderLayout.WEST);*/
      	init();
         
         this.start = new JButton("Start");
@@ -61,17 +44,21 @@ public class VueCreaLaby extends JPanel implements Observer {
      	this.add(start, BorderLayout.SOUTH);
      	
      	this.setPreferredSize(new Dimension(600,550));
+
+    	this.getComponent(9*10+9).setBounds(500, 500, 50, 50);
     }
     
     public void init() {
-    	tabLab = new JLabel[nbLigne][nbColonne];
-    	//jp.setPreferredSize(new Dimension((nbLigne)*50,(nbColonne)*50));
+    	JLabel[][] tabLab = new JLabel[nbLigne][nbColonne];
+    	
     	 for(int i =0;i<nbLigne;i++){
              for(int j =0;j<nbColonne;j++){
+            	
 	            	 tabLab[i][j] = new CaseLabel(player, i, j, new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case.png")));
 	                 tabLab[i][j].setTransferHandler(new MyTransferHandler());
-	                 tabLab[i][j].setBounds((i+1)*50,(j+1)*50,50,50);
-	                 this.add(tabLab[i][j]);
+	                 tabLab[i][j].setBounds(50+((i)*50),(50+(j)*50),50,50);
+	                this.add(tabLab[i][j]);
+	               
              }
     	 }
     }
@@ -87,6 +74,7 @@ public class VueCreaLaby extends JPanel implements Observer {
     
     public void paintComponent(Graphics g)
     {
+    	
     	 super.paintComponent(g);
         // dessin des lignes de la grille
     	g2 = (Graphics2D) g;	
@@ -118,15 +106,14 @@ public class VueCreaLaby extends JPanel implements Observer {
     }
 
     private void modifLab(int h, int l){
+    	this.getComponent(9*10+9).setBounds(500, 500, 50, 50);
         nbLigne=h;
         nbColonne=l;
-        tabLab = new CaseLabel[nbLigne][nbColonne];
-        //jp.setPreferredSize(new Dimension((nbLigne)*50,(nbColonne)*50));
-
         for(int i =0;i<nbLigne;i++){
             for(int j =0;j<nbColonne;j++){
 	            	if (player.getShip(i, j) != null) {
 	            		int x = player.getShip(i, j).getPosX();
+
 	            		if (player.getShip(i, j).getShipPart()[i-x] == 1)
 	            			((JLabel) this.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1_shot.png")));
 
@@ -136,7 +123,8 @@ public class VueCreaLaby extends JPanel implements Observer {
                     	if (player.getShipGrill(i,j) == 1) ((JLabel) this.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case_shot.png")));	
                       	else ((JLabel) this.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case.png")));	
                     }
-
+	            	
+	            	
             }
         }
     }
