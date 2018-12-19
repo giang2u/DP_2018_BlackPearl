@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 
 import main.Jeu;
+import model.players.Player;
 
 
 public class GameCSVDAO implements GameDAO {
@@ -33,7 +34,9 @@ public class GameCSVDAO implements GameDAO {
 			if (f != null) {
 				String nomF = f.getAbsolutePath();
 				ObjectOutputStream objectOutputStream = new ObjectOutputStream((new FileOutputStream( nomF +"BlackPearl.csv")));
-				//objectOutputStream.writeObject(j.getJeu); récupérer le jeu en cours..
+				objectOutputStream.writeObject(j.getP1()); 
+				objectOutputStream.writeObject(j.getAi());
+				objectOutputStream.writeObject(j.getJoueurCourant());
 				objectOutputStream.close();
 
 			
@@ -71,11 +74,14 @@ public class GameCSVDAO implements GameDAO {
 				String nomF = fichier.getAbsolutePath();
 
 				try {
-					System.out.println(fichier.getName());
-					ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fichier.getName()));
+					System.out.println(nomF);
+					ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(nomF));
 					//Création du nouveau jeu à partir des fichiers
 
-					jeuArrayList = ((ArrayList<Jeu>) objectInputStream.readObject());
+					j.setP1((Player) objectInputStream.readObject());
+					j.setAi((Player) objectInputStream.readObject());
+					j.setJoueurCourant((Player) objectInputStream.readObject());
+					
 					System.out.println("LOADING...");
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();

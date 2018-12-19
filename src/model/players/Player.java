@@ -1,5 +1,6 @@
 package model.players;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Scanner;
@@ -9,7 +10,7 @@ import view.Vue;
 import model.ship.Ship;
 import model.ship.Ship_centuryXVI;
 
-public abstract class Player extends Observable{
+public abstract class Player extends Observable implements Serializable{
 
 	public final static int SIZE = 10;
 
@@ -19,7 +20,6 @@ public abstract class Player extends Observable{
 	protected int nbTireToucher = 0;
 	protected int nbTireMiss = 0;
 	protected ArrayList<Ship> shipList;
-	protected ArrayList<Vue> listView;
 	protected boolean isReady = false;
 
 	// last click of user
@@ -35,7 +35,6 @@ public abstract class Player extends Observable{
 		shipList = new ArrayList<>(5);
 		shipCount = new int[5];
 		checkShip = new Ship[Player.SIZE][Player.SIZE];
-		listView = new ArrayList<>();
 	}
 
 
@@ -275,6 +274,11 @@ public abstract class Player extends Observable{
 
 	public void setCheckShip(Ship[][] checkShip) {
 		this.checkShip = checkShip;
+	}
+	
+	public void update() {
+		setChanged();
+		notifyObservers();
 	}
 
 

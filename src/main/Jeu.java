@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
@@ -67,7 +68,7 @@ public class Jeu extends JFrame implements Observer{
 		
 		initJeu();
 		joueurCourant = p1;
-		setPreferredSize(new Dimension(1400, 650));
+		setPreferredSize(new Dimension(1400, 900));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
 
 		jpHistory = new ShotHistoryGridView(p1);
@@ -77,7 +78,7 @@ public class Jeu extends JFrame implements Observer{
 		jpMenu = new VueMenu(this);
 		this.setJMenuBar(jpMenu);
 		this.add(jpGridShip, BorderLayout.WEST);
-		this.add(jpShip,BorderLayout.CENTER);
+		this.add(jpShip,BorderLayout.SOUTH);
 		this.add(jpHistory, BorderLayout.EAST);
 
 		this.setTitle("WORLD OF WARSHIP IN SQUARE BECAUSE NOT GRAPHIC ASSET");
@@ -210,6 +211,7 @@ public class Jeu extends JFrame implements Observer{
 
 	public void saveGame(){
 		AbstractDAOFactory.getAbstractDAOFactory(1).getGameDAO().save(this);
+		this.getP1().update();
 	}
 
 

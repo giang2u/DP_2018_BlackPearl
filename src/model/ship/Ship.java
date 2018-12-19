@@ -1,8 +1,9 @@
 package model.ship;
 
+import java.io.Serializable;
 import java.util.Observable;
 
-public abstract class Ship extends Observable{
+public abstract class Ship extends Observable implements Serializable{
 	
 	protected int posX, posY, size, hp;
 	protected boolean horizontal, dead;
