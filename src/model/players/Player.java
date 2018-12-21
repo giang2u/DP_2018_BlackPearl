@@ -188,7 +188,7 @@ public abstract class Player extends Observable implements Serializable{
 		// if there we can place it
 		if (checkCount(taille) && checkPlacedShip(x,y,taille, true)) {
 			for (int i = 0; i < taille; i++) {
-				if(this.epoch =="16eme"){
+				if(this.epoch.equals("16eme")){
 					s = new Ship_centuryXVI(x,y,taille,true);
 					checkShip[x+i][y] = s;
 					if (i == 0) addShip(s);

@@ -129,7 +129,10 @@ public class Jeu extends JFrame{
 
 		boolean fini = false;
 		while(!fini) {
+			System.out.println("");
 			if(j.getP1().isReady()){
+
+				System.out.println(j.getP1().getListShip().get(0).getHp());
 				int currentNbShot = j.getJoueurCourant() == j.getP1() ? j.getP1().shotNumber() :  j.getAi().shotNumber();
 
 				if (j.getJoueurCourant() == j.getP1()) {
@@ -192,7 +195,7 @@ public class Jeu extends JFrame{
 	}
 
 	public void setEpoch(String name) {
-		if(name == "Century XVI"){
+		if(name == "16eme"){
 			this.epoch = new CenturyXVI();
 		}
 		else{
@@ -219,7 +222,7 @@ public class Jeu extends JFrame{
 	}
 
 	public void selectEpoch(){
-		String[] ep = {"16 eme", "20 eme"};
+		String[] ep = {"16eme", "20eme"};
 	    JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
 	    String nom = (String)jop.showInputDialog(null, "Veuillez choisir epoque !","",JOptionPane.QUESTION_MESSAGE,null,ep,ep[1]);
 	    String camembert = "";
@@ -228,11 +231,11 @@ public class Jeu extends JFrame{
 	    jop2.showMessageDialog(null, "Votre epoque est " +  affiche, "", JOptionPane.INFORMATION_MESSAGE);
 	    
 	    switch(nom) {
-	    case "16 eme":
+	    case "16eme":
 			this.setEpoch("16eme");
 	    	break;
-	    case "20 eme":
-			this.setEpoch("16eme");
+	    case "20eme":
+			this.setEpoch("20eme");
 	    	break;
 	    }
 	}

@@ -13,7 +13,6 @@ public abstract class Ship extends Observable implements Serializable{
 		this.posX = x;
 		this.posY = y;
 		this.size = size;
-		this.hp = size;
 		this.horizontal = horizontal;
 		dead = false;
 		shipPart = new int[size];
