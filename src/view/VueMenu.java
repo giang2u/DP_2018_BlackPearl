@@ -47,22 +47,9 @@ public class VueMenu extends JMenuBar implements Observer{
 		JMenuItem load = new JMenuItem("Charger");
 		load.addActionListener(new ControllerLoad(jeu));
 		menu.add(load);
-		
-		
-		JMenu menuepoch = new JMenu("Epoch");
-		
-		
-		this.centuryXVI = new JMenuItem("Century XVI");
-		centuryXVI.addActionListener(new ControllerEpochChoice(jeu, this.centuryXVI.getText()));
-		menuepoch.add(centuryXVI);
-		
-		this.centuryXX = new JMenuItem("Century XX");
-		centuryXX.addActionListener(new ControllerEpochChoice(jeu,this.centuryXX.getText()));
-		menuepoch.add(centuryXX);
-		
+
 		
 		this.add(menu);
-		//this.add(menuepoch);
 	}
 
 	@Override
