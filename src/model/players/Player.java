@@ -25,8 +25,10 @@ public abstract class Player extends Observable implements Serializable{
 	protected String epoch;
 
 	// last click of user
-	protected int xClick, yClick;
+	protected int xClick, yClick, nbShip;
 
+
+	protected Ship[] tabShip;
 	protected Ship[][] checkShip;
 	protected int[] shipCount;
 	protected Player enemy;
@@ -35,6 +37,7 @@ public abstract class Player extends Observable implements Serializable{
 		this.playerName = name;
 		initGrill();
 		shipList = new ArrayList<>(5);
+		tabShip = new Ship[5];
 		shipCount = new int[5];
 		checkShip = new Ship[Player.SIZE][Player.SIZE];
 	}
@@ -51,6 +54,27 @@ public abstract class Player extends Observable implements Serializable{
 		notifyObservers();
 	}
 	
+	public Ship[] getTabShip() {
+		return tabShip;
+	}
+
+
+	public void setTabShip(Ship[] tabShip) {
+		this.tabShip = tabShip;
+	}
+
+	// add ship and return his number
+	public int addTabShip(Ship s) {
+		int i = 0;
+		while (tabShip[i] != null) {
+			i++;
+		}
+		if (i < this.tabShip.length && i >= 0) {
+			tabShip[i] = s;
+		}
+		return i;
+	}
+
 	public String getPlayerName() {
 		return playerName;
 	}
@@ -82,6 +106,7 @@ public abstract class Player extends Observable implements Serializable{
 
 
 
+	// check if shot is successful then set the part shot to 1 in shipPart
 	public boolean cibleToucher(int xTirer, int yTirer){
 
 		boolean toucher = false;
@@ -211,6 +236,7 @@ public abstract class Player extends Observable implements Serializable{
 						checkShip[s.getPosX()][s.getPosY()-i] = s;
 						if(i >= 1){
 							checkShip[s.getPosX()+i][s.getPosY()] = null;
+							shipGrill[s.getPosX()+i][s.getPosY()] = 0;
 						}
 					}
 				}
@@ -233,12 +259,22 @@ public abstract class Player extends Observable implements Serializable{
 				if(this.epoch.equals("16eme")){
 					s = new Ship_centuryXVI(x,y,taille,true);
 					checkShip[x+i][y] = s;
-					if (i == 0) addShip(s);
+					int o = 0;
+					if (i == 0) {
+						addShip(s); 
+						o = addTabShip(s);
+					}
+					shipGrill[x+i][y] = o;
 				}
 				if(this.epoch =="20eme"){
 					s = new Ship_centuryXX(x,y,taille,true);
 					checkShip[x+i][y] = s;
-					if (i == 0) addShip(s);
+					int o = 0;
+					if (i == 0) {
+						addShip(s);
+						addTabShip(s);
+					}
+					shipGrill[x+i][y] = o;
 				}
 				put = true;
 			}

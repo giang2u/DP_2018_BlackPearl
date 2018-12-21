@@ -62,7 +62,7 @@ public class GameCSVDAO implements GameDAO {
 
 
 	@Override
-	public Jeu load(Jeu j) {
+	public void load(Jeu j) {
 		Jeu jeu_charge = null;
 		ArrayList<Jeu> jeuArrayList = new ArrayList<Jeu>();
 		JFileChooser jf = new JFileChooser() ;
@@ -89,7 +89,7 @@ public class GameCSVDAO implements GameDAO {
 					readPlayer(ai, in, j);
 					in.close(); 
 					
-
+			
 					System.out.println("LOADING...");
 
 
@@ -111,7 +111,6 @@ public class GameCSVDAO implements GameDAO {
 						JOptionPane.ERROR_MESSAGE) ;
 			}
 		}
-		return new Jeu();
 	}
 
 
@@ -169,6 +168,9 @@ public class GameCSVDAO implements GameDAO {
 			if (i < p1.getShipCount().length-1) out.print(",");
 			else out.println();
 		}
+		
+		
+		
 	}
 
 	
@@ -232,7 +234,7 @@ public class GameCSVDAO implements GameDAO {
 			int x = Integer.parseInt(part[0]);
 			int y = Integer.parseInt(part[1]);
 			int hp = Integer.parseInt(part[2]);
-			boolean horizontal = Boolean.parseBoolean((part[3]));
+			boolean horizontal = Boolean.parseBoolean((part[4]));
 			if(j.getEpoch().toString().equals("16eme")) {
 				listShip.add(new Ship_centuryXVI(x,y,hp,horizontal));
 			}
@@ -249,8 +251,7 @@ public class GameCSVDAO implements GameDAO {
 			str = in.readLine();
 			String[] parts1 = str.split(",");	
 			for (int k = 0; k < Player.SIZE; k++) {
-				if (parts1[k] == "0") 
-					checkShip[i][k] = null;
+				if (parts1[k].equals("0") ) checkShip[i][k] = null;
 				else {
 					if(j.getEpoch().toString().equals("16eme")) {
 						checkShip[i][k] = new Ship_centuryXVI(i,k,1,Boolean.parseBoolean(parts1[k]));

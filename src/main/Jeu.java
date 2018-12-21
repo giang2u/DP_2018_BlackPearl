@@ -131,7 +131,7 @@ public class Jeu extends JFrame{
 
 		boolean fini = false;
 		while(!fini) {
-			System.out.println("");
+			//System.out.print("");
 			if(j.getP1().isReady()){
 
 				System.out.println(j.getP1().getListShip().get(0).getHp());
@@ -218,10 +218,6 @@ public class Jeu extends JFrame{
 		AbstractDAOFactory.getAbstractDAOFactory(1).getGameDAO().load(this);
 
 		this.getP1().update();
-		
-		for (Ship s :this.getP1().getListShip()) {
-			System.out.println(s.getPosX() + "  " + s.getPosY());
-		}
 	}
 
 	public void saveGame(){
@@ -233,11 +229,13 @@ public class Jeu extends JFrame{
 		String[] ep = {"16eme", "20eme"};
 	    JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
 	    String nom = (String)jop.showInputDialog(null, "Veuillez choisir epoque !","",JOptionPane.QUESTION_MESSAGE,null,ep,ep[1]);
-	    String camembert = "";
+	    String camembert = "les vikings au siecle 0 et vous aurez un malus de 10points de plus j aime les POMMES!";
 	    String affiche = nom==null?camembert:nom;
 	    
 	    jop2.showMessageDialog(null, "Votre epoque est " +  affiche, "", JOptionPane.INFORMATION_MESSAGE);
-	    
+	    if (nom == null)  {
+	    	nom = "16eme";
+	    }
 	    switch(nom) {
 	    case "16eme":
 			this.setEpoch("16eme");
