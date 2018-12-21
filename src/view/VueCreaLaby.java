@@ -43,7 +43,7 @@ public class VueCreaLaby extends JPanel implements Observer {
      	this.start.addActionListener(new ControllerStartGame(player));
      	this.add(start, BorderLayout.SOUTH);
      	
-     	this.setPreferredSize(new Dimension(600,550));
+     	this.setPreferredSize(new Dimension(650,550));
 
     	this.getComponent(9*10+9).setBounds(500, 500, 50, 50);
     }
@@ -141,7 +141,6 @@ public class VueCreaLaby extends JPanel implements Observer {
         if(this.player.getListShip().size() >= 5 && !this.player.isReady()){
         	this.start.setEnabled(true);
         }
-        this.modifLab(Player.SIZE,Player.SIZE);
-        
+        this.modifLab(Player.SIZE,Player.SIZE);		
     }
 }

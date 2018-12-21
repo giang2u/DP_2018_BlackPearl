@@ -68,6 +68,7 @@ public class Jeu extends JFrame implements Observer{
 		
 		initJeu();
 		joueurCourant = p1;
+		epoch = new CenturyXVI();
 		setPreferredSize(new Dimension(1400, 900));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
 
@@ -207,6 +208,12 @@ public class Jeu extends JFrame implements Observer{
 
 	public void loadGame(){
 		AbstractDAOFactory.getAbstractDAOFactory(1).getGameDAO().load(this);
+
+		this.getP1().update();
+		
+		for (Ship s :this.getP1().getListShip()) {
+			System.out.println(s.getPosX() + "  " + s.getPosY());
+		}
 	}
 
 	public void saveGame(){

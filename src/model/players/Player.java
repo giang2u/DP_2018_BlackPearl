@@ -36,6 +36,48 @@ public abstract class Player extends Observable implements Serializable{
 		shipCount = new int[5];
 		checkShip = new Ship[Player.SIZE][Player.SIZE];
 	}
+	
+
+	public void copiePlayer(Player h) {
+		this.playerName = h.getPlayerName();
+		this.shipList = h.getListShip();
+		this.shipCount = h.getShipCount();
+		this.checkShip = h.getCheckShip();
+		this.shipGrill = h.getShipGrill();
+		this.historyGrill = h.getHistoryGrill();
+		setChanged();
+		notifyObservers();
+	}
+	
+	public String getPlayerName() {
+		return playerName;
+	}
+
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
+	}
+
+
+	public void setShipList(ArrayList<Ship> shipList) {
+		this.shipList = shipList;
+	}
+
+	public int[] getShipCount() {
+		return shipCount;
+	}
+
+	public void setShipCount(int[] shipCount) {
+		this.shipCount = shipCount;
+	}
+
+	public void setShipGrill(int[][] shipGrill) {
+		this.shipGrill = shipGrill;
+	}
+
+	public void setHistoryGrill(int[][] historyGrill) {
+		this.historyGrill = historyGrill;
+	}
+
 
 
 	public boolean cibleToucher(int xTirer, int yTirer){
@@ -277,6 +319,7 @@ public abstract class Player extends Observable implements Serializable{
 	}
 	
 	public void update() {
+		System.out.println("UPDATE");
 		setChanged();
 		notifyObservers();
 	}
