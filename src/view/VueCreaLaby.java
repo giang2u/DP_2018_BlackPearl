@@ -28,7 +28,7 @@ public class VueCreaLaby extends JPanel implements Observer {
     private Graphics2D g2;
     protected Jeu jeu;
 
-    public VueCreaLaby(Human niv, int nbLigne, int nbColonne){
+    public VueCreaLaby(Human niv, int nbLigne, int nbColonne,Jeu jeu){
 
         this.player = niv;
         niv.addObserver(this);
@@ -42,7 +42,7 @@ public class VueCreaLaby extends JPanel implements Observer {
         
         this.start = new JButton("Start");
      	this.start.setEnabled(false);
-     	this.start.addActionListener(new ControllerStartGame(player));
+     	this.start.addActionListener(new ControllerStartGame(player, jeu));
      	this.addMouseListener(new ListenerPoser(player, this));
      	JPanel bouton = new JPanel();
      	bouton.add(start);

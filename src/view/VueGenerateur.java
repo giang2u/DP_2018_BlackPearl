@@ -30,7 +30,7 @@ public class VueGenerateur extends JFrame {
         setLocation((screen.width-this.getSize().width)/2,(screen.height-this.getSize().height)/2);
 
         vo = new VueObjets(player, j);
-        vc = new VueCreaLaby(player,10, 10);
+        vc = new VueCreaLaby(player,10, 10, j);
 
         //this.setLayout(new BoxLayout());
         //this.add(vo,BorderLayout.LINE_START);

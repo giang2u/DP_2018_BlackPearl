@@ -61,7 +61,9 @@ public class Jeu extends JFrame{
 	public static Jeu instance;
 	
 	public static Jeu getInstance() {
-		instance = new Jeu();
+		if (instance == null) {
+			instance = new Jeu();
+		}
 		return instance;
 	}
 
@@ -76,7 +78,7 @@ public class Jeu extends JFrame{
 		epoch = new CenturyXVI();
 		setPreferredSize(new Dimension(1400, 900));
 		jpHistory = new ShotHistoryGridView(p1);
-		jpGridShip = new VueCreaLaby((Human) p1,10, 10);
+		jpGridShip = new VueCreaLaby((Human) p1,10, 10, this);
 		jpShip = new VueObjets((Human) p1, this);
 		this.add(jpGridShip, BorderLayout.WEST);
 		this.add(jpShip,BorderLayout.SOUTH);
@@ -90,7 +92,7 @@ public class Jeu extends JFrame{
 	
 	public void restart() {
 		this.dispose();
-		getInstance();
+		instance = new Jeu();
 	}
 
 	public void initJeu(String name){
@@ -242,6 +244,40 @@ public class Jeu extends JFrame{
 	    	break;
 	    case "20eme":
 			this.setEpoch("20eme");
+	    	break;
+	    }
+	}
+	
+	public void selectAiDifficulty() {
+		String[] sexe = {"facile", "HELL", "random"};
+	    JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
+	    String nom = (String)jop.showInputDialog(null, 
+	      "Veuillez choisir le mode de difficulte !",
+	      "Coucou!",
+	      JOptionPane.QUESTION_MESSAGE,
+	      null,
+	      sexe,
+	      sexe[2]);
+	    
+	    String camembert = "very hard mode";
+	    String affiche = nom==null?camembert:nom;
+	    
+	    jop2.showMessageDialog(null, "Votre difficulte est " +  affiche, " Apple pen", JOptionPane.INFORMATION_MESSAGE);
+	    
+	    if (nom == null)  {
+	    	nom = "difficile";
+	    }
+	    
+	    switch(nom) {
+	    case "facile":
+	    	((AI) this.getAi()).setDifficulte(0);
+	    	break;
+	    case "difficile":
+	    	((AI) this.getAi()).setDifficulte(1);
+	    	break;
+	    case "random":
+	    	int i = (int)(Math.random() * 2) + 0 ;
+	    	((AI) this.getAi()).setDifficulte(i);
 	    	break;
 	    }
 	}
