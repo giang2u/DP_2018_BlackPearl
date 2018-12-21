@@ -9,6 +9,7 @@ import view.Vue;
 
 import model.ship.Ship;
 import model.ship.Ship_centuryXVI;
+import model.ship.Ship_centuryXX;
 
 public abstract class Player extends Observable implements Serializable{
 
@@ -21,6 +22,7 @@ public abstract class Player extends Observable implements Serializable{
 	protected int nbTireMiss = 0;
 	protected ArrayList<Ship> shipList;
 	protected boolean isReady = false;
+	protected String epoch;
 
 	// last click of user
 	protected int xClick, yClick;
@@ -150,7 +152,6 @@ public abstract class Player extends Observable implements Serializable{
 	//  ------------------ PLACEMENT DRAG AND DROP DES BATEAUX -------------------------- //
 
 	public void setVerticalShip(){
-		System.out.println(shipList.size());
 		for(Ship s : this.shipList){
 			if(!s.isHorizontal() && s.getPosY() - s.getSize() +1  >= 0){
 				boolean notturner = false;
@@ -163,7 +164,6 @@ public abstract class Player extends Observable implements Serializable{
 					j++;
 				}
 				if(!notturner){
-					//Ship s2 = new Ship_centuryXVI(s.getPosX(),s.getPosY(),s.getSize(),false);
 					s.setHorizontal(false);
 					for (int i = 0; i < s.getSize(); i++) {
 						checkShip[s.getPosX()][s.getPosY()-i] = s;
@@ -188,9 +188,16 @@ public abstract class Player extends Observable implements Serializable{
 		// if there we can place it
 		if (checkCount(taille) && checkPlacedShip(x,y,taille, true)) {
 			for (int i = 0; i < taille; i++) {
-				s = new Ship_centuryXVI(x,y,taille,true);
-				checkShip[x+i][y] = s;
-				if (i == 0) addShip(s);
+				if(this.epoch =="16eme"){
+					s = new Ship_centuryXVI(x,y,taille,true);
+					checkShip[x+i][y] = s;
+					if (i == 0) addShip(s);
+				}
+				if(this.epoch =="20eme"){
+					s = new Ship_centuryXX(x,y,taille,true);
+					checkShip[x+i][y] = s;
+					if (i == 0) addShip(s);
+				}
 				put = true;
 			}
 			shipCount[taille-1]++;
@@ -281,7 +288,12 @@ public abstract class Player extends Observable implements Serializable{
 		setChanged();
 		notifyObservers();
 	}
-
+	
+	public void setEpoch(String name){
+		this.epoch = name;
+		setChanged();
+		notifyObservers();
+	}
 
 }
 

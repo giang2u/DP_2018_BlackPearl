@@ -6,5 +6,9 @@ public class Ship_centuryXVI extends Ship {
 		super(x, y, size, horizontal);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public String toString(){
+		return "bateau 16eme";
+	}
 
 }

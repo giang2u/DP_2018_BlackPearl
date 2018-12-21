@@ -16,6 +16,7 @@ import javax.swing.JToolBar;
 import main.Jeu;
 
 import controller.ControllerAiDifficulty;
+import controller.ControllerEpochChoice;
 import controller.ControllerLoad;
 import controller.ControllerRestart;
 import controller.ControllerSave;
@@ -24,10 +25,10 @@ import controller.ControllerSave;
 public class VueMenu extends JMenuBar implements Observer{
 
 	private Jeu jeu;
-
+	private JMenuItem centuryXVI;
+	private JMenuItem centuryXX;
 	public VueMenu(Jeu j) {
 		jeu = j;
-
 		JMenu menu = new JMenu("pineapple");
 		
 		
@@ -47,7 +48,21 @@ public class VueMenu extends JMenuBar implements Observer{
 		load.addActionListener(new ControllerLoad(jeu));
 		menu.add(load);
 		
+		
+		JMenu menuepoch = new JMenu("Epoch");
+		
+		
+		this.centuryXVI = new JMenuItem("Century XVI");
+		centuryXVI.addActionListener(new ControllerEpochChoice(jeu, this.centuryXVI.getText()));
+		menuepoch.add(centuryXVI);
+		
+		this.centuryXX = new JMenuItem("Century XX");
+		centuryXX.addActionListener(new ControllerEpochChoice(jeu,this.centuryXX.getText()));
+		menuepoch.add(centuryXX);
+		
+		
 		this.add(menu);
+		//this.add(menuepoch);
 	}
 
 	@Override

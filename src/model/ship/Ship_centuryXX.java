@@ -7,5 +7,8 @@ public class Ship_centuryXX extends Ship{
 		// TODO Auto-generated constructor stub
 	}
 
+	public String toString(){
+		return "bateau 20eme";
+	}
 
 }

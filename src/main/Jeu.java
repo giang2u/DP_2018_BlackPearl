@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.TransferHandler;
 
@@ -44,14 +45,14 @@ import model.players.Player;
 import model.ship.Ship;
 
 
-public class Jeu extends JFrame implements Observer{
+public class Jeu extends JFrame{
 
 	private Player p1 ;
 	private Player ai ;
 	private EpochFactory epoch;
 	private Player joueurCourant;
 	private JPanel jpHistory,jpGridShip;
-	private JMenuBar jpMenu;
+	private VueMenu jpMenu;
 	
 	private JPanel jpShip;
 	
@@ -65,26 +66,23 @@ public class Jeu extends JFrame implements Observer{
 	}
 
 	public Jeu(){
-		
-		initJeu();
-		joueurCourant = p1;
-		setPreferredSize(new Dimension(1400, 900));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
-
-		jpHistory = new ShotHistoryGridView(p1);
-
-		jpGridShip = new VueCreaLaby((Human) p1,10, 10);
-		jpShip = new VueObjets((Human) p1, this);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		selectEpoch();
+		this.setTitle("WORLD OF WARSHIP IN SQUARE BECAUSE NOT GRAPHIC ASSET");
 		jpMenu = new VueMenu(this);
 		this.setJMenuBar(jpMenu);
+		initJeu(this.epoch.nameEpoch());
+		joueurCourant = p1;
+		jpHistory = new ShotHistoryGridView(p1);
+		jpGridShip = new VueCreaLaby((Human) p1,10, 10);
+		jpShip = new VueObjets((Human) p1, this);
 		this.add(jpGridShip, BorderLayout.WEST);
 		this.add(jpShip,BorderLayout.SOUTH);
 		this.add(jpHistory, BorderLayout.EAST);
 
-		this.setTitle("WORLD OF WARSHIP IN SQUARE BECAUSE NOT GRAPHIC ASSET");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
 		this.pack();
 		this.setVisible(true);
-		
 	}
 	
 	
@@ -93,29 +91,30 @@ public class Jeu extends JFrame implements Observer{
 		getInstance();
 	}
 
-	public void initJeu(){
+	public void initJeu(String name){
 		this.p1 = new Human("Nam");
 		//this.ai = new AI("Cumputer", new ShotRandom());
 		this.ai = new AI("shotcheckerboard", new ShotCheckerBoard());
 		setJoueurCourant(p1);
-		initShip();
-		//this.p1.positionShip();
+		initShip(name);
 	}
 
 
 	/**
 	 * init create 5 bateau et donne au joueur
 	 */
-	public void initShip(){
+	public void initShip(String name){
+		if(name == "16eme"){
+			this.p1.setEpoch("16eme");
+			this.ai.setEpoch("16eme");
 
-		int epoque = 1;
-		if(epoque == 1){
-			this.epoch = new CenturyXVI();
 		}
-		if(epoque == 2){
-			this.epoch = new CenturyXX();
+		else{
+
+			this.p1.setEpoch("20eme");
+			this.ai.setEpoch("20eme");
 		}
-		((AI) this.ai).putShip();
+		((AI)this.ai).putShip();
 		p1.setEnemy(ai);
 		ai.setEnemy(p1);
 	}
@@ -130,7 +129,6 @@ public class Jeu extends JFrame implements Observer{
 
 		boolean fini = false;
 		while(!fini) {
-
 			if(j.getP1().isReady()){
 				int currentNbShot = j.getJoueurCourant() == j.getP1() ? j.getP1().shotNumber() :  j.getAi().shotNumber();
 
@@ -193,8 +191,14 @@ public class Jeu extends JFrame implements Observer{
 		return epoch;
 	}
 
-	public void setEpoch(EpochFactory epoch) {
-		this.epoch = epoch;
+	public void setEpoch(String name) {
+		if(name == "Century XVI"){
+			this.epoch = new CenturyXVI();
+		}
+		else{
+			this.epoch = new CenturyXX();
+		}
+
 	}
 
 	public Player getJoueurCourant() {
@@ -214,14 +218,25 @@ public class Jeu extends JFrame implements Observer{
 		this.getP1().update();
 	}
 
-
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+	public void selectEpoch(){
+		String[] ep = {"16 eme", "20 eme"};
+	    JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
+	    String nom = (String)jop.showInputDialog(null, "Veuillez choisir epoque !","",JOptionPane.QUESTION_MESSAGE,null,ep,ep[1]);
+	    String camembert = "";
+	    String affiche = nom==null?camembert:nom;
+	    
+	    jop2.showMessageDialog(null, "Votre epoque est " +  affiche, "", JOptionPane.INFORMATION_MESSAGE);
+	    
+	    switch(nom) {
+	    case "16 eme":
+			this.setEpoch("16eme");
+	    	break;
+	    case "20 eme":
+			this.setEpoch("16eme");
+	    	break;
+	    }
 	}
 	
-
 	/*
 	private void createLayout(JComponent... arg) {
 

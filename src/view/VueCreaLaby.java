@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import controller.ControllerStartGame;
 import controller.ListenerPoser;
 import controller.MyTransferHandler;
+import main.Jeu;
 import model.players.Human;
 import model.players.Niveau;
 import model.players.Player;
@@ -25,12 +26,13 @@ public class VueCreaLaby extends JPanel implements Observer {
     private Human player;
     protected JButton start;
     private Graphics2D g2;
+    protected Jeu jeu;
 
     public VueCreaLaby(Human niv, int nbLigne, int nbColonne){
 
         this.player = niv;
         niv.addObserver(this);
-        
+        this.jeu = jeu;
         this.nbLigne = nbLigne;
         this.nbColonne = nbColonne;
 
