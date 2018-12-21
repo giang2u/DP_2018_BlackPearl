@@ -17,7 +17,6 @@ public class ControllerStartGame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		this.p.setReady(true);
-		
 	}
 
 }

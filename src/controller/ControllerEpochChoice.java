@@ -7,35 +7,33 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import main.Jeu;
+import model.players.AI;
+import model.players.Player;
 
 
 public class ControllerEpochChoice implements ActionListener {
-
+	
+	protected Jeu j ;
+	protected String epoch;
 	/**
 	 * @param args
 	 */
-	public ControllerEpochChoice(Jeu j) {
-		
-                
-            
+	public ControllerEpochChoice(Jeu j, String nameEpoch) {
+		this.j = j;
+		this.epoch = nameEpoch;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		String[] sexe = {"facile", "HELL", "random"};
-	    JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
-	    String nom = (String)jop.showInputDialog(null, 
-	      "Veuillez choisir le mode de difficulté !",
-	      "Gendarmerie nationale !",
-	      JOptionPane.QUESTION_MESSAGE,
-	      null,
-	      sexe,
-	      sexe[2]);
-	    jop2.showMessageDialog(null, "Votre difficulté est " + nom, "Apple pen", JOptionPane.INFORMATION_MESSAGE);
+		this.j.setEpoch(epoch);
+	    JOptionPane jop2 = new JOptionPane();
+	    jop2.showMessageDialog(null, "Vous avez selectionnee  " + this.epoch , "", JOptionPane.INFORMATION_MESSAGE);
+   
 	}
 
 	
