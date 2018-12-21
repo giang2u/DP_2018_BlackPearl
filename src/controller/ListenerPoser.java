@@ -28,8 +28,8 @@ public class ListenerPoser implements MouseListener {
 		int x = arg0.getX()/Case.size;
 		int y = arg0.getY()/Case.size;
 
-		if(p.getCheckShip()[x][y] != null){
-			p.getCheckShip()[x][y].setHorizontal(false);
+		if(p.getCheckShip()[x-1][y-1] != null){
+			p.getCheckShip()[x-1][y-1].setHorizontal(false);
 			p.setxClick(x);
 			p.setyClick(y);
 		}

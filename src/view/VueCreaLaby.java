@@ -41,6 +41,7 @@ public class VueCreaLaby extends JPanel implements Observer {
         this.start = new JButton("Start");
      	this.start.setEnabled(false);
      	this.start.addActionListener(new ControllerStartGame(player));
+     	this.addMouseListener(new ListenerPoser(player, this));
      	this.add(start, BorderLayout.SOUTH);
      	
      	this.setPreferredSize(new Dimension(600,550));

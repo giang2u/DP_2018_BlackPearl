@@ -150,6 +150,7 @@ public abstract class Player extends Observable implements Serializable{
 	//  ------------------ PLACEMENT DRAG AND DROP DES BATEAUX -------------------------- //
 
 	public void setVerticalShip(){
+		System.out.println(shipList.size());
 		for(Ship s : this.shipList){
 			if(!s.isHorizontal() && s.getPosY() - s.getSize() +1  >= 0){
 				boolean notturner = false;
