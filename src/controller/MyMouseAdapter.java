@@ -11,7 +11,8 @@ import java.awt.event.MouseWheelEvent;
 
 public class MyMouseAdapter extends MouseAdapter {
 
-    VueObjets vo;
+    protected VueObjets vo;
+    protected  JComponent comp;
 
     public MyMouseAdapter(VueObjets vueObjets) {
         super();
@@ -25,15 +26,13 @@ public class MyMouseAdapter extends MouseAdapter {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        JComponent comp = (JComponent) e.getSource();
+        comp = (JComponent) e.getSource();
         TransferHandler th = comp.getTransferHandler();
-
-        th.exportAsDrag(comp, e, TransferHandler.COPY);
+        th.exportAsDrag(comp, e, TransferHandler.MOVE);
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        super.mouseReleased(e);
         
     }
 

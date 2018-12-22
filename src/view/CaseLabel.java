@@ -28,8 +28,8 @@ public class CaseLabel extends JLabel {
 		return taille;
 	}
 
-	public void setTaille(int size) {
-		this.taille = size;
+	public void setTaille(int t) {
+		this.taille = t;
 	}
 
 	public ImageIcon getIcon() {
@@ -51,6 +51,9 @@ public class CaseLabel extends JLabel {
 
     public void ajouterShip(int i){
     	player.ajouterShip(ligne,colonne, i);
+    	setTaille(i);
+    	setLigne(ligne);
+    	setColonne(colonne);
     }
     
     public void verticalShip() {
@@ -113,5 +116,12 @@ public class CaseLabel extends JLabel {
         return type;
     }
 
-    //public
+	public void setLigne(int ligne) {
+		this.ligne = ligne;
+	}
+
+	public void setColonne(int colonne) {
+		this.colonne = colonne;
+	}
+
 }

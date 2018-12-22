@@ -13,8 +13,10 @@ import model.players.Human;
 import model.players.Niveau;
 
 import java.awt.*;
+import java.util.Observable;
+import java.util.Observer;
 
-public class VueObjets extends JPanel implements Vue{
+public class VueObjets extends JPanel implements Observer{
 	
 	private ImageIcon ship2;
 	private ImageIcon ship3;
@@ -65,23 +67,30 @@ public class VueObjets extends JPanel implements Vue{
         labelShip4.setType("ship4");
         labelShip5.setType("ship5");
 
-        labelShip2.setName("noChange");
-        labelShip3.setName("noChange");
-        labelShip3_2.setName("ship3");
-        labelShip4.setName("noChange");
-        labelShip5.setName("noChange");
-
+        labelShip2.setName("ship2");
+        labelShip3.setName("ship3");
+        labelShip3_2.setName("ship3_2");
+        labelShip4.setName("ship4");
+        labelShip5.setName("ship5");
 
 
         this.dragAndDrop();
+
         
-        
+
+        labelShip2.setTaille(2);
+        labelShip3.setTaille(3);
+        labelShip3_2.setTaille(3);
+        labelShip4.setTaille(4);
+        labelShip5.setTaille(5);
+
 
         objet.add(labelShip2);
         objet.add(labelShip3);
         objet.add(labelShip3_2);
         objet.add(labelShip4);
         objet.add(labelShip5);
+
         this.add(objet, BorderLayout.CENTER);
    
 
@@ -91,20 +100,26 @@ public class VueObjets extends JPanel implements Vue{
 
     private void dragAndDrop(){
     	
-    	labelShip2.setTransferHandler(new MyTransferHandler());
+    	labelShip2.setTransferHandler(new MyTransferHandler(player));
     	labelShip2.addMouseListener(new MyMouseAdapter(this));
     	
-    	labelShip3.setTransferHandler(new MyTransferHandler());
+    	labelShip3.setTransferHandler(new MyTransferHandler(player));
     	labelShip3.addMouseListener(new MyMouseAdapter(this));
     	
-    	labelShip3_2.setTransferHandler(new MyTransferHandler());
+    	labelShip3_2.setTransferHandler(new MyTransferHandler(player));
     	labelShip3_2.addMouseListener(new MyMouseAdapter(this));
     	
-    	labelShip4.setTransferHandler(new MyTransferHandler());
+    	labelShip4.setTransferHandler(new MyTransferHandler(player));
     	labelShip4.addMouseListener(new MyMouseAdapter(this));
     	
-    	labelShip5.setTransferHandler(new MyTransferHandler());
+    	labelShip5.setTransferHandler(new MyTransferHandler(player));
     	labelShip5.addMouseListener(new MyMouseAdapter(this));
     	
     }
+    
+    @Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
+	}
 }

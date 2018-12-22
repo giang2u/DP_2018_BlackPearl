@@ -9,5 +9,10 @@ public abstract class EpochFactory {
 	}
 	
 	public abstract Ship buildShip(int x, int y, int size, boolean horizontal);
+	public abstract String nameEpoch();
 
+	
+	public String toString() {
+		return epochName;
+	}
 }

@@ -54,7 +54,7 @@ public class ShotCheckerBoard implements StrategyShot {
 
         Player enemy = p.getEnemy();
         if (enemy.getShip(xAttack, yAttack) != null) {
-            enemy.setShipPart(xAttack, yAttack);
+            enemy.shotShipPart(xAttack, yAttack);
             p.toucher();
 
         } else {

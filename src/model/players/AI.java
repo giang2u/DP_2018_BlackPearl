@@ -19,7 +19,6 @@ public class AI extends Player {
 		super(name);
 		this.strategyShot = strategyShot;
 		difficulte = 0;
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void putShip() {

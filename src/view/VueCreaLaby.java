@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import controller.ControllerStartGame;
 import controller.ListenerPoser;
 import controller.MyTransferHandler;
+import main.Jeu;
 import model.players.Human;
 import model.players.Niveau;
 import model.players.Player;
@@ -25,12 +26,13 @@ public class VueCreaLaby extends JPanel implements Observer {
     private Human player;
     protected JButton start;
     private Graphics2D g2;
+    protected Jeu jeu;
 
-    public VueCreaLaby(Human niv, int nbLigne, int nbColonne){
+    public VueCreaLaby(Human niv, int nbLigne, int nbColonne,Jeu jeu){
 
         this.player = niv;
         niv.addObserver(this);
-        
+        this.jeu = jeu;
         this.nbLigne = nbLigne;
         this.nbColonne = nbColonne;
 
@@ -40,11 +42,13 @@ public class VueCreaLaby extends JPanel implements Observer {
         
         this.start = new JButton("Start");
      	this.start.setEnabled(false);
-     	this.start.addActionListener(new ControllerStartGame(player));
-     	this.add(start, BorderLayout.SOUTH);
-     	
-     	this.setPreferredSize(new Dimension(600,550));
-
+     	this.start.addActionListener(new ControllerStartGame(player, jeu));
+     	this.addMouseListener(new ListenerPoser(player, this));
+     	JPanel bouton = new JPanel();
+     	bouton.add(start);
+     	bouton.setPreferredSize(new Dimension(80,40));
+     	this.add(bouton, BorderLayout.EAST);
+     	this.setPreferredSize(new Dimension(700,550));
     	this.getComponent(9*10+9).setBounds(500, 500, 50, 50);
     }
     
@@ -53,9 +57,8 @@ public class VueCreaLaby extends JPanel implements Observer {
     	
     	 for(int i =0;i<nbLigne;i++){
              for(int j =0;j<nbColonne;j++){
-            	
 	            	 tabLab[i][j] = new CaseLabel(player, i, j, new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case.png")));
-	                 tabLab[i][j].setTransferHandler(new MyTransferHandler());
+	                 tabLab[i][j].setTransferHandler(new MyTransferHandler(player));
 	                 tabLab[i][j].setBounds(50+((i)*50),(50+(j)*50),50,50);
 	                this.add(tabLab[i][j]);
 	               
@@ -138,10 +141,9 @@ public class VueCreaLaby extends JPanel implements Observer {
         if(this.player.isReady()){
         	this.start.setEnabled(false);
         }
-        if(this.player.getListShip().size() >= 5 && !this.player.isReady()){
+        if(this.player.getListShip().size() == 5 && !this.player.isReady()){
         	this.start.setEnabled(true);
         }
-        this.modifLab(Player.SIZE,Player.SIZE);
-        
+        this.modifLab(Player.SIZE,Player.SIZE);		
     }
 }

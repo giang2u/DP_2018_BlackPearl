@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.TransferHandler;
 
@@ -29,7 +30,6 @@ import dao.AbstractDAOFactory;
 
 import model.players.strategy.ShotRandom;
 import view.ShipGridView;
-import view.ShipSettingView;
 import view.ShotHistoryGridView;
 import view.VueCreaLaby;
 import view.VueMenu;
@@ -44,14 +44,14 @@ import model.players.Player;
 import model.ship.Ship;
 
 
-public class Jeu extends JFrame implements Observer{
+public class Jeu extends JFrame{
 
 	private Player p1 ;
 	private Player ai ;
 	private EpochFactory epoch;
 	private Player joueurCourant;
 	private JPanel jpHistory,jpGridShip;
-	private JMenuBar jpMenu;
+	private VueMenu jpMenu;
 	
 	private JPanel jpShip;
 	
@@ -60,62 +60,63 @@ public class Jeu extends JFrame implements Observer{
 	public static Jeu instance;
 	
 	public static Jeu getInstance() {
-		instance = new Jeu();
+		if (instance == null) {
+			instance = new Jeu();
+		}
 		return instance;
 	}
 
 	public Jeu(){
-		
-		initJeu();
-		joueurCourant = p1;
-		setPreferredSize(new Dimension(1400, 900));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
-
-		jpHistory = new ShotHistoryGridView(p1);
-
-		jpGridShip = new VueCreaLaby((Human) p1,10, 10);
-		jpShip = new VueObjets((Human) p1, this);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		selectEpoch();
+		this.setTitle("WORLD OF WARSHIP IN SQUARE BECAUSE NOT GRAPHIC ASSET");
 		jpMenu = new VueMenu(this);
 		this.setJMenuBar(jpMenu);
+		initJeu(this.epoch.nameEpoch());
+		joueurCourant = p1;
+		epoch = new CenturyXVI();
+		setPreferredSize(new Dimension(1400, 900));
+		jpHistory = new ShotHistoryGridView(p1);
+		jpGridShip = new VueCreaLaby((Human) p1,10, 10, this);
+		jpShip = new VueObjets((Human) p1, this);
 		this.add(jpGridShip, BorderLayout.WEST);
 		this.add(jpShip,BorderLayout.SOUTH);
 		this.add(jpHistory, BorderLayout.EAST);
 
-		this.setTitle("WORLD OF WARSHIP IN SQUARE BECAUSE NOT GRAPHIC ASSET");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
 		this.pack();
 		this.setVisible(true);
-		
 	}
 	
 	
 	public void restart() {
 		this.dispose();
-		getInstance();
+		instance = new Jeu();
 	}
 
-	public void initJeu(){
+	public void initJeu(String name){
 		this.p1 = new Human("Nam");
 		//this.ai = new AI("Cumputer", new ShotRandom());
-		this.ai = new AI("shotcheckerboard", new ShotCheckerBoard());
+		this.ai = new AI("shotcheckerboard", new ShotRandom());
 		setJoueurCourant(p1);
-		initShip();
-		//this.p1.positionShip();
+		initShip(name);
 	}
 
 
 	/**
 	 * init create 5 bateau et donne au joueur
 	 */
-	public void initShip(){
+	public void initShip(String name){
+		if(name == "16eme"){
+			this.p1.setEpoch("16eme");
+			this.ai.setEpoch("16eme");
 
-		int epoque = 1;
-		if(epoque == 1){
-			this.epoch = new CenturyXVI();
 		}
-		if(epoque == 2){
-			this.epoch = new CenturyXX();
+		else{
+			this.p1.setEpoch("20eme");
+			this.ai.setEpoch("20eme");
 		}
-		((AI) this.ai).putShip();
+		((AI)this.ai).putShip();
 		p1.setEnemy(ai);
 		ai.setEnemy(p1);
 	}
@@ -130,39 +131,41 @@ public class Jeu extends JFrame implements Observer{
 
 		boolean fini = false;
 		while(!fini) {
-			//System.out.println(j.getAi().getListShip()); // A effacer
-			//System.out.println(" ");
-				int currentNbShot = j.getJoueurCourant() == j.getP1() ? j.getP1().shotNumber() :  j.getAi().shotNumber();
 
 
+			//System.out.print("");
+			if (j.getP1().isReady()) {
 
-					if (j.getJoueurCourant() == j.getAi() &&j.getP1().isReady()) 	{((AI) j.getAi()).tirer();
-				System.out.println("Je suis la ");}
-				else {
+				//int currentNbShot = j.getJoueurCourant() == j.getP1() ? j.getP1().shotNumber() :  j.getAi().shotNumber();
 
-						//System.out.println(j.getJoueurCourant());
-						System.out.println(j.getP1().isReady());
-					}
-
-
-
-
-				if (currentNbShot != j.getJoueurCourant().shotNumber()) {
+				if (j.getJoueurCourant() == j.getAi()) {
+					((AI) j.getAi()).tirer();
+				}
+				//System.out.println("test");
+				if (/*currentNbShot != j.getJoueurCourant().shotNumber()*/ j.getJoueurCourant().isJoue()) {
 
 					Player p = (j.getJoueurCourant() == j.getP1()) ? j.getAi() : j.getP1();
 
 					// check if p has lost
-					if (p.isLose()) { 
-						System.out.println(" OUA T TRO FORT LE JOUEUR " + p.toString() + " A PERDU"); 
+					if (p.isLose()) {
+						System.out.println(" OUA T TRO FORT LE JOUEUR " + p.toString() + " A PERDU");
 						fini = true;
 					}
 
 					// Switch turn
+					j.getJoueurCourant().setJoue(false);
 					j.setJoueurCourant(p);
 					nbTour++;
 				}
 
+			} else {
+				System.out.print("");
+			}
 		}
+		
+		JOptionPane jop1 = new JOptionPane();
+		jop1.showMessageDialog(null,"Le joueur " + j.getJoueurCourant().getPlayerName() + " a perdu gro nul", "La groupie du pianiste", JOptionPane.INFORMATION_MESSAGE);
+				
 	}
 
 	public JPanel getJpShip() {
@@ -193,8 +196,14 @@ public class Jeu extends JFrame implements Observer{
 		return epoch;
 	}
 
-	public void setEpoch(EpochFactory epoch) {
-		this.epoch = epoch;
+	public void setEpoch(String name) {
+		if(name == "16eme"){
+			this.epoch = new CenturyXVI();
+		}
+		else{
+			this.epoch = new CenturyXX();
+		}
+
 	}
 
 	public Player getJoueurCourant() {
@@ -207,6 +216,8 @@ public class Jeu extends JFrame implements Observer{
 
 	public void loadGame(){
 		AbstractDAOFactory.getAbstractDAOFactory(1).getGameDAO().load(this);
+
+		this.getP1().update();
 	}
 
 	public void saveGame(){
@@ -214,49 +225,60 @@ public class Jeu extends JFrame implements Observer{
 		this.getP1().update();
 	}
 
-
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+	public void selectEpoch(){
+		String[] ep = {"16eme", "20eme"};
+	    JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
+	    String nom = (String)jop.showInputDialog(null, "Veuillez choisir epoque !","",JOptionPane.QUESTION_MESSAGE,null,ep,ep[1]);
+	    String camembert = "les vikings au siecle 0 et vous aurez un malus de 10points de plus j aime les POMMES!";
+	    String affiche = nom==null?camembert:nom;
+	    
+	    jop2.showMessageDialog(null, "Votre epoque est " +  affiche, "", JOptionPane.INFORMATION_MESSAGE);
+	    if (nom == null)  {
+	    	nom = "16eme";
+	    }
+	    switch(nom) {
+	    case "16eme":
+			this.setEpoch("16eme");
+	    	break;
+	    case "20eme":
+			this.setEpoch("20eme");
+	    	break;
+	    }
 	}
 	
-
-	/*
-	private void createLayout(JComponent... arg) {
-
-		ShipSettingView jp = (ShipSettingView) arg[0];
-
-        Container pane = getContentPane();
-        GroupLayout gl = new GroupLayout(pane);
-        pane.setLayout(gl);
-
-        gl.setAutoCreateContainerGaps(true);
-        gl.setAutoCreateGaps(true);
-
-        gl.setHorizontalGroup(gl.createParallelGroup(GroupLayout.Alignment.CENTER)
-                .addGroup(gl.createSequentialGroup()
-                        .addComponent(jp.getJl().get(0))
-                        .addGap(30)
-                        .addComponent(jp.getJl().get(1))
-                        .addGap(30)
-                        .addComponent(jp.getJl().get(2))
-                )
-                .addComponent(arg[1], groupLayout.DEFAULT_SIZE,
-                        GroupLayout.DEFAULT_SIZE, Integer.MAX_VALUE)
-        );
-
-        gl.setVerticalGroup(gl.createSequentialGroup()
-                .addGroup(gl.createParallelGroup()
-                        .addComponent(jp.getJl().get(0))
-                        .addComponent(jp.getJl().get(1))
-                        .addComponent(jp.getJl().get(2)))
-                .addGap(30)
-                .addComponent(arg[1])
-        );
-
-        pack();
-    }*/
-
+	public void selectAiDifficulty() {
+		String[] sexe = {"facile", "HELL", "random"};
+	    JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
+	    String nom = (String)jop.showInputDialog(null, 
+	      "Veuillez choisir le mode de difficulte !",
+	      "Coucou!",
+	      JOptionPane.QUESTION_MESSAGE,
+	      null,
+	      sexe,
+	      sexe[2]);
+	    
+	    String camembert = "very hard mode";
+	    String affiche = nom==null?camembert:nom;
+	    
+	    jop2.showMessageDialog(null, "Votre difficulte est " +  affiche, " Apple pen", JOptionPane.INFORMATION_MESSAGE);
+	    
+	    if (nom == null)  {
+	    	nom = "difficile";
+	    }
+	    
+	    switch(nom) {
+	    case "facile":
+	    	((AI) this.getAi()).setDifficulte(0);
+	    	break;
+	    case "difficile":
+	    	((AI) this.getAi()).setDifficulte(1);
+	    	break;
+	    case "random":
+	    	int i = (int)(Math.random() * 2) + 0 ;
+	    	((AI) this.getAi()).setDifficulte(i);
+	    	break;
+	    }
+	}
+	
 
 }
