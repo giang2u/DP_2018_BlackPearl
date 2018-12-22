@@ -24,6 +24,10 @@ public abstract class Player extends Observable implements Serializable{
 	protected boolean isReady = false;
 	protected String epoch;
 
+	public String getEpoch() {
+		return epoch;
+	}
+
 	// last click of user
 	protected int xClick, yClick;
 	protected Ship[] tabShip;
@@ -53,14 +57,7 @@ public abstract class Player extends Observable implements Serializable{
 		notifyObservers();
 	}
 	
-	public Ship[] getTabShip() {
-		return tabShip;
-	}
 
-
-	public void setTabShip(Ship[] tabShip) {
-		this.tabShip = tabShip;
-	}
 
 	// add ship and return his number
 	public void addTabShip(Ship s) {
@@ -467,6 +464,15 @@ public abstract class Player extends Observable implements Serializable{
 
 	public void setJoue(boolean joue) {
 		this.joue = joue;
+	}
+	
+	public Ship[] getTabShip() {
+		return tabShip;
+	}
+
+
+	public void setTabShip(Ship[] tabShip) {
+		this.tabShip = tabShip;
 	}
 
 

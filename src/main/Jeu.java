@@ -216,8 +216,8 @@ public class Jeu extends JFrame{
 
 	public void loadGame(){
 		AbstractDAOFactory.getAbstractDAOFactory(1).getGameDAO().load(this);
-
 		this.getP1().update();
+		((ShotHistoryGridView) jpHistory).chargement();
 	}
 
 	public void saveGame(){
