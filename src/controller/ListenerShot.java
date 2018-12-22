@@ -49,6 +49,8 @@ public class ListenerShot implements MouseListener {
 				p.setJoue(true);
 			}
 		}
+
+		System.out.println(" OUA T TRO FORT LE JOUEUR " + p.toString() + " A PERDU");
 	}
 
 	@Override

@@ -148,6 +148,7 @@ public class VueCreaLaby extends JPanel implements Observer {
         if(this.player.getListShip().size() >=1 && !this.player.isReady()){
         	this.start.setEnabled(true);
         }
-        this.modifLab(Player.SIZE,Player.SIZE);		
+        this.modifLab(Player.SIZE,Player.SIZE);
+		System.out.println(" A PERDU  "   + this.player.isReady());
     }
 }

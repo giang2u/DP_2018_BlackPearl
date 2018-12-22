@@ -2,6 +2,7 @@ package model.players;
 
 import main.Jeu;
 import model.players.strategy.ShotCheckerBoard;
+import model.players.strategy.ShotRandom;
 import model.players.strategy.StrategyShot;
 
 import java.awt.AWTException;
@@ -53,6 +54,10 @@ public class AI extends Player {
 		if (i >= 0 && i < Jeu.difficulte.length) {
 			difficulte = i;
 		}
+
+		if (difficulte == 0) strategyShot = new ShotRandom();
+
+		if (difficulte == 1) strategyShot = new ShotCheckerBoard();
 	}
 
 	/*private void getLastShot(){
