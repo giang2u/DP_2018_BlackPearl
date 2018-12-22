@@ -141,6 +141,8 @@ public class GameCSVDAO implements GameDAO {
 		out.println(p1.getNbTireMiss());
 
 		out.println(p1.isReady());
+		
+		out.println(p1.getEpoch());
 
 		out.println(p1.getxClick()+","+p1.getyClick());
 
@@ -154,7 +156,15 @@ public class GameCSVDAO implements GameDAO {
 		// placement des bateaux
 		for (int i = 0; i < Player.SIZE; i++) {
 			for (int k = 0; k < Player.SIZE; k++) {
-				if  (p1.getCheckShip()[i][k] != null) out.print( p1.getCheckShip()[i][k].isHorizontal());
+				if  (p1.getCheckShip()[i][k] != null) {
+					int y = p1.getCheckShip()[i][k].getPosY();
+					int x = p1.getCheckShip()[i][k].getPosX();
+					boolean horizontal = p1.getCheckShip()[i][k].isHorizontal();
+					int touche = 0;
+					if (horizontal) touche = p1.getCheckShip()[i][k].getShipPart()[i - x] ;
+					else touche = p1.getCheckShip()[i][k].getShipPart()[k - y] ;
+					out.print( horizontal + ";"+ touche);
+				}
 				else out.print(0);
 
 				if (k < Player.SIZE-1) out.print(",");
@@ -197,7 +207,9 @@ public class GameCSVDAO implements GameDAO {
 			String[] parts1 = str.split(",");	
 			for (int k = 0; k < Player.SIZE; k++) {
 				history[i][k] = Integer.parseInt(parts1[k]);
+				System.out.print(history[i][k]);
 			}	
+			System.out.println();
 		}
 		p1.setHistoryGrill(history);
 
@@ -219,6 +231,9 @@ public class GameCSVDAO implements GameDAO {
 		str = in.readLine();
 		p1.setReady(Boolean.parseBoolean(str));
 
+		// player is ready
+		str = in.readLine();
+		p1.setEpoch(str);
 
 		// player last click position
 		str = in.readLine();
@@ -253,12 +268,14 @@ public class GameCSVDAO implements GameDAO {
 			for (int k = 0; k < Player.SIZE; k++) {
 				if (parts1[k].equals("0") ) checkShip[i][k] = null;
 				else {
+					String parts12[] = parts1[k].split(";");
 					if(j.getEpoch().toString().equals("16eme")) {
-						checkShip[i][k] = new Ship_centuryXVI(i,k,1,Boolean.parseBoolean(parts1[k]));
-						
+						checkShip[i][k] = new Ship_centuryXVI(i,k,1,Boolean.parseBoolean(parts12[0]));
+						if (parts12[1].equals("1") ) checkShip[i][k].setShipPart(i, k);
 					}
 					if(j.getEpoch().toString().equals("20eme")) {
-						checkShip[i][k] = new Ship_centuryXX(i,k,1,Boolean.parseBoolean(parts1[k]));
+						checkShip[i][k] = new Ship_centuryXX(i,k,1,Boolean.parseBoolean(parts12[0]));
+						if (parts12[1].equals("1") ) checkShip[i][k].setShipPart(i, k);
 					}
 				}
 			}	

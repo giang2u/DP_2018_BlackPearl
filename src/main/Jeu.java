@@ -30,7 +30,6 @@ import dao.AbstractDAOFactory;
 
 import model.players.strategy.ShotRandom;
 import view.ShipGridView;
-import view.ShipSettingView;
 import view.ShotHistoryGridView;
 import view.VueCreaLaby;
 import view.VueMenu;
@@ -133,22 +132,23 @@ public class Jeu extends JFrame{
 		boolean fini = false;
 		while(!fini) {
 
+
 			//System.out.print("");
-			if(j.getP1().isReady()){
+			if (j.getP1().isReady()) {
 
 				//int currentNbShot = j.getJoueurCourant() == j.getP1() ? j.getP1().shotNumber() :  j.getAi().shotNumber();
 
-				 if (j.getJoueurCourant() == j.getAi()) {
-						((AI) j.getAi()).tirer();
+				if (j.getJoueurCourant() == j.getAi()) {
+					((AI) j.getAi()).tirer();
 				}
 				//System.out.println("test");
-				if (/*currentNbShot != j.getJoueurCourant().shotNumber()*/ j.getJoueurCourant().isJoue() ) {
-					
+				if (/*currentNbShot != j.getJoueurCourant().shotNumber()*/ j.getJoueurCourant().isJoue()) {
+
 					Player p = (j.getJoueurCourant() == j.getP1()) ? j.getAi() : j.getP1();
 
 					// check if p has lost
-					if (p.isLose()) { 
-						System.out.println(" OUA T TRO FORT LE JOUEUR " + p.toString() + " A PERDU"); 
+					if (p.isLose()) {
+						System.out.println(" OUA T TRO FORT LE JOUEUR " + p.toString() + " A PERDU");
 						fini = true;
 					}
 
@@ -156,8 +156,8 @@ public class Jeu extends JFrame{
 					j.getJoueurCourant().setJoue(false);
 					j.setJoueurCourant(p);
 					nbTour++;
-				} 
-				
+				}
+
 			} else {
 				System.out.print("");
 			}
@@ -216,8 +216,8 @@ public class Jeu extends JFrame{
 
 	public void loadGame(){
 		AbstractDAOFactory.getAbstractDAOFactory(1).getGameDAO().load(this);
-
 		this.getP1().update();
+		((ShotHistoryGridView) jpHistory).chargement();
 	}
 
 	public void saveGame(){
