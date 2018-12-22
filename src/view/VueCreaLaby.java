@@ -118,15 +118,10 @@ public class VueCreaLaby extends JPanel implements Observer {
         for(int i =0;i<nbLigne;i++){
             for(int j =0;j<nbColonne;j++){
 	            	if (player.getShip(i, j) != null) {
-<<<<<<< HEAD
 	            		int x = player.getShip(i,j).getPosX();
-	            		if (player.getShip(i, j).getShipPart()[i-x] == 1)
-=======
-	            		int x = player.getShip(i, j).getPosX();
 						int y = player.getShip(i, j).getPosY();
 
 						if (player.getShip(i,j).isHorizontal() && player.getShip(i, j).getShipPart()[i-x] == 1)
->>>>>>> f38c35d1959590f6cced0f667de34ea1998c16ea
 	            			((JLabel) this.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1_shot.png")));
 
 	            		else if (!player.getShip(i,j).isHorizontal() && player.getShip(i, j).getShipPart()[y - j] == 1)
@@ -144,8 +139,6 @@ public class VueCreaLaby extends JPanel implements Observer {
         }
     }
   
-
-
 
     @Override
     public void update(Observable o, Object arg) {
