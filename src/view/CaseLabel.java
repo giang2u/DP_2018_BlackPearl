@@ -24,7 +24,11 @@ public class CaseLabel extends JLabel {
         this.player = niveau;
     }
 
-    public int getTaille() {
+    public CaseLabel() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public int getTaille() {
 		return taille;
 	}
 
@@ -71,19 +75,19 @@ public class CaseLabel extends JLabel {
                 ajouterShip(1);
                 break;
             case "ship2":
-                this.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1.png")));
+                this.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_2.png")));
                 ajouterShip(2);
                 break;
             case "ship3":
-                this.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1.png")));
+                this.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_3.png")));
                 ajouterShip(3);
                 break;
             case "ship4":
-                this.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1.png")));
+                this.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_4.png")));
                 ajouterShip(4);
                 break;
             case "ship5":
-                this.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1.png")));
+                this.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_5.png")));
                 ajouterShip(5);
                 break;
                 

@@ -27,11 +27,11 @@ public class VueCreaLaby extends JPanel implements Observer {
     protected JButton start;
     private Graphics2D g2;
     protected Jeu jeu;
+    protected JLabel[][] tabLab;
 
     public VueCreaLaby(Human niv, int nbLigne, int nbColonne,Jeu jeu){
 
         this.player = niv;
-        niv.addObserver(this);
         this.jeu = jeu;
         this.nbLigne = nbLigne;
         this.nbColonne = nbColonne;
@@ -50,18 +50,21 @@ public class VueCreaLaby extends JPanel implements Observer {
      	this.add(bouton, BorderLayout.EAST);
      	this.setPreferredSize(new Dimension(700,550));
     	this.getComponent(9*10+9).setBounds(500, 500, 50, 50);
+
+        niv.addObserver(this);
     }
     
     public void init() {
-    	JLabel[][] tabLab = new JLabel[nbLigne][nbColonne];
-    	
+    	tabLab = new JLabel[nbLigne][nbColonne];
     	 for(int i =0;i<nbLigne;i++){
-             for(int j =0;j<nbColonne;j++){
-	            	 tabLab[i][j] = new CaseLabel(player, i, j, new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case.png")));
-	                 tabLab[i][j].setTransferHandler(new MyTransferHandler(player));
-	                 tabLab[i][j].setBounds(50+((i)*50),(50+(j)*50),50,50);
+             for(int j = 0;j<nbColonne;j++){
+            	 	//c 'est cette ligne que ya un case qui balade au debut//
+            		 tabLab[i][j] = new CaseLabel(player, i, j, new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case.png")));
+            		 //tabLab[i][j] = new CaseLabel();
+            	 	tabLab[i][j].setTransferHandler(new MyTransferHandler(player));
+	                tabLab[i][j].setBounds(50+((i)*50),(50+(j)*50),50,50);
+
 	                this.add(tabLab[i][j]);
-	               
              }
     	 }
     }
@@ -87,7 +90,7 @@ public class VueCreaLaby extends JPanel implements Observer {
     		int x = i*50;
     		int y = 0;
 			g2.setColor(Color.white);
-        	g2.fillRect(x,y, CaseLabel.size, CaseLabel.size);
+        	//g2.fillRect(x,y, CaseLabel.size, CaseLabel.size);
     		g2.setColor(Color.gray);
     		g2.drawRect(x, y, CaseLabel.size, CaseLabel.size);
     		if (i > 0) g2.drawString(String.valueOf(x/50),(float) (x+20), (float)(y+50-20));
@@ -115,7 +118,7 @@ public class VueCreaLaby extends JPanel implements Observer {
         for(int i =0;i<nbLigne;i++){
             for(int j =0;j<nbColonne;j++){
 	            	if (player.getShip(i, j) != null) {
-	            		int x = player.getShip(i, j).getPosX();
+	            		int x = player.getShip(i,j).getPosX();
 						int y = player.getShip(i, j).getPosY();
 
 						if (player.getShip(i,j).isHorizontal() && player.getShip(i, j).getShipPart()[i-x] == 1)
@@ -128,7 +131,7 @@ public class VueCreaLaby extends JPanel implements Observer {
 	                }
                     else {
                     	if (player.getShipGrill(i,j) == 1) ((JLabel) this.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case_shot.png")));	
-                      	else ((JLabel) this.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case.png")));	
+                      	else ((JLabel) this.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("")));	
                     }
 	            	
 	            	
@@ -137,10 +140,9 @@ public class VueCreaLaby extends JPanel implements Observer {
     }
   
 
-
-
     @Override
     public void update(Observable o, Object arg) {
+
         this.repaint();
         if(this.player.isReady()){
         	this.start.setEnabled(false);

@@ -17,7 +17,7 @@ import java.io.IOException;
 public class MyTransferHandler extends TransferHandler {
 	 protected CaseLabel c;
 	 protected Player p;
-	 protected static int cpt ;
+	 protected static int cpt = 0 ;
 	 
 	 public MyTransferHandler(Player p){
 		 this.p = p;
@@ -57,7 +57,7 @@ public class MyTransferHandler extends TransferHandler {
             c = (CaseLabel)support.getComponent();
             c.setType(str);
             c.ajouterElement();
-            cpt++;
+        	cpt =  p.getListShip().size();
         } catch (UnsupportedFlavorException e){
             e.printStackTrace();
         } catch (IOException e) {
@@ -89,6 +89,7 @@ public class MyTransferHandler extends TransferHandler {
      */
     protected void exportDone(JComponent c, Transferable t, int action){
     	int taille  = p.getListShip().size();
+    	System.out.println(taille + " " + cpt);
     	if(action == MOVE 
     	&& taille > 0
     	&& p.getListShip().get(taille-1).getSize() ==  ((CaseLabel) c).getTaille()
@@ -96,9 +97,7 @@ public class MyTransferHandler extends TransferHandler {
         	c.setVisible(false);
         	c.setEnabled(false);
     	}
-    	else{
-    		cpt--;
-    	}
+
     	
     }
 
