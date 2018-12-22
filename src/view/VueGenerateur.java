@@ -12,7 +12,7 @@ import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
-public class VueGenerateur extends JFrame {
+public class VueGenerateur extends JPanel {
 
     private Human player;
     private VueObjets vo;
@@ -25,7 +25,7 @@ public class VueGenerateur extends JFrame {
 
         this.player = p;
 
-        setTitle("Generateur de Monde");
+        //setTitle("Generateur de Monde");
         setSize(LARGEUR, HAUTEUR);
         setLocation((screen.width-this.getSize().width)/2,(screen.height-this.getSize().height)/2);
 
@@ -44,8 +44,8 @@ public class VueGenerateur extends JFrame {
 
         // this.setSize(vc.getTailleLaby().width+130,vc.getTailleLaby().height+45);
         // this.setResizable(false);
-        this.setVisible(true);
-        this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
+        //this.setVisible(true);
+       // this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
     }
 
     public VueCreaLaby getCreaLaby(){

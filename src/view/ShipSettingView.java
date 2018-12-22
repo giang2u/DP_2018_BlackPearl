@@ -53,7 +53,7 @@ public class ShipSettingView extends JPanel implements Observer,Vue {
 
 	public ShipSettingView(Player p){
 		this.player = p;
-
+		System.out.println("hello");
 		//this.poser.addMouseListener(new ListenerPoser(player));
 		JPanel contentPane = new JPanel();
 		int j = 0;
@@ -112,6 +112,7 @@ public class ShipSettingView extends JPanel implements Observer,Vue {
 			g2d.fillRect(c.getX(), c.getY(), CaseLabel.size*5, CaseLabel.size);
 			g2d.setColor(Color.black);
 			g2d.drawRect(c.getX(), c.getY(), CaseLabel.size*5, CaseLabel.size);
+			System.out.println("hello");
 		}
 		//Si on n'a pas d'image à dessiner, on ne fait rien…
 		if(bateau == null)
