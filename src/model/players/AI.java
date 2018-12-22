@@ -1,6 +1,7 @@
 package model.players;
 
 import main.Jeu;
+import model.players.strategy.ShotCheckerBoard;
 import model.players.strategy.StrategyShot;
 
 import java.awt.AWTException;
@@ -16,7 +17,7 @@ public class AI extends Player {
 
 	public AI(String name, StrategyShot strategyShot) {
 		super(name);
-		//this.strategyShot = strategyShot;
+		this.strategyShot = strategyShot;
 		difficulte = 0;
 		// TODO Auto-generated constructor stub
 	}
@@ -44,6 +45,7 @@ public class AI extends Player {
 	public void tirer(){
 		if (strategyShot != null){
 			strategyShot.shot(this);
+			getLastShot();
 		}else{
 			System.out.println("oups il y a un problème");
 		}
@@ -54,7 +56,15 @@ public class AI extends Player {
 			difficulte = i;
 		}
 	}
-	
+
+	private void getLastShot(){
+		int lastX = strategyShot.getXattack();
+		int lastY = strategyShot.getYattack();
+		System.out.println(lastX + "YOUHOU" + lastY);
+		//System.exit(0);
+	}
+
+
 	/*public void randomShot(){
 		
 		if (nbTireMiss+nbTireToucher < SIZE*SIZE){

@@ -98,7 +98,7 @@ public class Jeu extends JFrame implements Observer{
 		//this.ai = new AI("Cumputer", new ShotRandom());
 		this.ai = new AI("shotcheckerboard", new ShotCheckerBoard());
 		setJoueurCourant(p1);
-		//initShip();
+		initShip();
 		//this.p1.positionShip();
 	}
 
@@ -130,21 +130,21 @@ public class Jeu extends JFrame implements Observer{
 
 		boolean fini = false;
 		while(!fini) {
-
-			if(j.getP1().isReady()){
+			//System.out.println(j.getAi().getListShip()); // A effacer
+			//System.out.println(" ");
 				int currentNbShot = j.getJoueurCourant() == j.getP1() ? j.getP1().shotNumber() :  j.getAi().shotNumber();
 
-				if (j.getJoueurCourant() == j.getP1()) {
-					//System.out.println("PLAYER TURN   " + nbTour);
-					// while player have not shot we stay here
-				}
 
-				else   {
-					if (j.getP1().getListShip().size() == 5) {
-						//System.out.println("AI TURN   " + nbTour);
-						((AI) j.getAi()).tirer();
+
+					if (j.getJoueurCourant() == j.getAi() &&j.getP1().isReady()) 	{((AI) j.getAi()).tirer();
+				System.out.println("Je suis la ");}
+				else {
+
+						//System.out.println(j.getJoueurCourant());
+						System.out.println(j.getP1().isReady());
 					}
-				}
+
+
 
 
 				if (currentNbShot != j.getJoueurCourant().shotNumber()) {
@@ -161,7 +161,7 @@ public class Jeu extends JFrame implements Observer{
 					j.setJoueurCourant(p);
 					nbTour++;
 				}
-			}
+
 		}
 	}
 

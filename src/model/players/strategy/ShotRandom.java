@@ -5,20 +5,34 @@ import model.players.Player;
 import java.util.Random;
 
 public class ShotRandom implements StrategyShot{
+    private int xDebut;
+    private int yDebut;
 
     public void shot(Player p) {
-    		Player enemy = p.getEnemy();
             Random random = new Random();
-            int xDebut = random.nextInt(Player.SIZE);
-            int yDebut = random.nextInt(Player.SIZE);
+            xDebut = random.nextInt(Player.SIZE);
+            yDebut = random.nextInt(Player.SIZE);
             System.out.println(xDebut +"  "+ yDebut);
-            if (enemy.getShip(xDebut, yDebut) != null) {
-            	enemy.setShipPart(xDebut,yDebut); 
-            	p.toucher();
-            }
-            else {
-            	enemy.setShipGrill(xDebut, yDebut); 
-            	p.rater();
-            }
+            attaquer(p, xDebut, yDebut);
+    }
+
+    private void attaquer(Player player, int xAttack, int yAttack) {
+
+        Player enemy = player.getEnemy();
+        if (enemy.getShip(xAttack, yAttack) != null) {
+            enemy.setShipPart(xAttack, yAttack);
+            player.toucher();
+        } else {
+            enemy.setShipGrill(xAttack, yAttack);
+            player.rater();
+        }
+    }
+
+    public int getXattack() {
+        return xDebut;
+    }
+
+    public int getYattack() {
+        return yDebut;
     }
 }
