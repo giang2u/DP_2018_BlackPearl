@@ -13,8 +13,10 @@ import model.players.Human;
 import model.players.Niveau;
 
 import java.awt.*;
+import java.util.Observable;
+import java.util.Observer;
 
-public class VueObjets extends JPanel implements Vue{
+public class VueObjets extends JPanel implements Observer{
 	
 	private ImageIcon ship2;
 	private ImageIcon ship3;
@@ -107,4 +109,10 @@ public class VueObjets extends JPanel implements Vue{
     	labelShip5.addMouseListener(new MyMouseAdapter(this));
     	
     }
+    
+    @Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
+	}
 }

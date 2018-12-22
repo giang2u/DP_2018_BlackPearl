@@ -219,33 +219,54 @@ public abstract class Player extends Observable implements Serializable{
 	//  ------------------ PLACEMENT DRAG AND DROP DES BATEAUX -------------------------- //
 
 	public void setVerticalShip(){
-		for(Ship s : this.shipList){
-			if(!s.isHorizontal() && s.getPosY() - s.getSize() +1  >= 0){
-				boolean notturner = false;
-				int j = 1;
-				while(!notturner && j < s.getSize()){
-					if(checkShip[s.getPosX()][s.getPosY()-j] != null){
-						notturner = true;
-
+			for(Ship s : this.shipList){
+				if(!s.isHorizontal() && s.getPosY() - s.getSize() +1  >= 0){
+					boolean notturner = false;
+					int j = 1;
+					while(!notturner && j < s.getSize()){
+						if(checkShip[s.getPosX()][s.getPosY()-j] != null){
+							notturner = true;
+						}
+						j++;
 					}
-					j++;
-				}
-				if(!notturner){
-					s.setHorizontal(false);
-					for (int i = 0; i < s.getSize(); i++) {
-						checkShip[s.getPosX()][s.getPosY()-i] = s;
-						if(i >= 1){
-							checkShip[s.getPosX()+i][s.getPosY()] = null;
-							shipGrill[s.getPosX()+i][s.getPosY()] = 0;
+					if(!notturner){
+						s.setHorizontal(false);
+						for (int i = 0; i < s.getSize(); i++) {
+							checkShip[s.getPosX()][s.getPosY()-i] = s;
+							if(i >= 1){
+								checkShip[s.getPosX()+i][s.getPosY()] = null;
+								shipGrill[s.getPosX()+i][s.getPosY()] = 0;
+							}
 						}
 					}
 				}
-			}
-
-			setChanged();
-			notifyObservers();
+				
+				if(s.isHorizontal() && s.getPosX() + s.getSize() +1  <= 11){
+					boolean notturner = false;
+					int j = 1;
+					while(!notturner && j < s.getSize()){
+						if(checkShip[s.getPosX()+j][s.getPosY()] != null){
+							notturner = true;
+						}
+						j++;
+					}
+					if(!notturner){
+						s.setHorizontal(true);
+						for (int i = 0; i < s.getSize(); i++) {
+							checkShip[s.getPosX()+ i][s.getPosY()] = s;
+							if(i >= 1){
+								checkShip[s.getPosX()][s.getPosY() - i] = null;
+								shipGrill[s.getPosX()][s.getPosY() - i] = 0;
+							}
+						}
+					}
+				}
 		}
+		setChanged();
+		notifyObservers();
 	}
+	
+	
 
 	//  ------------------ PLACEMENT DRAG AND DROP DES BATEAUX -------------------------- //
 
