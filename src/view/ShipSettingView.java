@@ -31,8 +31,6 @@ import javax.swing.JTextField;
 import javax.swing.TransferHandler;
 
 import controller.ListenerPoser;
-import controller.MouseGlassListener;
-import controller.MouseGlassMotionListener;
 
 import model.players.Player;
 import model.ship.Ship;

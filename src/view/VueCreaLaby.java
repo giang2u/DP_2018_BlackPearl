@@ -58,9 +58,9 @@ public class VueCreaLaby extends JPanel implements Observer {
     	tabLab = new JLabel[nbLigne][nbColonne];
     	 for(int i =0;i<nbLigne;i++){
              for(int j = 0;j<nbColonne;j++){
+            	 	//c 'est cette ligne que ya un case qui balade au debut//
             		 tabLab[i][j] = new CaseLabel(player, i, j, new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case.png")));
             		 //tabLab[i][j] = new CaseLabel();
-            		 System.out.println( tabLab[i][j].toString());
             	 	tabLab[i][j].setTransferHandler(new MyTransferHandler(player));
 	                tabLab[i][j].setBounds(50+((i)*50),(50+(j)*50),50,50);
 
@@ -144,7 +144,7 @@ public class VueCreaLaby extends JPanel implements Observer {
         if(this.player.isReady()){
         	this.start.setEnabled(false);
         }
-        if(this.player.getListShip().size() >= 5 && !this.player.isReady()){
+        if(this.player.getListShip().size() == 5 && !this.player.isReady()){
         	this.start.setEnabled(true);
         }
         this.modifLab(Player.SIZE,Player.SIZE);		
