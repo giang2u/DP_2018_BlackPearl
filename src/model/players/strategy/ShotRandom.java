@@ -35,18 +35,6 @@ public class ShotRandom implements StrategyShot{
         }
     }
 
-    private void attaquer(Player player, int xAttack, int yAttack) {
-
-        Player enemy = player.getEnemy();
-        if (enemy.getShip(xAttack, yAttack) != null) {
-            enemy.shotShipPart(xAttack, yAttack);
-            player.toucher();
-        } else {
-            enemy.setShipGrill(xAttack, yAttack);
-            player.rater();
-        }
-    }
-
     public int getXattack() {
         return xDebut;
     }

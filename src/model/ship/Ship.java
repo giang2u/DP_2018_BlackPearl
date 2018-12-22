@@ -93,8 +93,8 @@ public abstract class Ship extends Observable implements Serializable{
 			int c = a;
 			int current = posX;
 			if (!horizontal) {
-				c = b;
-				current = posY;
+				c = posY;
+				current = b;
 			}
 			if (shipPart[c - current] == 1) {
 				touche = true;
@@ -143,12 +143,30 @@ public abstract class Ship extends Observable implements Serializable{
 	 * @return
 	 */
 	public boolean lostHp(int x, int y) {
+
+
+		for (int i =0; i < shipPart.length; i++) {
+			System.out.print("  " + shipPart[i] + " ");
+		}
+
+		System.out.print(  "                ");
 		boolean touche = false;
 		if (!estDejaToucher(x, y)) {
 			diminuer();
-			shipPart[x - posX] = 1;
+			if (horizontal) {
+				shipPart[x - posX] = 1;
+			} else {
+				shipPart[posY - y] = 1;
+			}
 			touche = true;
 		}
+
+
+		for (int i =0; i < shipPart.length; i++) {
+			System.out.print( "  " + shipPart[i] + " ");
+		}
+		System.out.println( );
+
 		return touche;
 	}
 
@@ -156,7 +174,7 @@ public abstract class Ship extends Observable implements Serializable{
 	 * decrease life of the ship
 	 */
 	public void diminuer() {
-		if (this.hp > 0) this.hp--;
+		this.hp--;
 	}
 
 }

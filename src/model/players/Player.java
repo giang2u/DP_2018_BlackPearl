@@ -122,21 +122,37 @@ public abstract class Player extends Observable implements Serializable{
 	 * @param j
 	 */
 	public void shotShipPart(int i, int j) {
-		checkShip[i][j].setShipPart(i, j);
 		
 		boolean trouve = false;
 		int k = 0;
 		
 		while (!trouve && k < shipList.size() ) {
 			if (shipList.get(k).collision(i, j)) {
-				shipList.get(k).lostHp(i, j); 
+				shipList.get(k).lostHp(i, j);
 				trouve = true;
 			}
 			k++;
 		}
+
+
+		checkShip[i][j].setShipPart(i, j);
 		
 		setChanged();
 		notifyObservers();
+	}
+
+	public boolean aTouche(int i, int j) {
+
+		boolean trouve = false;
+		int k = 0;
+
+		while (!trouve && k < shipList.size() ) {
+			if (shipList.get(k).collision(i, j)) {
+				trouve = true;
+			}
+			k++;
+		}
+		return trouve;
 	}
 
 
