@@ -14,14 +14,16 @@ public class CaseLabel extends JLabel {
     public String type;
     public static int size = 50;
     public boolean touche = false;
-
+    public static int cpt = 0;
 
     public CaseLabel(Human niveau, int ligne, int colonne, ImageIcon i){
         super();
-        super.setIcon(i);
         this.ligne = ligne;
         this.colonne = colonne;
         this.player = niveau;
+        cpt++;
+        System.out.println(ligne + " " + colonne + " " + cpt);
+        super.setIcon(i);
     }
 
     public CaseLabel() {
