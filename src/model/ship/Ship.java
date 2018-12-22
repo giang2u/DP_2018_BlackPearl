@@ -144,12 +144,6 @@ public abstract class Ship extends Observable implements Serializable{
 	 */
 	public boolean lostHp(int x, int y) {
 
-
-		for (int i =0; i < shipPart.length; i++) {
-			System.out.print("  " + shipPart[i] + " ");
-		}
-
-		System.out.print(  "                ");
 		boolean touche = false;
 		if (!estDejaToucher(x, y)) {
 			diminuer();
@@ -161,11 +155,6 @@ public abstract class Ship extends Observable implements Serializable{
 			touche = true;
 		}
 
-
-		for (int i =0; i < shipPart.length; i++) {
-			System.out.print( "  " + shipPart[i] + " ");
-		}
-		System.out.println( );
 
 		return touche;
 	}

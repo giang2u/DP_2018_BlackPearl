@@ -83,7 +83,6 @@ public class Jeu extends JFrame{
 		this.add(jpShip,BorderLayout.SOUTH);
 		this.add(jpHistory, BorderLayout.EAST);
 
-		System.out.println(" fnhgdsnhds" + p1 + " A PERDU");
 
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
@@ -131,12 +130,8 @@ public class Jeu extends JFrame{
 		while(!fini) {
 
 			if ( j.getRestart() == true) j = new Jeu();
-			//System.out.println(" OUA T TRO FORT LE JOUEUR " +  j.getP1().isReady());
-			//	System.out.println(" OUA T TRO FORT LE JOUEUR " + j.getJoueurCourant() + "    " + j.getP1() + "      " + j.getAi() + " A PERDU");
 			if (j.getP1().isReady()) {
 				System.out.print("");
-				//int currentNbShot = j.getJoueurCourant() == j.getP1() ? j.getP1().shotNumber() :  j.getAi().shotNumber();
-
 				if (j.getJoueurCourant() == j.getAi()) {
 					((AI) j.getAi()).tirer();
 				}
@@ -146,7 +141,6 @@ public class Jeu extends JFrame{
 
 					// check if p has lost
 					if (p.isLose()) {
-						System.out.println(" OUA T TRO FORT LE JOUEUR " + p.toString() + " A PERDU");
 						fini = true;
 					}
 

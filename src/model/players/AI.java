@@ -45,8 +45,6 @@ public class AI extends Player {
 	public void tirer(){
 		if (strategyShot != null){
 			strategyShot.shot(this);
-		}else{
-			System.out.println("oups il y a un problème");
 		}
 	}
 	
@@ -60,27 +58,5 @@ public class AI extends Player {
 		if (difficulte == 1) strategyShot = new ShotCheckerBoard();
 	}
 
-	/*private void getLastShot(){
-		int lastX = strategyShot.getXattack();
-		int lastY = strategyShot.getYattack();
-		System.out.println(lastX + "YOUHOU" + lastY);
-		//System.exit(0);
-	}*/
-
-
-	/*public void randomShot(){
-		
-		if (nbTireMiss+nbTireToucher < SIZE*SIZE){
-			Random random = new Random();
-			int xDebut = random.nextInt(SIZE);
-			int yDebut = random.nextInt(SIZE);
-			
-			if (enemy.getShip(xDebut, yDebut) != null) enemy.setShipPart(xDebut,yDebut);
-			else enemy.setShipGrill(xDebut, yDebut);
-			nbTireMiss++;
-		}
-		//cibleToucher(xDebut, yDebut);
-
-	}*/
 
 }

@@ -24,7 +24,6 @@ public class VueGenerateur extends JPanel {
     public VueGenerateur(Human p,Jeu j) {
 
         this.player = p;
-        System.out.println("hello gene");
         //setTitle("Generateur de Monde");
         setSize(LARGEUR, HAUTEUR);
         setLocation((screen.width-this.getSize().width)/2,(screen.height-this.getSize().height)/2);

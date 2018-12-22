@@ -50,7 +50,6 @@ public class ShipSettingView extends JPanel implements Observer,Vue {
 
 	public ShipSettingView(Player p){
 		this.player = p;
-		System.out.println("hello");
 		//this.poser.addMouseListener(new ListenerPoser(player));
 		JPanel contentPane = new JPanel();
 		int j = 0;

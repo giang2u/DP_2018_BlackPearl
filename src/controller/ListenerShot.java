@@ -30,7 +30,6 @@ public class ListenerShot implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 		if (p.isReady()) {
 			int x = (e.getX()- 50) /50 ;
@@ -49,8 +48,6 @@ public class ListenerShot implements MouseListener {
 				p.setJoue(true);
 			}
 		}
-
-		System.out.println(" OUA T TRO FORT LE JOUEUR " + p.toString() + " A PERDU");
 	}
 
 	@Override

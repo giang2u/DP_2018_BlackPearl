@@ -207,9 +207,7 @@ public class GameCSVDAO implements GameDAO {
 			String[] parts1 = str.split(",");	
 			for (int k = 0; k < Player.SIZE; k++) {
 				history[i][k] = Integer.parseInt(parts1[k]);
-				System.out.print(history[i][k]);
 			}	
-			System.out.println();
 		}
 		p1.setHistoryGrill(history);
 

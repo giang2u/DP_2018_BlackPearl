@@ -87,7 +87,6 @@ public abstract class Player extends Observable implements Serializable{
 
 		boolean toucher = false;
 		setCoorDonne(xTirer, yTirer);
-		//System.out.println("tir " + xTirer + "  " +  yTirer);
 
 		for(Ship ship : enemy.getListShip()){
 

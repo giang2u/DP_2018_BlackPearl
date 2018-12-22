@@ -15,7 +15,6 @@ public class ControllerLoad implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		jeu.loadGame();
 	}
 

@@ -14,7 +14,6 @@ public class CenturyXVI extends EpochFactory{
 	}
 	@Override
 	public String nameEpoch() {
-		// TODO Auto-generated method stub
 		return this.epochName;
 	}
 

@@ -89,7 +89,6 @@ public class MyTransferHandler extends TransferHandler {
      */
     protected void exportDone(JComponent c, Transferable t, int action){
     	int taille  = p.getListShip().size();
-    	System.out.println(taille + " " + cpt);
     	if(action == MOVE 
     	&& taille > 0
     	&& p.getListShip().get(taille-1).getSize() ==  ((CaseLabel) c).getTaille()

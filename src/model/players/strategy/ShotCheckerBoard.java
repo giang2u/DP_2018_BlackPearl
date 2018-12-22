@@ -117,7 +117,6 @@ public class ShotCheckerBoard implements StrategyShot {
             if (enemy.getShip(xAttack, yAttack) != null) {
                 enemy.shotShipPart(xAttack, yAttack);
                 p.toucher();
-                System.out.print("   JATAK  " + xAttack + "    " +  yAttack );
             } else {
                 enemy.setShipGrill(xAttack, yAttack);
                 p.rater();
@@ -171,7 +170,3 @@ public class ShotCheckerBoard implements StrategyShot {
         return yAttack;
     }
 }
-/*for (int i = 0; i < 4; i++) {
-        xAttack = croix[i][0];
-        yAttack = croix[0][i];
-        }*/
