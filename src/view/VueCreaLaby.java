@@ -57,9 +57,8 @@ public class VueCreaLaby extends JPanel implements Observer {
     	
     	 for(int i =0;i<nbLigne;i++){
              for(int j =0;j<nbColonne;j++){
-            	
 	            	 tabLab[i][j] = new CaseLabel(player, i, j, new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case.png")));
-	                 tabLab[i][j].setTransferHandler(new MyTransferHandler());
+	                 tabLab[i][j].setTransferHandler(new MyTransferHandler(player));
 	                 tabLab[i][j].setBounds(50+((i)*50),(50+(j)*50),50,50);
 	                this.add(tabLab[i][j]);
 	               

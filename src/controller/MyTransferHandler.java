@@ -3,6 +3,8 @@ package controller;
 
 import javax.swing.*;
 
+import model.players.Player;
+
 import view.Case;
 import view.CaseLabel;
 
@@ -13,6 +15,13 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
 public class MyTransferHandler extends TransferHandler {
+	 protected CaseLabel c;
+	 protected Player p;
+	 protected static int cpt ;
+	 
+	 public MyTransferHandler(Player p){
+		 this.p = p;
+	 }
 
     //private Image image;
     //private final DataFlavor flavors[] = { DataFlavor.imageFlavor };
@@ -45,9 +54,10 @@ public class MyTransferHandler extends TransferHandler {
 
         try {
             str = (String)data.getTransferData(DataFlavor.stringFlavor);
-            CaseLabel c = (CaseLabel)support.getComponent();
+            c = (CaseLabel)support.getComponent();
             c.setType(str);
             c.ajouterElement();
+            cpt++;
         } catch (UnsupportedFlavorException e){
             e.printStackTrace();
         } catch (IOException e) {
@@ -68,6 +78,7 @@ public class MyTransferHandler extends TransferHandler {
         return new StringSelection(((CaseLabel)c).getType());
     }
 
+ 
 
     /**
      * Cette méthode est invoquée à la fin de l'action DROP
@@ -77,10 +88,16 @@ public class MyTransferHandler extends TransferHandler {
      * @param action
      */
     protected void exportDone(JComponent c, Transferable t, int action){
-    	//System.out.println(((CaseLabel)c).getTaille());
-    	if(action == MOVE){
+    	int taille  = p.getListShip().size();
+    	if(action == MOVE 
+    	&& taille > 0
+    	&& p.getListShip().get(taille-1).getSize() ==  ((CaseLabel) c).getTaille()
+    	&& taille == cpt){
         	c.setVisible(false);
         	c.setEnabled(false);
+    	}
+    	else{
+    		cpt--;
     	}
     	
     }
