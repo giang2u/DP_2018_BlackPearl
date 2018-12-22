@@ -116,11 +116,15 @@ public class VueCreaLaby extends JPanel implements Observer {
             for(int j =0;j<nbColonne;j++){
 	            	if (player.getShip(i, j) != null) {
 	            		int x = player.getShip(i, j).getPosX();
+						int y = player.getShip(i, j).getPosY();
 
-	            		if (player.getShip(i, j).getShipPart()[i-x] == 1)
+						if (player.getShip(i,j).isHorizontal() && player.getShip(i, j).getShipPart()[i-x] == 1)
 	            			((JLabel) this.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1_shot.png")));
 
-	            		else ((JLabel) this.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1.png")));   
+	            		else if (!player.getShip(i,j).isHorizontal() && player.getShip(i, j).getShipPart()[y - j] == 1)
+							((JLabel) this.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1_shot.png")));
+
+						else ((JLabel) this.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/ship_1.png")));
 	                }
                     else {
                     	if (player.getShipGrill(i,j) == 1) ((JLabel) this.getComponent(i*10+j)).setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("./img/case_shot.png")));	
@@ -130,7 +134,7 @@ public class VueCreaLaby extends JPanel implements Observer {
 	            	
             }
         }
-    }
+     }
   
 
 
@@ -144,7 +148,6 @@ public class VueCreaLaby extends JPanel implements Observer {
         if(this.player.getListShip().size() == 5 && !this.player.isReady()){
         	this.start.setEnabled(true);
         }
-        this.modifLab(Player.SIZE,Player.SIZE);
-		System.out.println(" A PERDU  "   + this.player.isReady());
+        this.modifLab(Player.SIZE,Player.SIZE);		
     }
 }
