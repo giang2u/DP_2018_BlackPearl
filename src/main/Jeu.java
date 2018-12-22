@@ -97,7 +97,7 @@ public class Jeu extends JFrame{
 	public void initJeu(String name){
 		this.p1 = new Human("Nam");
 		//this.ai = new AI("Cumputer", new ShotRandom());
-		this.ai = new AI("shotcheckerboard", new ShotRandom());
+		this.ai = new AI("shotcheckerboard", new ShotCheckerBoard());
 		setJoueurCourant(p1);
 		initShip(name);
 	}
@@ -133,9 +133,9 @@ public class Jeu extends JFrame{
 		while(!fini) {
 
 
-			//System.out.print("");
+			//
 			if (j.getP1().isReady()) {
-
+				System.out.print("");
 				//int currentNbShot = j.getJoueurCourant() == j.getP1() ? j.getP1().shotNumber() :  j.getAi().shotNumber();
 
 				if (j.getJoueurCourant() == j.getAi()) {

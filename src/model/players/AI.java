@@ -44,7 +44,6 @@ public class AI extends Player {
 	public void tirer(){
 		if (strategyShot != null){
 			strategyShot.shot(this);
-			getLastShot();
 		}else{
 			System.out.println("oups il y a un problème");
 		}
@@ -56,12 +55,12 @@ public class AI extends Player {
 		}
 	}
 
-	private void getLastShot(){
+	/*private void getLastShot(){
 		int lastX = strategyShot.getXattack();
 		int lastY = strategyShot.getYattack();
 		System.out.println(lastX + "YOUHOU" + lastY);
 		//System.exit(0);
-	}
+	}*/
 
 
 	/*public void randomShot(){
