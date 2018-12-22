@@ -28,7 +28,7 @@ public class MyMouseAdapter extends MouseAdapter {
         JComponent comp = (JComponent) e.getSource();
         TransferHandler th = comp.getTransferHandler();
 
-        th.exportAsDrag(comp, e, TransferHandler.COPY);
+        th.exportAsDrag(comp, e, TransferHandler.MOVE);
     }
 
     @Override

@@ -112,7 +112,6 @@ public class ShipSettingView extends JPanel implements Observer,Vue {
 			g2d.fillRect(c.getX(), c.getY(), CaseLabel.size*5, CaseLabel.size);
 			g2d.setColor(Color.black);
 			g2d.drawRect(c.getX(), c.getY(), CaseLabel.size*5, CaseLabel.size);
-			System.out.println(c.getX());
 		}
 		//Si on n'a pas d'image à dessiner, on ne fait rien…
 		if(bateau == null)
@@ -132,7 +131,7 @@ public class ShipSettingView extends JPanel implements Observer,Vue {
 	}
 
 
-	public void nepasregarder() {
+	//public void nepasregarder() {
 		//  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		/* 
 	        //Notre textearea avec son contenu déplaçable
@@ -179,6 +178,6 @@ public class ShipSettingView extends JPanel implements Observer,Vue {
 		       b.setTransferHandler(new TransferHandler("prout"));
 		       contentPane.add(b);*/
 		//  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	}
+	
 
 }

@@ -113,5 +113,4 @@ public class CaseLabel extends JLabel {
         return type;
     }
 
-    //public
 }

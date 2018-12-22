@@ -77,7 +77,12 @@ public class MyTransferHandler extends TransferHandler {
      * @param action
      */
     protected void exportDone(JComponent c, Transferable t, int action){
-    	c.setEnabled(false);
+    	//System.out.println(((CaseLabel)c).getTaille());
+    	if(action == MOVE){
+        	c.setVisible(false);
+        	c.setEnabled(false);
+    	}
+    	
     }
 
     /**
@@ -88,6 +93,6 @@ public class MyTransferHandler extends TransferHandler {
      * @return int
      */
     public int getSourceActions(JComponent c) {
-        return COPY;
+        return MOVE;
     }
 }
