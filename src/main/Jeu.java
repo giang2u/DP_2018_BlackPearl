@@ -133,6 +133,7 @@ public class Jeu extends JFrame{
 
 		boolean fini = false;
 		while(!fini) {
+
 			//System.out.print("");
 			if(j.getP1().isReady()){
 
@@ -166,6 +167,9 @@ public class Jeu extends JFrame{
 					j.setJoueurCourant(p);
 					nbTour++;
 				}
+				
+			} else {
+				System.out.print("");
 			}
 		}
 	}
@@ -282,41 +286,5 @@ public class Jeu extends JFrame{
 	    }
 	}
 	
-	/*
-	private void createLayout(JComponent... arg) {
-
-		ShipSettingView jp = (ShipSettingView) arg[0];
-
-        Container pane = getContentPane();
-        GroupLayout gl = new GroupLayout(pane);
-        pane.setLayout(gl);
-
-        gl.setAutoCreateContainerGaps(true);
-        gl.setAutoCreateGaps(true);
-
-        gl.setHorizontalGroup(gl.createParallelGroup(GroupLayout.Alignment.CENTER)
-                .addGroup(gl.createSequentialGroup()
-                        .addComponent(jp.getJl().get(0))
-                        .addGap(30)
-                        .addComponent(jp.getJl().get(1))
-                        .addGap(30)
-                        .addComponent(jp.getJl().get(2))
-                )
-                .addComponent(arg[1], groupLayout.DEFAULT_SIZE,
-                        GroupLayout.DEFAULT_SIZE, Integer.MAX_VALUE)
-        );
-
-        gl.setVerticalGroup(gl.createSequentialGroup()
-                .addGroup(gl.createParallelGroup()
-                        .addComponent(jp.getJl().get(0))
-                        .addComponent(jp.getJl().get(1))
-                        .addComponent(jp.getJl().get(2)))
-                .addGap(30)
-                .addComponent(arg[1])
-        );
-
-        pack();
-    }*/
-
 
 }

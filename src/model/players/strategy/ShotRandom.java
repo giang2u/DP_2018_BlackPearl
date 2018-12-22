@@ -13,7 +13,7 @@ public class ShotRandom implements StrategyShot{
             int yDebut = random.nextInt(Player.SIZE);
             System.out.println(xDebut +"  "+ yDebut);
             if (enemy.getShip(xDebut, yDebut) != null) {
-            	enemy.setShipPart(xDebut,yDebut); 
+            	enemy.shotShipPart(xDebut,yDebut); 
             	p.toucher();
             }
             else {

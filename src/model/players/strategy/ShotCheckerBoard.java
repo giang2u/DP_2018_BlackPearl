@@ -38,7 +38,7 @@ public class ShotCheckerBoard implements StrategyShot{
 /* COMPARONS LA CASE CHOISIE AU HASARD SI SA VALEUR DANS LE TABLEAU POSITIONS EST A 1*/
             if (positions[xAttack][yAttack] == 1) {
                 if (enemy.getShip(xAttack, yAttack) != null) {
-                    enemy.setShipPart(xAttack, yAttack);
+                    enemy.shotShipPart(xAttack, yAttack);
                     p.toucher();
                 } else {
                     enemy.setShipGrill(xDebut, yDebut);
