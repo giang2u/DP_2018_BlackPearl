@@ -272,8 +272,6 @@ public class GameCSVDAO implements GameDAO {
 			shipCount[i] = Integer.parseInt(parts3[i]);
 		}
 		p1.setShipCount(shipCount);
-
-
 	}
 
 
