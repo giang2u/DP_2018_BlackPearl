@@ -30,6 +30,7 @@ public abstract class Player extends Observable implements Serializable{
 	protected Ship[][] checkShip;
 	protected int[] shipCount;
 	protected Player enemy;
+	protected boolean joue = false;
 
 	public Player(String name) {
 		this.playerName = name;
@@ -39,7 +40,7 @@ public abstract class Player extends Observable implements Serializable{
 		shipCount = new int[5];
 		checkShip = new Ship[Player.SIZE][Player.SIZE];
 	}
-	
+
 
 	public void copiePlayer(Player h) {
 		this.playerName = h.getPlayerName();
@@ -89,10 +90,10 @@ public abstract class Player extends Observable implements Serializable{
 
 		boolean toucher = false;
 		setCoorDonne(xTirer, yTirer);
+		//System.out.println("tir " + xTirer + "  " +  yTirer);
 
 		for(Ship ship : enemy.getListShip()){
 
-			System.out.println("tir " + xTirer + "  " +  yTirer);
 			if(ship.collision(xClick, yClick)){
 				ship.lostHp(xClick, yClick);
 				toucher = true;
@@ -159,6 +160,7 @@ public abstract class Player extends Observable implements Serializable{
 						s.setHorizontal(false);
 						for (int i = 0; i < s.getSize(); i++) {
 							checkShip[s.getPosX()][s.getPosY()-i] = s;
+							shipGrill[s.getPosX()][s.getPosY()-i] = nShip;
 							if(i >= 1){
 								checkShip[s.getPosX()+i][s.getPosY()] = null;
 								shipGrill[s.getPosX()+i][s.getPosY()] = 0;
@@ -212,7 +214,7 @@ public abstract class Player extends Observable implements Serializable{
 						addTabShip(s);
 					}
 				}
-				if(this.epoch =="20eme"){
+				if(this.epoch.equals("20eme")){
 					s = new Ship_centuryXX(x,y,taille,true);
 					checkShip[x+i][y] = s;
 					if (i == 0) {
@@ -342,6 +344,16 @@ public abstract class Player extends Observable implements Serializable{
 		notifyObservers();
     }
 	
+	public int getHistoryGrill(int i,int j){
+		return historyGrill[i][j];
+	}
+	
+	public void setHistoryGrill(int i, int j) {
+		historyGrill[i][j] = 1;
+		setChanged();
+		notifyObservers();
+	}
+	
 	
 	public int getNbTireToucher() {
 		return nbTireToucher;
@@ -380,7 +392,6 @@ public abstract class Player extends Observable implements Serializable{
 
 	public void setReady(boolean isReady) {
 		this.isReady = isReady;
-
 		setChanged();
 		notifyObservers();
 	}
@@ -432,6 +443,14 @@ public abstract class Player extends Observable implements Serializable{
 
 	public void setHistoryGrill(int[][] historyGrill) {
 		this.historyGrill = historyGrill;
+	}
+
+	public boolean isJoue() {
+		return joue;
+	}
+
+	public void setJoue(boolean joue) {
+		this.joue = joue;
 	}
 
 

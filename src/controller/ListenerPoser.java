@@ -24,22 +24,28 @@ public class ListenerPoser implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 
-		
+
 		int x = arg0.getX()/Case.size;
 		int y = arg0.getY()/Case.size;
 
-		if(p.getCheckShip()[x-1][y-1] != null){
-			if(p.getCheckShip()[x-1][y-1].isHorizontal()){
-				p.getCheckShip()[x-1][y-1].setHorizontal(false);
-				p.setxClick(x);
-				p.setyClick(y);
-		        p.setVerticalShip();
-			}
-			else{
-				p.getCheckShip()[x-1][y-1].setHorizontal(true);
-				p.setxClick(x);
-				p.setyClick(y);
-				p.setVerticalShip();
+		boolean checkX = x - 1 >= 0 && x-1 < p.getCheckShip().length;
+		boolean checkY = y - 1 >= 0 && y-1 < p.getCheckShip()[0].length;
+
+		if (checkX && checkY) {
+
+			if(p.getCheckShip()[x-1][y-1] != null){
+				if(p.getCheckShip()[x-1][y-1].isHorizontal()){
+					p.getCheckShip()[x-1][y-1].setHorizontal(false);
+					p.setxClick(x);
+					p.setyClick(y);
+					p.setVerticalShip();
+				}
+				else{
+					p.getCheckShip()[x-1][y-1].setHorizontal(true);
+					p.setxClick(x);
+					p.setyClick(y);
+					p.setVerticalShip();
+				}
 			}
 		}
 
@@ -48,13 +54,13 @@ public class ListenerPoser implements MouseListener {
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -65,7 +71,7 @@ public class ListenerPoser implements MouseListener {
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

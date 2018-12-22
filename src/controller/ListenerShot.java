@@ -31,14 +31,22 @@ public class ListenerShot implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-
-		if (lcase != null) {
-			if(p.cibleToucher(e.getX()/50, e.getY()/50)){
-				lcase[e.getX()/50][ e.getY()/50].setColor(Color.red);
-				p.toucher();
-			}
-			else{
-				p.rater();
+		
+		if (p.isReady()) {
+			int x = (e.getX()- 50) /50 ;
+			int y = (e.getY()- 50) /50 ;
+			boolean checkX = x >= 0 && x < Player.SIZE;
+			boolean checkY = y >= 0 && y < Player.SIZE;
+			if (checkX && checkY && p.getHistoryGrill(x, y) == 0) {
+				if(p.cibleToucher(x, y)){
+					lcase[x][y].setColor(Color.RED);
+					p.toucher();
+				} else{
+					lcase[x][y].setColor(Color.GRAY);
+					p.rater();
+				}
+				p.setHistoryGrill(x, y);
+				p.setJoue(true);
 			}
 		}
 	}

@@ -11,14 +11,25 @@ public class ShotRandom implements StrategyShot{
             Random random = new Random();
             int xDebut = random.nextInt(Player.SIZE);
             int yDebut = random.nextInt(Player.SIZE);
-            System.out.println(xDebut +"  "+ yDebut);
-            if (enemy.getShip(xDebut, yDebut) != null) {
-            	enemy.shotShipPart(xDebut,yDebut); 
-            	p.toucher();
-            }
-            else {
-            	enemy.setShipGrill(xDebut, yDebut); 
-            	p.rater();
+            boolean tirer = false;
+            
+            while (!p.isJoue()) {
+            	// if case non shot
+            	if (p.getHistoryGrill(xDebut, yDebut) == 0) {
+            		// shot in case x,y
+		            if (enemy.getShip(xDebut, yDebut) != null) {
+		            	enemy.shotShipPart(xDebut,yDebut); 
+		            	p.toucher();
+		            }
+		            else {
+		            	enemy.setShipGrill(xDebut, yDebut); 
+		            	p.rater();
+		            }
+		            p.setHistoryGrill(xDebut, yDebut);
+		            p.setJoue(true);
+            	}
+	            xDebut = random.nextInt(Player.SIZE);
+	            yDebut = random.nextInt(Player.SIZE);
             }
     }
 }

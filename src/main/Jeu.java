@@ -98,7 +98,7 @@ public class Jeu extends JFrame{
 	public void initJeu(String name){
 		this.p1 = new Human("Nam");
 		//this.ai = new AI("Cumputer", new ShotRandom());
-		this.ai = new AI("shotcheckerboard", new ShotCheckerBoard());
+		this.ai = new AI("shotcheckerboard", new ShotRandom());
 		setJoueurCourant(p1);
 		initShip(name);
 	}
@@ -114,7 +114,6 @@ public class Jeu extends JFrame{
 
 		}
 		else{
-
 			this.p1.setEpoch("20eme");
 			this.ai.setEpoch("20eme");
 		}
@@ -137,24 +136,14 @@ public class Jeu extends JFrame{
 			//System.out.print("");
 			if(j.getP1().isReady()){
 
-				System.out.println(j.getP1().getListShip().get(0).getHp());
-				int currentNbShot = j.getJoueurCourant() == j.getP1() ? j.getP1().shotNumber() :  j.getAi().shotNumber();
+				//int currentNbShot = j.getJoueurCourant() == j.getP1() ? j.getP1().shotNumber() :  j.getAi().shotNumber();
 
-				if (j.getJoueurCourant() == j.getP1()) {
-					//System.out.println("PLAYER TURN   " + nbTour);
-					// while player have not shot we stay here
-				}
-
-				else   {
-					if (j.getP1().getListShip().size() == 5) {
-						//System.out.println("AI TURN   " + nbTour);
+				 if (j.getJoueurCourant() == j.getAi()) {
 						((AI) j.getAi()).tirer();
-					}
 				}
-
-
-				if (currentNbShot != j.getJoueurCourant().shotNumber()) {
-
+				//System.out.println("test");
+				if (/*currentNbShot != j.getJoueurCourant().shotNumber()*/ j.getJoueurCourant().isJoue() ) {
+					
 					Player p = (j.getJoueurCourant() == j.getP1()) ? j.getAi() : j.getP1();
 
 					// check if p has lost
@@ -164,14 +153,19 @@ public class Jeu extends JFrame{
 					}
 
 					// Switch turn
+					j.getJoueurCourant().setJoue(false);
 					j.setJoueurCourant(p);
 					nbTour++;
-				}
+				} 
 				
 			} else {
 				System.out.print("");
 			}
 		}
+		
+		JOptionPane jop1 = new JOptionPane();
+		jop1.showMessageDialog(null,"Le joueur " + j.getJoueurCourant().getPlayerName() + " a perdu gro nul", "La groupie du pianiste", JOptionPane.INFORMATION_MESSAGE);
+				
 	}
 
 	public JPanel getJpShip() {
