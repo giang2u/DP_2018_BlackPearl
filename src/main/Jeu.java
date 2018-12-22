@@ -52,7 +52,7 @@ public class Jeu extends JFrame{
 	private Player joueurCourant;
 	private JPanel jpHistory,jpGridShip;
 	private VueMenu jpMenu;
-	
+	private boolean restart = false;
 	private JPanel jpShip;
 	
 	public static int[] difficulte = {0,1};
@@ -83,6 +83,9 @@ public class Jeu extends JFrame{
 		this.add(jpShip,BorderLayout.SOUTH);
 		this.add(jpHistory, BorderLayout.EAST);
 
+		System.out.println(" fnhgdsnhds" + p1 + " A PERDU");
+
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
 		this.pack();
 		this.setVisible(true);
@@ -91,7 +94,7 @@ public class Jeu extends JFrame{
 	
 	public void restart() {
 		this.dispose();
-		instance = new Jeu();
+		restart = true;
 	}
 
 	public void initJeu(String name){
@@ -121,19 +124,15 @@ public class Jeu extends JFrame{
 		ai.setEnemy(p1);
 	}
 
-	/**
-	 * @param args
-	 * @throws InterruptedException 
-	 */
 	public static void main(String[] args) throws InterruptedException {
-		Jeu j = new Jeu();
+		Jeu j = Jeu.getInstance();
 		int nbTour = 0;
-
 		boolean fini = false;
 		while(!fini) {
 
-
-			//
+			if ( j.getRestart() == true) j = new Jeu();
+			//System.out.println(" OUA T TRO FORT LE JOUEUR " +  j.getP1().isReady());
+			//	System.out.println(" OUA T TRO FORT LE JOUEUR " + j.getJoueurCourant() + "    " + j.getP1() + "      " + j.getAi() + " A PERDU");
 			if (j.getP1().isReady()) {
 				System.out.print("");
 				//int currentNbShot = j.getJoueurCourant() == j.getP1() ? j.getP1().shotNumber() :  j.getAi().shotNumber();
@@ -141,8 +140,7 @@ public class Jeu extends JFrame{
 				if (j.getJoueurCourant() == j.getAi()) {
 					((AI) j.getAi()).tirer();
 				}
-				//System.out.println("test");
-				if (/*currentNbShot != j.getJoueurCourant().shotNumber()*/ j.getJoueurCourant().isJoue()) {
+				if (j.getJoueurCourant().isJoue()) {
 
 					Player p = (j.getJoueurCourant() == j.getP1()) ? j.getAi() : j.getP1();
 
@@ -162,10 +160,10 @@ public class Jeu extends JFrame{
 				System.out.print("");
 			}
 		}
-		
+
 		JOptionPane jop1 = new JOptionPane();
 		jop1.showMessageDialog(null,"Le joueur " + j.getJoueurCourant().getPlayerName() + " a perdu gro nul", "La groupie du pianiste", JOptionPane.INFORMATION_MESSAGE);
-				
+
 	}
 
 	public JPanel getJpShip() {
@@ -186,6 +184,11 @@ public class Jeu extends JFrame{
 
 	public Player getAi() {
 		return ai;
+	}
+
+	public boolean getRestart(){
+		return restart;
+
 	}
 
 	public void setAi(Player ai) {
