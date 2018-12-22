@@ -30,7 +30,6 @@ import dao.AbstractDAOFactory;
 
 import model.players.strategy.ShotRandom;
 import view.ShipGridView;
-import view.ShipSettingView;
 import view.ShotHistoryGridView;
 import view.VueCreaLaby;
 import view.VueMenu;
@@ -216,8 +215,8 @@ public class Jeu extends JFrame{
 
 	public void loadGame(){
 		AbstractDAOFactory.getAbstractDAOFactory(1).getGameDAO().load(this);
-
 		this.getP1().update();
+		((ShotHistoryGridView) jpHistory).chargement();
 	}
 
 	public void saveGame(){

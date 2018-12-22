@@ -45,6 +45,21 @@ public class ShotHistoryGridView extends JPanel implements Observer{
 		this.player.addObserver(this);
     }
     
+    public void chargement() {
+    	  for (int i = 0; i < Player.SIZE; i++ )  {
+          	for (int j = 0; j < Player.SIZE ; j++ ) {
+          		
+          		if (player.getHistoryGrill(i, j) == 1) {
+          			if(player.cibleToucher(i, j)){
+    					lcase[i][j].setColor(Color.RED);
+    				} else{
+    					lcase[i][j].setColor(Color.GRAY);
+    				}
+          		}
+          	}
+    	  }
+    }
+    
  
     public void paintComponent(Graphics g)
     {
