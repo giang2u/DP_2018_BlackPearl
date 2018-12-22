@@ -81,8 +81,8 @@ public class Jeu extends JFrame{
 		jpGridShip = new VueCreaLaby((Human) p1,10, 10, this);
 		jpShip = new VueObjets((Human) p1, this);
 		this.add(jpGridShip, BorderLayout.WEST);
-		this.add(jpShip,BorderLayout.SOUTH);
-		this.add(jpHistory, BorderLayout.EAST);
+		//this.add(jpShip,BorderLayout.SOUTH);
+		//this.add(jpHistory, BorderLayout.EAST);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
 		this.pack();

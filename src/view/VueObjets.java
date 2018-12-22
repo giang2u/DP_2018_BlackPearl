@@ -36,7 +36,6 @@ public class VueObjets extends JPanel implements Observer{
 
 
     public VueObjets(Human player, Jeu j) {
-
         this.player = player;
 
         this.setLayout(new BorderLayout());
@@ -101,25 +100,24 @@ public class VueObjets extends JPanel implements Observer{
     private void dragAndDrop(){
     	
     	labelShip2.setTransferHandler(new MyTransferHandler(player));
-    	labelShip2.addMouseListener(new MyMouseAdapter(this));
+    	labelShip2.addMouseListener(new MyMouseAdapter());
     	
     	labelShip3.setTransferHandler(new MyTransferHandler(player));
-    	labelShip3.addMouseListener(new MyMouseAdapter(this));
+    	labelShip3.addMouseListener(new MyMouseAdapter());
     	
     	labelShip3_2.setTransferHandler(new MyTransferHandler(player));
-    	labelShip3_2.addMouseListener(new MyMouseAdapter(this));
-    	
+    	labelShip3_2.addMouseListener(new MyMouseAdapter());
+    
     	labelShip4.setTransferHandler(new MyTransferHandler(player));
-    	labelShip4.addMouseListener(new MyMouseAdapter(this));
+    	labelShip4.addMouseListener(new MyMouseAdapter());
     	
     	labelShip5.setTransferHandler(new MyTransferHandler(player));
-    	labelShip5.addMouseListener(new MyMouseAdapter(this));
+    	labelShip5.addMouseListener(new MyMouseAdapter());
     	
     }
     
     @Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+
 	}
 }

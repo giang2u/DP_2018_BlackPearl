@@ -33,7 +33,6 @@ import javax.swing.TransferHandler;
 import controller.ListenerPoser;
 import controller.MouseGlassListener;
 import controller.MouseGlassMotionListener;
-import controller.MyMouseAdapterTest;
 
 import model.players.Player;
 import model.ship.Ship;

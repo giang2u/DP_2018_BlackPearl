@@ -11,12 +11,10 @@ import java.awt.event.MouseWheelEvent;
 
 public class MyMouseAdapter extends MouseAdapter {
 
-    protected VueObjets vo;
     protected  JComponent comp;
 
-    public MyMouseAdapter(VueObjets vueObjets) {
+    public MyMouseAdapter() {
         super();
-        this.vo = vueObjets;
     }
 
     @Override
