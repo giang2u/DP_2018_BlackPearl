@@ -29,18 +29,19 @@ public class GameCSVDAO implements GameDAO {
 	@Override
 	public void save(Jeu j) {
 		try{
-			JFileChooser choix = new JFileChooser();
+/*
+			 JFileChooser choix = new JFileChooser();
 			choix.showOpenDialog(null);
 
 			final File f = choix.getSelectedFile();
-
+*/
 			Player p1 = j.getP1();
 			Player ai = j.getAi();
 
-			if (f != null) {
-				String nomF = f.getAbsolutePath();
-
-				PrintWriter out = new PrintWriter(new FileWriter(nomF+"BlackPearl.csv"));
+			//if (f != null) {
+				//String nomF = f.getAbsolutePath();
+				String nomF = "BlackPearl.csv";
+				PrintWriter out = new PrintWriter(new FileWriter(nomF));
 				writePlayer(p1, out);
 				writePlayer(ai, out);
 
@@ -49,12 +50,12 @@ public class GameCSVDAO implements GameDAO {
 
 
 				JOptionPane.showMessageDialog(null,
-						"fichier enregistre", "Youpi",
+						"fichier " + nomF + " enregistre", "Youpi",
 						JOptionPane.INFORMATION_MESSAGE) ;
-			}
+			//}
 
 		} catch (FileNotFoundException e) {
-			System.out.println("Fichier non trouvé");
+			System.out.println("Fichier non trouve");
 		} catch (IOException e) {
 			System.out.println("Erreur IO");
 		}
@@ -65,6 +66,7 @@ public class GameCSVDAO implements GameDAO {
 	public void load(Jeu j) {
 		Jeu jeu_charge = null;
 		ArrayList<Jeu> jeuArrayList = new ArrayList<Jeu>();
+/*
 		JFileChooser jf = new JFileChooser() ;
 		jf.setCurrentDirectory(new File("/")); 
 		jf.changeToParentDirectory(); 
@@ -77,10 +79,11 @@ public class GameCSVDAO implements GameDAO {
 			if (parts[1].equals("csv")) {
 
 				// String nomF = fichier.getName();
-
-				String nomF = fichier.getAbsolutePath();
-
+*/
+				String nomF = "BlackPearl.csv";
+				
 				try {
+	
 					Player p1 = j.getP1();
 					Player ai = j.getAi();
 
@@ -96,7 +99,10 @@ public class GameCSVDAO implements GameDAO {
 				} 
 				//j.initNewGame(jeuArrayList);  //Creation d'un nouveau jeu à partir de la sauvegarde dans jeuArrayList*/
 				catch (FileNotFoundException e) {
-					System.out.println("Fichier non trouvé");
+					JOptionPane.showMessageDialog(null,
+							"fichier " + nomF + " non trouve", "argh",
+							JOptionPane.INFORMATION_MESSAGE) ;
+					System.out.println("Fichier " + nomF + " non trouve");
 					e.printStackTrace();
 				} catch (IOException e) {
 					System.out.println("Erreur IO");
@@ -105,13 +111,13 @@ public class GameCSVDAO implements GameDAO {
 
 
 				// if
-			} else{
+/*			} else{
 				JOptionPane.showMessageDialog(null,
 						"Mauvais fichier", "Erreur",
 						JOptionPane.ERROR_MESSAGE) ;
 			}
 		}
-	}
+*/	}
 
 
 	public void writePlayer(Player p1, PrintWriter out)  {
